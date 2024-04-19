@@ -1,0 +1,89 @@
+#!/usr/bin/ruby
+require 'irb/completion'
+require 'irb/ext/save-history'
+require 'rubygems'
+
+IRB.conf[:SAVE_HISTORY] = 1000
+IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
+
+IRB.conf[:PROMPT_MODE] = :SIMPLE
+
+IRB.conf[:AUTO_INDENT] = true
+
+class Object
+  # list methods which aren't in superclass
+  def local_methods(obj = self)
+    (obj.methods - obj.class.superclass.instance_methods).sort
+  end
+  # print documentation
+  #
+  #   ri 'Array#pop'
+  #   Array.ri
+  #   Array.ri :pop
+  #   arr.ri :pop
+  def ri(method = nil)
+    unless method && method =~ /^[A-Z]/ # if class isn't specified
+      klass = self.kind_of?(Class) ? name : self.class.name
+      method = [klass, method].compact.join('#')
+    end
+    puts `ri '#{method}'`
+  end
+end
+
+def me
+  User.find_by(email: 'jkahne@my-work.com')
+end
+
+def time(&block)
+  puts Benchmark.measure(&block)
+end
+
+def generate_items
+
+  address =   Address.create({ name: 'Ample',
+                               address: '30 East Central Pkwy',
+                               city: 'Cincinnati',
+                               state: 'OH',
+                               zip: '45202' })
+  region  = Region.create({ name: 'Cincinnati, OH',
+                            active: true,
+                            address: address,
+                            image: File.new("#{Rails.root}/test/fixtures/files/test_img.jpg")  })
+
+  100.times do |s|
+
+    start = rand(0..15).days.from_now
+    sale = Sale.create({ shipping_starts_at: rand(-5..15).days.from_now,
+                         sale_code: "15CIN#{'%03d' % s}",
+                         active: true,
+                         name: "Sale #{s}",
+                         sale_starts_at: start,
+                         sale_ends_at: start + 1.day,
+                         location: address,
+                         region_id: region.id,
+                         aasm_state: 'running' })
+    puts "Sale #{sale.name} created"
+
+    200.times do |i|
+      item = Item.create( { active: true,
+                            name: "Item #{i}",
+                            sale: sale,
+                            barcode: "#{sale.sale_code}-#{'%03d' % i}"  })
+      puts "Item #{item.name} created"
+
+    end
+  end
+
+end
+
+
+class Object
+  def my_methods(include_inherited = false)
+    ignored_methods = include_inherited ? Object.methods : self.class.superclass.instance_methods
+    (self.methods - ignored_methods).sort
+  end
+  alias_method :m, :my_methods
+end
+
+
+

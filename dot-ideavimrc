@@ -1,0 +1,12 @@
+let mapleader = ','
+
+set commentary
+
+set incsearch
+
+inoremap <leader>, <Esc>
+vnoremap <leader>, <Esc>
+
+nmap <Leader>rf <Action>(ReformatCode)
+set clipboard+=unnamed
+
