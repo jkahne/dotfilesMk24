@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# echo
+# echo "**** Starting Docker ***"
+# echo
+# open /Applications/Docker.app
+# echo -n "**** Sleeping while waiting for Docker"
+# until [ `docker ps > /dev/null 2>&1;echo $?` -eq "0" ]; do
+#    echo -n "."
+#    sleep 1
+# done
+# echo
+
+
+
+
+# echo
+# echo !!! running make quick_start !!!
+# echo !!! If you need to rebuild, instead run rebuildmorning !!!
+# echo
+
+# cd ~/projects/work/ << current job >>
+# make quick_start
+# # make start_portainer
+
+# echo
+# echo Done.
+# echo
+#
+
+
+## Sync work notes
+pushd /Users/jkahne/projects/work/notes
+
+gstatus=`git status --porcelain`
+
+if [ ${#gstatus} -ne 0 ]
+then
+  git add --all
+  git commit -m'autocommit'
+  git pull origin main --rebase
+  sleep 10
+  git push origin main
+else
+  git pull origin main
+fi
+
+popd
+

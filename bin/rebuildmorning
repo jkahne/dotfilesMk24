@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+
+# echo
+# echo "**** Starting Docker ***"
+# echo
+# open /Applications/Docker.app
+# echo -n "**** Sleeping while waiting for Docker"
+# until [ `docker ps > /dev/null 2>&1;echo $?` -eq "0" ]; do
+#    echo -n "."
+#    sleep 1
+# done
+# echo
+
+# echo
+# echo !!! running make start_all !!!
+# echo
+
+# cd ~/projects/work/<< current job >>
+# make start_all
+# # make start_portainer
+
+# echo
+# echo Done.
+# echo

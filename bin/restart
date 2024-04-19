@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+
+# cd ~/projects/work/<< current job >>
+# make restart_all
+
