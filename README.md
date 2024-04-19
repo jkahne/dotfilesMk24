@@ -2,8 +2,15 @@
 ## Installation
 
 ```
-git clone https://github.com/jkahne/dotfiles24.git ~/.dotfiles
+git clone https://github.com/jkahne/dotfilesMk24.git ~/.dotfiles
+
+## Manual text changes:
+- update name and email in dot-config
+
+
 cd ~/.dotfiles
+stow . -t /Users/jkahne --dotfiles --override=.
+
 ```
 
 

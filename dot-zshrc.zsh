@@ -3,12 +3,15 @@ export EDITOR=nvim
 export HERE=$HOME/.dotfiles
 export ASDF_DIR=$HOME/.asdf
 
+# export KEY='value'
 # Add commonly used folders to $PATH
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # If you need to use these commands (from coreutils) with their normal
 # names, you can add a "gnubin" directory to your PATH with:
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+
+# export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
 
 ## My own scripts
 export PATH="$HOME/bin:$PATH"
@@ -39,6 +42,7 @@ export KERL_CONFIGURE_OPTIONS="
       --disable-jit \
       "
 
+# . /opt/homebrew/opt/asdf/libexec/asdf.sh
 . $HOME/.asdf/asdf.sh
 
 # append completions to fpath
@@ -75,9 +79,6 @@ else
   zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
   # zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 fi
-
-
-
 
 
 # Config
@@ -132,12 +133,24 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # links
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-[ -f $HERE/aliases.zsh ] && source $HERE/aliases.zsh
+[ -f $HERE/dot-aliases.zsh ] && source $HERE/dot-aliases.zsh
 [ -f $HERE/prompt.zsh ] && source $HERE/prompt.zsh
 [ -f $HERE/key-bindings.zsh ] && source $HERE/key-bindings.zsh
 [ -f $HERE/projects.zsh ] && source $HERE/projects.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
+# File search functions
+# havn't used these
+# function f() { find . -iname "*$1*" ${@:2} }
+# function r() { grep "$1" ${@:2} -R . }
+
+# Create a folder and move into it in one command
+function mkcd() { mkdir -p "$@" && cd "$_"; }
+
+function ghpr() {
+  GH_FORCE_TTY=100% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1}' --preview-window=down --header-lines=3 | awk '{print $1}' | xargs gh pr checkout
+}
 
 # obsidian://open?vault=Brain&file=git%20log%20commit%20counting%20script%20agile%20otter%20tim%20ottinger
 function gitcc() {
@@ -149,4 +162,25 @@ function gitcc() {
   sort -nr |
   head
 }
+
+# fancy-ctrl-z () {
+#   if [[ $#BUFFER -eq 0 ]]; then
+#     BUFFER="fg"
+#     zle accept-line -w
+#   else
+#     zle push-input -w
+#     zle clear-screen -w
+#   fi
+# }
+# zle -N fancy-ctrl-z
+# bindkey '^Z' fancy-ctrl-z
+
+
+# pnpm
+export PNPM_HOME="/Users/jkahne/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
