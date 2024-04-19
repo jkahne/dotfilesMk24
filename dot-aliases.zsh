@@ -21,13 +21,16 @@ alias proutes="mix phx.routes | fzf -e"
 alias updateclam="freshclam -v"
 
 alias vim="nvim"
-alias d="cd ~/.dotfiles && nvim ~/.dotfiles/nvim/init.vim"
-alias n="cd ~/.config/nvim && nvim"
+alias n="nvim"
+alias d="cd ~/.dotfiles && nvim"
+# nv => NeoVim
+alias nv="cd ~/.config/nvim && nvim"
+# wn => Work Notes
+alias wn="cs ~/projects/worknotes && nvim"
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
 alias cdx="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Brain/"
 alias om="overmind start -f Procfile.dev"
 alias postmaster="brew services stop postgres; cd /opt/homebrew/var/postgres; rm postmaster.pid; cd -; brew services start postgres;"
-alias aso='source ~/.dotfiles/aliases.zsh'
 alias squash='git rebase -i main'
 alias sync='git add -u . && git commit -m "Minor changes. Commit message skipped." && git pull --rebase && git push'
 # alias fbr='git branch --sort=-committerdate | grep -v HEAD | string trim | fzf +s | xargs git checkout'
