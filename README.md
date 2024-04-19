@@ -1,7 +1,8 @@
-
 ## Installation
-
 ```
+manually run commands in ./preinstall from the repo on the web 
+
+
 git clone https://github.com/jkahne/dotfilesMk24.git ~/.dotfiles
 
 ## Manual text changes:
@@ -10,6 +11,8 @@ git clone https://github.com/jkahne/dotfilesMk24.git ~/.dotfiles
 
 cd ~/.dotfiles
 ./install
+
+set up https://github.com/jkahne/nvim
 
 stow . -t /Users/jkahne --dotfiles --override=.
 ```
