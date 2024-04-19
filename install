@@ -14,25 +14,13 @@ fi
 printf "\nbrew packages\n"
 # # dependencies
 for pkg in gpg gawk coreutils automake autoconf libyaml readline libxslt libtool openssl@3 fop unixodbc wxwidgets; do
-  # if brew list -1 | grep -q "^${pkg}\$"; then
-  if [ ! "$(brew ls --versions '$pkg')" ]; then
-    echo "Package '$pkg' is installed; updating:"
-    brew upgrade "$pkg" && brew cleanup "$pkg" || true
-  else
     brew install "$pkg"
-  fi
 done
 
 # # the stuff I know what is
 # asdf taken out
-for pkg in httpie autojump zsh zsh-completions git-delta exa bat ripgrep fzf neovim tree vlc 1password-cli pngpaste lazygit btop ; do
-  # if brew list -1 | grep -q "^${pkg}\$"; then
-  if [ ! "$(brew ls --versions '$pkg')" ]; then
-    echo "Package '$pkg' is installed; updating:"
-    brew upgrade "$pkg" && brew cleanup "$pkg" || true
-  else
+for pkg in httpie autojump zsh zsh-completions git-delta bat ripgrep fzf neovim tree vlc 1password-cli pngpaste lazygit btop stow ; do
     brew install "$pkg"
-  fi
 done
 
 
@@ -40,12 +28,12 @@ brew reinstall --cask keycastr
 brew reinstall --cask stats
 
 printf "\nSwitch to brew zsh\n"
-if [ $( cat /etc/shells | grep -E ^$(brew --prefix)/bin/zsh$ ) ]; then
-  echo "zsh already set as default shell"
-else
-  echo $(brew --prefix)/bin/zsh | sudo tee -a /etc/shells
-  chsh -s $(brew --prefix)/bin/zsh
-fi
+# if [ $( cat /etc/shells | grep -E ^$(brew --prefix)/bin/zsh$ ) ]; then
+#   echo "zsh already set as default shell"
+# else
+#  echo $(brew --prefix)/bin/zsh | sudo tee -a /etc/shells
+#  chsh -s $(brew --prefix)/bin/zsh
+# fi
 
 
 
@@ -63,7 +51,7 @@ fi
 # asdf
 # printf "\ninstall asdf from http://asdf-vm.com/guide/getting-started.html#_1-install-dependencies\n"
 
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+# git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 
 printf "\nasdf plugins\n"
 for plgn in nodejs erlang elixir yarn ruby; do
