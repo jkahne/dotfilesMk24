@@ -9,9 +9,11 @@ git clone https://github.com/jkahne/dotfilesMk24.git ~/.dotfiles
 
 
 cd ~/.dotfiles
-stow . -t /Users/jkahne --dotfiles --override=.
+./install
 
+stow . -t /Users/jkahne --dotfiles --override=.
 ```
+
 
 
 ## Manual Install

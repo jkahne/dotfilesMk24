@@ -1,0 +1,141 @@
+#!/bin/bash
+
+set -e
+
+## xcode
+printf "\nxcode\n"
+if [ $( xcode-select -p | grep -E ^/Library/Developer/CommandLineTools$ ) ]; then
+  echo "xcode already installed"
+else
+  xcode-select --install
+fi
+
+
+printf "\nbrew packages\n"
+# # dependencies
+for pkg in gpg gawk coreutils automake autoconf libyaml readline libxslt libtool openssl@3 fop unixodbc wxwidgets; do
+  # if brew list -1 | grep -q "^${pkg}\$"; then
+  if [ ! "$(brew ls --versions '$pkg')" ]; then
+    echo "Package '$pkg' is installed; updating:"
+    brew upgrade "$pkg" && brew cleanup "$pkg" || true
+  else
+    brew install "$pkg"
+  fi
+done
+
+# # the stuff I know what is
+# asdf taken out
+for pkg in httpie autojump zsh zsh-completions git-delta exa bat ripgrep fzf neovim tree vlc 1password-cli pngpaste lazygit btop ; do
+  # if brew list -1 | grep -q "^${pkg}\$"; then
+  if [ ! "$(brew ls --versions '$pkg')" ]; then
+    echo "Package '$pkg' is installed; updating:"
+    brew upgrade "$pkg" && brew cleanup "$pkg" || true
+  else
+    brew install "$pkg"
+  fi
+done
+
+
+brew reinstall --cask keycastr
+brew reinstall --cask stats
+
+printf "\nSwitch to brew zsh\n"
+if [ $( cat /etc/shells | grep -E ^$(brew --prefix)/bin/zsh$ ) ]; then
+  echo "zsh already set as default shell"
+else
+  echo $(brew --prefix)/bin/zsh | sudo tee -a /etc/shells
+  chsh -s $(brew --prefix)/bin/zsh
+fi
+
+
+
+
+
+
+# /opt/homebrew/opt/fzf/install
+if [ -f "$HOME/.fzf.zsh" ]; then
+  echo "fzf already installed"
+else
+  $(brew --prefix)/opt/fzf/install
+fi
+
+
+# asdf
+# printf "\ninstall asdf from http://asdf-vm.com/guide/getting-started.html#_1-install-dependencies\n"
+
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+
+printf "\nasdf plugins\n"
+for plgn in nodejs erlang elixir yarn ruby; do
+  if [ $( asdf plugin list | grep -E ^$plgn$ ) ]; then
+    echo "Plugin '$plgn' is already installed. Updating"
+    asdf plugin update $plgn
+  else
+    asdf plugin add $plgn
+  fi
+done
+
+
+
+
+printf "\nmanual\n"
+echo " -> Terminal preferences -> /opt/homebrew/bin/zsh "
+echo " "
+echo " "
+echo " "
+echo "---------- SSH ----------"
+echo " -> see $HOME/.dotfiles/install"
+echo " "
+echo " "
+echo " "
+echo "---------- ZSH completions ----------"
+echo " -> rm -f ~/.zcompdump; compinit"
+echo " -> chmod -R go-w '/opt/homebrew/share/zsh'"
+echo "    or maybe rather"
+echo " -> chmod -R go-w '/opt/homebrew/share'"
+echo " "
+echo " "
+echo " "
+echo "---------- ASDF ----------"
+echo " -> remember to set your global and local versions!! "
+echo " "
+echo " "
+echo " "
+
+
+
+
+
+brew cleanup
+
+
+
+# ## Set up SSH
+# https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+# ssh-keygen -t ed25519 -C "jkahne@fastmail.com"
+# eval "$(ssh-agent -s)"
+# touch ~/.ssh/config
+# vim ~/.ssh/config
+
+# ```
+# Host *
+#   AddKeysToAgent yes
+#   IdentityFile ~/.ssh/id_ed25519
+# ```
+
+# ssh-add ~/.ssh/id_ed25519
+# pbcopy < ~/.ssh/id_ed25519.pub
+# paste it into GitHub > settings > SSH > new
+
+
+
+
+# ## work
+# brew install wkhtmltopdf
+# sudo vim /etc/hosts
+# 127.0.0.1 lego pizza-planet.lego never-never-land.lego hundred-acre-wood.lego
+
+# brew install heroku/brew/heroku
+
+

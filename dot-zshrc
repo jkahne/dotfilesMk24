@@ -67,7 +67,18 @@ if type brew &>/dev/null; then
   # compinit
 fi
 
+
+# ASDF
+
+# asdf scripts need to be sourced after you have set your $PATH and after you have sourced your framework (oh-my-zsh etc).
+# WARNING
+# On macOS, starting a Bash or Zsh shell automatically calls a utility called path_helper. path_helper can rearrange items in PATH (and MANPATH), causing inconsistent behavior for tools that require specific ordering. To workaround this, asdf on macOS defaults to forcily adding its PATH-entries to the front (taking highest priority). This is controllable with the ASDF_FORCE_PREPEND variable.
+
+# consider moving this down if needed.
+# needs to be above `compint`
 fpath=(${ASDF_DIR}/completions $fpath)
+
+
 
 autoload -Uz compinit && compinit
 
