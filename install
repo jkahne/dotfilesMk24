@@ -13,19 +13,21 @@ fi
 
 printf "\nbrew packages\n"
 # # dependencies
-for pkg in gpg gawk coreutils automake autoconf libyaml readline libxslt libtool openssl@3 fop unixodbc wxwidgets; do
+for pkg in gpg gawk coreutils automake autoconf libyaml readline libxslt libtool openssl@3 fop wxwidgets; do
     brew install "$pkg"
 done
 
 # # the stuff I know what is
 # asdf taken out
-for pkg in httpie autojump zsh zsh-completions git-delta bat ripgrep fzf neovim tree vlc 1password-cli pngpaste lazygit btop stow ; do
+for pkg in wget fd httpie autojump zsh zsh-completions git-delta bat ripgrep fzf neovim tree vlc 1password-cli pngpaste lazygit btop stow ; do
     brew install "$pkg"
 done
 
 
 brew reinstall --cask keycastr
 brew reinstall --cask stats
+brew install --cask iterm2
+
 
 printf "\nSwitch to brew zsh\n"
 # if [ $( cat /etc/shells | grep -E ^$(brew --prefix)/bin/zsh$ ) ]; then
@@ -63,6 +65,10 @@ for plgn in nodejs erlang elixir yarn ruby; do
   fi
 done
 
+# set global nodejs version before Mason (in neovim) can run
+# npm install -g neovim
+# gem install neovim
+# gem install solargraph
 
 
 
