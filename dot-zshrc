@@ -4,6 +4,7 @@ export HERE=$HOME/.dotfiles
 export ASDF_DIR=$HOME/.asdf
 
 # export KEY='value'
+
 # Add commonly used folders to $PATH
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
@@ -174,13 +175,4 @@ function gitcc() {
 # }
 # zle -N fancy-ctrl-z
 # bindkey '^Z' fancy-ctrl-z
-
-
-# pnpm
-export PNPM_HOME="/Users/jkahne/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
