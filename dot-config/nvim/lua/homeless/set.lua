@@ -99,3 +99,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "MatchParen", { fg = "#000000", bg = "#989797" })
   end,
 })
+
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "dot-zshrc",
+    command = "set filetype=zsh"
+})
+

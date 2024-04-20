@@ -147,7 +147,7 @@ setopt share_history # share command history data
 
 
 # FZF
-export FZF_DEFAULT_OPTS="--height 80% --layout=reverse --border  --preview '([[ -f {} ]] && (bat  --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
+export FZF_DEFAULT_OPTS="--height 80% --layout=reverse --border --preview-window=down:30%  --preview '([[ -f {} ]] && (bat  --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
 export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden --follow  -g '!node_modules' -g '!deps' -g '!_build' -g '!.elixir_ls' -g '!.beam' -g '!tmp' -g '!coverage' -g '!vendor' -g '!.git'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
