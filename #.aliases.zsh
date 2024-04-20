@@ -1,5 +1,6 @@
 alias mv='mv -i'
-# alias l="exa -la"
+alias l="eza -la"
+alias exa="eza"
 
 alias b="bundle"
 alias bi="bundle config set path 'vendor' && bundle install"

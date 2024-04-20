@@ -6,6 +6,9 @@
 \.git
 /bin/git-deps
 
+\#.*
+\#.*\**
+
 .*,v
 RCS
 CVS
