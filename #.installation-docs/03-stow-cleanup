@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -e
-
-ln -sf ~/config/nvim ~/.config/nvim

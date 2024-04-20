@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -e
+
+echo "homebrew..."
+if ! command -v brew &> /dev/null
+then
+    echo "Homebrew is not installed. Installing now..."
+    # Install Homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    
+    # Configure Homebrew in your shell
+    if [[ -d "/opt/homebrew/bin" ]]; then
+        eval $(/opt/homebrew/bin/brew shellenv)
+    elif [[ -d "/usr/local/bin/brew" ]]; then
+        eval $(/usr/local/bin/brew shellenv)
+    else
+        echo "Error: Homebrew installation directory not found."
+        exit 1
+    fi
+    
+    echo "Homebrew installation and configuration completed."
+else
+    echo "Homebrew is already installed."
+fi
+
+echo "git..."
+brew install git
+
+echo "stow..."
+brew install stow
+
+echo "iterm2..."
+brew reinstall --cask iterm2
+
+echo "done"

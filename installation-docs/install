@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -e
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+# PARENT_DIR=$(dirname -- "$SCRIPT_DIR")
+
+pushd $SCRIPT_DIR
+pushd ..
+
+
+echo "[+] Stowing dotfiles..."
+stow . -t $HOME -v --dotfiles \
+  --ignore=.DS_Store \
+  --ignore=README.md \
+  --ignore=aliases.zsh \
+  --ignore=key-bindings.zsh \
+  --ignore=prompt.zsh  \
+  --ignore=installation-docs 
+  # --ignore=config \
+
+
+# echo "[+] Stowing .config ..."
+# stow config -t "$HOME/.config" -v \
+#   --ignore=.DS_Store 
+
+
+
+popd 
+popd
+
+# Reload shell once installed
+echo "[+] Reloading shell..."
+exec $SHELL -l
+
+
