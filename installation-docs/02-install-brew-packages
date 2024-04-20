@@ -20,7 +20,7 @@ done
 
 # # the stuff I know what is
 # asdf taken out
-for pkg in wget fd eza httpie autojump zsh zsh-completions git-delta bat ripgrep fzf neovim tree vlc 1password-cli pngpaste lazygit btop ; do
+for pkg in tmux wget fd eza httpie autojump zsh zsh-completions git-delta bat ripgrep fzf neovim tree vlc 1password-cli pngpaste lazygit btop ; do
     brew install "$pkg"
 done
 
