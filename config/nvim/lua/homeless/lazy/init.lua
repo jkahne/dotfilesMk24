@@ -46,16 +46,6 @@ return {
     'windwp/nvim-ts-autotag',
     config = true
   },
-  -- {
-  --   'smoka7/hop.nvim',
-  --   version = "*",
-  --   opts = {},
-  --   config = function()
-  --     require('hop').setup({
-  --       vim.keymap.set('n', 's', ':HopChar2<CR>', { noremap = true, silent = true })
-  --     })
-  --   end
-  -- },
 
   {
     "ggandor/leap.nvim",

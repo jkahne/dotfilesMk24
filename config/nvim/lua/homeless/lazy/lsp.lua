@@ -11,7 +11,7 @@ return {
     "dcampos/nvim-snippy",
     "dcampos/cmp-snippy",
     "j-hui/fidget.nvim",
-    {
+   {
       "folke/trouble.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       opts = {
