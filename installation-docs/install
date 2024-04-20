@@ -3,11 +3,8 @@
 set -e
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-# PARENT_DIR=$(dirname -- "$SCRIPT_DIR")
 
-pushd $SCRIPT_DIR
-pushd ..
-
+pushd "$(dirname "$SCRIPT_DIR")"
 
 echo "[+] Stowing dotfiles..."
 stow . -t $HOME -v --dotfiles \
@@ -17,17 +14,8 @@ stow . -t $HOME -v --dotfiles \
   --ignore=key-bindings.zsh \
   --ignore=prompt.zsh  \
   --ignore=installation-docs 
-  # --ignore=config \
-
-
-# echo "[+] Stowing .config ..."
-# stow config -t "$HOME/.config" -v \
-#   --ignore=.DS_Store 
-
-
 
 popd 
-popd
 
 # Reload shell once installed
 echo "[+] Reloading shell..."
