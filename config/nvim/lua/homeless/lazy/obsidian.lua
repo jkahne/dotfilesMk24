@@ -28,7 +28,7 @@ return {
           name = "Brain",
           path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Brain/",
           overrides = {
-            notes_subdir = "05 Fleeting",
+            notes_subdir = "00 Inbox",
           },
         },
         {
