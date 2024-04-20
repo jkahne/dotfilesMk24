@@ -2,5 +2,4 @@
 
 set -e
 
-cd ~
-rm config
+ln -sf ~/config/nvim ~/.config/nvim
