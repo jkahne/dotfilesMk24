@@ -40,7 +40,9 @@ alias branch_cleanup='git branch | grep -v "main" | xargs git branch -D'
 # alias remove_merged_branches='git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
 
 alias lz="lazygit"
+alias lg="lazygit"
 alias lzconfig="vim ~/Library/Application\ Support/lazygit/config.yml"
+alias lgconfig="vim ~/Library/Application\ Support/lazygit/config.yml"
 
 alias gw="git ci -m'wip'"
 alias gwip="git ci -m'wip'"
