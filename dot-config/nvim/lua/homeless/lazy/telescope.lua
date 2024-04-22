@@ -54,6 +54,7 @@ return {
         },
         layout_strategy = "vertical",
         anchor = "N",
+        file_ignore_patterns = { "node_modules", "package-lock.json", "lazy-lock.json" },
         path_display = {"truncate"},
         layout_config = {
           center = {
@@ -76,6 +77,28 @@ return {
         },
         sorting_strategy = "ascending",
         -- preview = true,
+      },
+      pickers = {
+        buffers = {
+          -- path_display = formattedName,
+          mappings = {
+            i = {
+              ["<C-d>"] = require("telescope.actions").delete_buffer,
+            },
+            n = {
+              ["<C-d>"] = require("telescope.actions").delete_buffer,
+            },
+          },
+          -- previewer = false,
+          -- initial_mode = "normal",
+          -- -- theme = "dropdown",
+          -- layout_config = {
+          --   height = 0.4,
+          --   width = 0.6,
+          --   prompt_position = "top",
+          --   preview_cutoff = 120,
+          -- },
+        },
       },
 
     })
