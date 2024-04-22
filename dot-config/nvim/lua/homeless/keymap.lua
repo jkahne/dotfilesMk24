@@ -77,8 +77,8 @@ vim.api.nvim_set_keymap('n', '<leader>w', ':lua WrapPencil()<CR>', {noremap = tr
 -- Clear search highlighting with a leader key
 vim.keymap.set('n', '<Leader><space>', ':noh<CR>', { noremap = true })
 
--- Map '0' to go to the first non-blank character of the line
-vim.keymap.set({'n', 'v', 'o'}, '0', '^', { noremap = false })
+vim.keymap.set({'n', 'v', 'o'}, '<S-h>', '^', { noremap = false })
+vim.keymap.set({'n', 'v', 'o'}, '<S-l>', 'g_', { noremap = false })
 
 -- Scratch and Vim notes with leader key for quick access
 vim.keymap.set('n', '<Leader>sn', ':tab drop /Users/jkahne/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Brain/*99\\ Meta/scratch.md<CR>', { noremap = true })

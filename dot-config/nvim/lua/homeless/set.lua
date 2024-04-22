@@ -9,7 +9,7 @@ vim.opt.expandtab   = true
 vim.opt.shiftround  = true
 
 vim.opt.smartindent = true
-vim.o.completeopt = "menuone,noselect"
+vim.opt.completeopt = {"menuone","noselect"}
 
 vim.opt.wrap = false
 
@@ -34,13 +34,17 @@ vim.opt.foldlevel = 10  -- Set the depth of opened folds (high number to keep mo
 
 vim.opt.termguicolors = true
 
+vim.opt.pumheight = 10
+vim.opt.pumblend = 10
+
+vim.opt.showmode = false
+vim.opt.showtabline = 1
+
 vim.opt.scrolloff = 4
 vim.opt.signcolumn = "yes"
--- vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50 -- 300
+vim.opt.updatetime = 50 
 vim.opt.timeoutlen = 500
--- vim.o.timeoutlen = 500 -- or is it this?
 
 vim.opt.clipboard:append("unnamedplus")
 
