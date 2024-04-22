@@ -1,3 +1,7 @@
+most of this is outdated already.  
+
+Documentation, amirite?
+
 ## Installation
 ```
 manually run commands in ./preinstall from the repo on the web 

@@ -13,7 +13,8 @@ stow . -t $HOME -v --dotfiles \
   --ignore=aliases.zsh \
   --ignore=key-bindings.zsh \
   --ignore=prompt.zsh  \
-  --ignore=installation-docs 
+  --ignore=installation-docs \
+  --ignore=synced 
 
 popd 
 
