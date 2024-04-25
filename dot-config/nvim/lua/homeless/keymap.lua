@@ -47,6 +47,7 @@ vim.api.nvim_set_keymap('i', '<leader>k', '<Plug>(snippy-previous)', {silent = t
 -- Mappings for =>, <%= %>, and #{}
 vim.keymap.set('i', '<C-Enter>', ' => ', { noremap = true })
 vim.keymap.set('i', '<C-;>', '- [ ] ', { noremap = true })
+vim.keymap.set('n', '<C-;>', '0i- [ ] ', { noremap = true })
 vim.keymap.set('n', "<C-,>", 'i<%=  %><Left><Left><Left>')
 vim.keymap.set('i', "<C-,>", '<%=  %><Left><Left><Left>')
 vim.keymap.set('n', "<C-.>", 'i#{  }<Left><Left>')
