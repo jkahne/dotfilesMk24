@@ -66,10 +66,36 @@ vim.keymap.set('i', '!', '!<C-g>u', { noremap = true })
 vim.keymap.set('i', '?', '?<C-g>u', { noremap = true })
 
 
+-- Toggle cursor crosshair
+vim.keymap.set("n", "+", function()
+  -- vim.opt.cursorline = not vim.opt.cursorline
+  -- vim.opt.cursorcolumn = not vim.opt.cursorcolumn
+  -- Halp! i can't even Lua properly
+  vim.cmd [[
+  set cursorline!
+  set cursorcolumn!
+  ]]
+end, { desc = '[+] Show cursor line and column' })
+
+-- "" Bubbling Text
+-- " Bubble single lines
+vim.keymap.set('n', '<C-Up>', 'ddkP')
+vim.keymap.set('n', '<C-Down>', 'ddp')
+-- " Bubble multiple lines
+vim.keymap.set('v', '<C-Up>', 'xkP`[V`]=gv')
+vim.keymap.set('v', '<C-Down>', 'xp`[V`]=gv')
+
+-- " <F12> " Invisible characters and colors
+vim.keymap.set('n', '<F12>', ':set list!<CR>')
+vim.keymap.set('v', '<F12>', '<ESC>:set list!<CR>gv')
+vim.keymap.set('i', '<F12>', '<ESC>:set list!<CR>i')
+
+
+
 -- Search and replace shortcuts
 vim.keymap.set('n', '<Leader>rr', ':%s//g<Left><Left>', { noremap = true })
 vim.keymap.set('n', '<Leader>rw', function()
-    vim.cmd('%s/' .. vim.fn.expand('<cword>') .. '//g<Left><Left>')
+  vim.cmd('%s/' .. vim.fn.expand('<cword>') .. '//g<Left><Left>')
 end, { noremap = true })
 
 -- Toggle text wrapping
@@ -167,3 +193,10 @@ vim.keymap.set('n', '<Leader>T', ':tabnew<CR>', { noremap = false })
 
 
 
+
+
+vim.keymap.set('i', "'", "''<left>", { noremap = true })
+vim.keymap.set('i', '"', '""<left>', { noremap = true })
+vim.keymap.set('i', "(", "()<left>", { noremap = true })
+vim.keymap.set('i', "[", "[]<left>", { noremap = true })
+vim.keymap.set('i', "{", "{}<left>", { noremap = true })
