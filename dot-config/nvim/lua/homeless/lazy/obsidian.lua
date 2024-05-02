@@ -24,17 +24,17 @@ return {
 
     require('obsidian').setup({
       workspaces = {
-        {
-          name = "Brain",
-          path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Brain/",
-          overrides = {
-            notes_subdir = "00 Inbox",
-          },
-        },
-        {
-          name = "Brain23oey",
-          path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Brain23eoy/",
-        },
+        -- {
+        --   name = "Brain",
+        --   path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Brain/",
+        --   overrides = {
+        --     notes_subdir = "00 Inbox",
+        --   },
+        -- },
+        -- {
+        --   name = "Brain23oey",
+        --   path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Brain23eoy/",
+        -- },
         {
           name = "worknotes",
           path = "~/projects/worknotes",

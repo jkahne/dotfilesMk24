@@ -109,8 +109,8 @@ vim.keymap.set({'n', 'v', 'o'}, '<S-h>', '^', { noremap = false })
 vim.keymap.set({'n', 'v', 'o'}, '<S-l>', 'g_', { noremap = false })
 
 -- Scratch and Vim notes with leader key for quick access
-vim.keymap.set('n', '<Leader>sn', ':tab drop /Users/jkahne/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Brain/*99\\ Meta/scratch.md<CR>', { noremap = true })
-vim.keymap.set('n', '<Leader>vn', ':tab drop /Users/jkahne/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Brain/*99\\ Meta/vimnotes.md<CR>', { noremap = true })
+vim.keymap.set('n', '<Leader>sn', ':tab drop /Users/jeremykahne/projects/worknotes/00\\ Inbox/scratch.md<CR>', { noremap = true })
+vim.keymap.set('n', '<Leader>vn', ':tab drop /Users/jeremykahne/projects/worknotes/00\\ Inbox/vimnotes.md<CR>', { noremap = true })
 
 vim.keymap.set({ 'n', 'v' }, '<space>', '<Nop>', { silent = true })
 
