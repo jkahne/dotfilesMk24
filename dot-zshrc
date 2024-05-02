@@ -2,6 +2,8 @@ export SHELL=/opt/homebrew/bin/zsh
 export EDITOR=nvim
 export HERE=$HOME/.dotfiles
 export ASDF_DIR=$HOME/.asdf
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+export PGGSSENCMODE="disable"
 
 # export KEY='value'
 
@@ -19,6 +21,8 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 ## My own scripts
 export PATH="$HOME/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PATH="$HOME/projects/work/BackerKit/bin:$PATH"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -31,6 +35,15 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # export CPPFLAGS=-L$(brew --prefix unixodbc)/include
 export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
+# export LDFLAGS="-L/opt/homebrew/opt/libxslt/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/libxslt/include"
+# export LDFLAGS="-L/opt/homebrew/opt/libxslt/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/libxslt/include"
+#
+# for BackerKit, to install pg gem during bundle
+# export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
+
 #I added these but then i installed ruby 3.2.3 without them and it worked
 #export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 #export CFLAGS="-Wno-error=implicit-function-declaration"
@@ -198,4 +211,4 @@ function gitcc() {
 # bindkey '^Z' fancy-ctrl-z
 
 
-source /Users/jkahne/.config/broot/launcher/bash/br
+source /Users/jeremykahne/.config/broot/launcher/bash/br

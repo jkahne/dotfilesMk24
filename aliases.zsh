@@ -9,6 +9,10 @@ alias bu="b update"
 alias be="bundle exec"
 alias binit="bi && b package && echo 'vendor/ruby' >> .gitignore"
 
+alias rubocop-nike="rake lint:ruby:current:fix"
+alias nike="rake lint:ruby:current:fix"
+alias pair="bundle exec git pair"
+
 alias tls="tmux ls"
 alias t="tmux attach -t"
 # alias til="tmux attach -t til"

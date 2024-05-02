@@ -35,6 +35,13 @@ vim.keymap.set('n', '<C-L>', '<C-W>l', { noremap = false })
 
 vim.keymap.set("n", "<C-b>", "<cmd>bprev<CR>zz")
 vim.keymap.set("n", "<C-f>", "<cmd>bnext<CR>zz")
+-- Close the current buffer and move to the previous one
+vim.keymap.set('n', '<leader>bd', ':bp <bar> bd #<CR>', { noremap = true, silent = true })
+-- Close all buffers except the current one
+vim.keymap.set('n', '<leader>bo', ':up <bar> %bd <bar> e#<CR>', { noremap = true, silent = true })
+-- Switch between current and last buffer
+vim.keymap.set('n', '<Leader>c', '<C-^><CR>', { noremap = false, silent = true })
+
 
 vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true })
 vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true })
@@ -110,8 +117,8 @@ vim.keymap.set({'n', 'v', 'o'}, '<S-h>', '^', { noremap = false })
 vim.keymap.set({'n', 'v', 'o'}, '<S-l>', 'g_', { noremap = false })
 
 -- Scratch and Vim notes with leader key for quick access
-vim.keymap.set('n', '<Leader>sn', ':tab drop /Users/jkahne/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Brain/*99\\ Meta/scratch.md<CR>', { noremap = true })
-vim.keymap.set('n', '<Leader>vn', ':tab drop /Users/jkahne/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Brain/*99\\ Meta/vimnotes.md<CR>', { noremap = true })
+vim.keymap.set('n', '<Leader>sn', ':tab drop /Users/jeremykahne/projects/worknotes/00\\ Inbox/scratch.md<CR>', { noremap = true })
+vim.keymap.set('n', '<Leader>vn', ':tab drop /Users/jeremykahne/projects/worknotes/00\\ Inbox/vimnotes.md<CR>', { noremap = true })
 
 vim.keymap.set({ 'n', 'v' }, '<space>', '<Nop>', { silent = true })
 
@@ -144,12 +151,6 @@ vim.api.nvim_create_autocmd("FileType", {
 -- vim.api.nvim_set_keymap('i', '<C-y>', '<C-y>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('c', '<C-y>', '<C-y>', { noremap = true, silent = true })
 
--- Close the current buffer and move to the previous one
-vim.keymap.set('n', '<leader>bd', ':bp <bar> bd #<CR>', { noremap = true, silent = true })
--- Close all buffers except the current one
-vim.keymap.set('n', '<leader>bo', ':up <bar> %bd <bar> e#<CR>', { noremap = true, silent = true })
--- Switch between current and last buffer
-vim.keymap.set('n', '<Leader>c', '<C-^><CR>', { noremap = false, silent = true })
 
 
 function WrapPencil()
