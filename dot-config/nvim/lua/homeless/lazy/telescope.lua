@@ -32,6 +32,7 @@ return {
       defaults = {
         mappings = {
           i = {
+            ["<C-h>"] = "which_key",
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
             ['<C-g>'] = function(prompt_bufnr)
@@ -129,6 +130,7 @@ return {
     vim.keymap.set('n', '<leader>m', builtin.marks, {})
     vim.keymap.set('n', '<leader>h', builtin.quickfixhistory, {})
 
+    vim.keymap.set('n', '<leader>eh', "<cmd>Telescope find_files hidden=true<cr>", {})
 
 
 
