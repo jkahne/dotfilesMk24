@@ -1,4 +1,5 @@
-return {
+return  {
+{
   "neovim/nvim-lspconfig",
   dependencies = {
     "williamboman/mason.nvim",
@@ -230,4 +231,17 @@ return {
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
   end
+},
+
+-- Signature
+{
+  "ray-x/lsp_signature.nvim",
+  config = function()
+    require("lsp_signature").setup()
+    vim.keymap.set("n", "<C-i>", function()
+      require("lsp_signature").toggle_float_win()
+    end, { silent = true, noremap = true, desc = "toggle signature" })
+  end,
+},
+
 }
