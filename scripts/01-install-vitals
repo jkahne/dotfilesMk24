@@ -2,6 +2,9 @@
 
 set -e
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+
 echo "homebrew..."
 if ! command -v brew &> /dev/null
 then
@@ -9,28 +12,43 @@ then
     # Install Homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     
-    # Configure Homebrew in your shell
-    if [[ -d "/opt/homebrew/bin" ]]; then
-        eval $(/opt/homebrew/bin/brew shellenv)
-    elif [[ -d "/usr/local/bin/brew" ]]; then
-        eval $(/usr/local/bin/brew shellenv)
-    else
-        echo "Error: Homebrew installation directory not found."
-        exit 1
-    fi
-    
-    echo "Homebrew installation and configuration completed."
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/jkahne/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 else
     echo "Homebrew is already installed."
 fi
 
+[ ! -L $HOME/.dotfiles ] && ln -s "$DOTFILES_DIR" "$HOME/.dotfiles"
+
 echo "git..."
 brew install git
+
+if [ ! -d ~/.asdf ]; then
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+fi
 
 echo "stow..."
 brew install stow
 
 echo "iterm2..."
 brew reinstall --cask iterm2
+
+echo "tmux..."
+brew install tmux
+
+brew install wget
+brew install eza
+brew install bat
+brew install zsh
+brew install zsh-completions
+brew install git-delta
+brew install ripgrep
+brew install fd
+brew install neovim
+
+brew install lazygit
+# this is overridden by the `scripts/install` stow command
+rm ~/Library/Application\ Support/lazygit/config.yml
+
 
 echo "done"
