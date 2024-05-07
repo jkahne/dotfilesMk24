@@ -1,38 +1,60 @@
-## Installation
-```
+# Notes to future me:
+
 run `./scripts/01-install-vitals`
-open a new terminal or source .zshrc
+open a new terminal or iterm or source .zshrc
 cd ~/.dotfiles
 run './scripts/02-install-neovim-and-asdf-plugins'
 
-## Manual changes:
 - update name and email in dot-gitconfig
-- install JetBrains font
 
+1Password
 
-- 1password
-  - safari extension
+Keyboard Maestro
+ - sync to ./synced/Keyboard\ Maestro\ Macros.kmsync
 
-- Keyboard Maestro
-  - install
-  - sync from `/synced` directory
+Brew
+ - git install gh
+   - gh auth login 
+     => sets ups ssh and puts it on github.com
+     => next time you push, you will need to auth with the forever token
 
-- CleanShot
-  - install
+Font
+ - Install JetBrains font from TODO
+
+Cleanshot
+ - keyboard shortcuts:
   - ⌘1 Capture Area
   - ⇧⌘1 Capture Text (OCR)
   - ⌘2 Record Screen
 
-- Things3
+Things
 
-- App Store
-  - presentify
-  - Fantastical
-  - macgtp
-  - datagrip
-  - Fork
-  - CAPSLOCK => ctrl
-  - 
+System Settings
+ - Desktop & Dock
+   - size => small 
+   - Magnification => 1/4 or so
+   - position on screen => Left
+   - Double Click a window's title bar => Do Nothing
+   - Automatically hide and show the Dock => True
+   - Show suggested and recent apps in Dock => False
+   - Click wallpaper to reveal desktop => Only in Stage Manager
+ - Accessibility
+   - Zoom
+     - Use scroll gesture with modifier keys to zoom => true
+     - 
+ - Wallpaper
+   - Dynamic Wallpapers => Solar Gradients
+- Keyboard 
+  - Key repeat rate => Fast
+  - Delay until repeat => Short
+  => Modifier Keys  
+    => ⭐️ Caps Lock to Control
+
+Fantastical
+MacGPT
+Fork
+Datagrip
+
 
 
 Kallax (all 15.5 deep):
@@ -47,7 +69,7 @@ Kallax (all 15.5 deep):
 
 Alex
 
-26.5x26  19 deep
-14x27.5  23 deep
+    26.5x26  19 deep
+    14x27.5  23 deep
 
 
