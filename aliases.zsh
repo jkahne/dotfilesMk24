@@ -2,6 +2,9 @@ alias mv='mv -i'
 alias l="eza -la"
 alias exa="eza"
 
+alias rubocop-nike="rake lint:ruby:current:fix"
+alias nike="rake lint:ruby:current:fix"
+
 alias b="bundle"
 alias bi="bundle config set path 'vendor' && bundle install"
 alias bil="bi --local"

@@ -1,1 +1,1 @@
-[{"url": "postgresql://postgres:postgres@localhost:5432/myapp_development", "name": "myapp_development"}]
+[{"url": "postgresql://jeremykahne@localhost:5432/backerkit_development", "name": "backerkit_development"}]
