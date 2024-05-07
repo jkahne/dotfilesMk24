@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -e
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+
+
+brew install ripgrep
+brew install fd
+brew install fzf
+brew install neovim
+
+# /opt/homebrew/opt/fzf/install
+if [ -f "$HOME/.fzf.zsh" ]; then
+  echo "fzf already installed"
+else
+  $(brew --prefix)/opt/fzf/install
+fi
+
+printf "\nasdf plugins\n"
+for plgn in nodejs ruby golang; do
+  if [ $( asdf plugin list | grep -E ^$plgn$ ) ]; then
+    echo "Plugin '$plgn' is already installed. Updating"
+    asdf plugin update $plgn
+  else
+    asdf plugin add $plgn
+    asdf install $plgn latest
+    asdf global $plgn latest
+    asdf reshim $plgn
+  fi
+done
+
+npm install -g neovim
+gem install neovim
+gem install solargraph
+
+

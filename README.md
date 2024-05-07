@@ -1,37 +1,24 @@
-most of this is outdated already.  
-
-Documentation, amirite?
-
 ## Installation
 ```
-manually run commands in ./preinstall from the repo on the web 
-
-
-git clone https://github.com/jkahne/dotfilesMk24.git ~/.dotfiles
-
-## Manual text changes:
-- update name and email in dot-config
-
-
+run `./scripts/01-install-vitals`
+open a new terminal or source .zshrc
 cd ~/.dotfiles
-./install
+run './scripts/02-install-neovim-and-asdf-plugins'
 
-set up https://github.com/jkahne/nvim
+## Manual changes:
+- update name and email in dot-gitconfig
+- install JetBrains font
 
-stow . -t /Users/jkahne --dotfiles --override=.
-```
-
-
-
-## Manual Install
 
 - 1password
   - safari extension
 
 - Keyboard Maestro
-  - sync from icloud drive
+  - install
+  - sync from `/synced` directory
 
 - CleanShot
+  - install
   - ⌘1 Capture Area
   - ⇧⌘1 Capture Text (OCR)
   - ⌘2 Record Screen
@@ -40,11 +27,27 @@ stow . -t /Users/jkahne --dotfiles --override=.
 
 - App Store
   - presentify
-  - toothpicks
-  - keynote
-  - numbers
-  - pages
-  - Notability
   - Fantastical
-  -
+  - macgtp
+  - datagrip
+  - Fork
+  - CAPSLOCK => ctrl
+  - 
+
+
+Kallax (all 15.5 deep):
+
+    3x3: 44x44
+    3x4: 44x58
+    2x1: 31x16
+    4x4: 58x58
+    2x4: 31x58
+    1x4: 17x58
+    5x5: 72x72
+
+Alex
+
+26.5x26  19 deep
+14x27.5  23 deep
+
 

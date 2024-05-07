@@ -11,14 +11,10 @@ then
     echo "Homebrew is not installed. Installing now..."
     # Install Homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    
-    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/jkahne/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"    
 else
     echo "Homebrew is already installed."
 fi
-
-[ ! -L $HOME/.dotfiles ] && ln -s "$DOTFILES_DIR" "$HOME/.dotfiles"
 
 echo "git..."
 brew install git
@@ -30,11 +26,12 @@ fi
 echo "stow..."
 brew install stow
 
-echo "iterm2..."
-brew reinstall --cask iterm2
-
 echo "tmux..."
 brew install tmux
+
+for pkg in gpg gawk autojump coreutils automake autoconf libyaml readline libxslt libtool openssl@3 fop wxwidgets tree vlc 1password-cli pngpaste lazygit btop; do
+    brew install "$pkg"
+done
 
 brew install wget
 brew install eza
@@ -42,13 +39,44 @@ brew install bat
 brew install zsh
 brew install zsh-completions
 brew install git-delta
-brew install ripgrep
-brew install fd
-brew install neovim
 
-brew install lazygit
-# this is overridden by the `scripts/install` stow command
-rm ~/Library/Application\ Support/lazygit/config.yml
+echo "iterm2..."
+brew reinstall --cask iterm2
+brew reinstall --cask keycastr
+brew reinstall --cask stats
 
+chmod -R go-w '/opt/homebrew/share'
+
+# this is overridden by stowing
+[ -f ~/Library/Application\ Support/lazygit/config.yml ] && rm -f ~/Library/Application\ Support/lazygit/config.yml
+
+
+[ ! -L $HOME/.dotfiles ] && ln -s "$DOTFILES_DIR" "$HOME/.dotfiles"
+
+pushd "$(dirname "$SCRIPT_DIR")"
+# pushd "~/.dotfiles"
+
+echo "[+] Stowing dotfiles..."
+stow . -t $HOME -v --dotfiles \
+  --ignore=.DS_Store \
+  --ignore=README.md \
+  --ignore=aliases.zsh \
+  --ignore=key-bindings.zsh \
+  --ignore=prompt.zsh  \
+  --ignore=scripts \
+  --ignore=synced 
+
+popd 
+
+printf "\nSwitch to brew zsh\n"
+if [ $( cat /etc/shells | grep -E ^$(brew --prefix)/bin/zsh$ ) ]; then
+  echo "zsh already set as default shell"
+else
+ echo $(brew --prefix)/bin/zsh | sudo tee -a /etc/shells
+ chsh -s $(brew --prefix)/bin/zsh
+fi
+
+
+brew cleanup
 
 echo "done"
