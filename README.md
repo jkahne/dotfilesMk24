@@ -2,8 +2,9 @@
 
 run `./scripts/01-install-vitals`
 open a new terminal or iterm or source .zshrc
-cd ~/.dotfiles
-run './scripts/02-install-neovim-and-asdf-plugins'
+`cd ~/.dotfiles`
+run `./scripts/02-install-neovim-and-asdf-plugins`
+run `./scripts/03-macos`
 
 - update name and email in dot-gitconfig
 
@@ -23,9 +24,9 @@ Font
 
 Cleanshot
  - keyboard shortcuts:
-  - ⌘1 Capture Area
-  - ⇧⌘1 Capture Text (OCR)
-  - ⌘2 Record Screen
+   - ⌘1 Capture Area
+   - ⇧⌘1 Capture Text (OCR)
+   - ⌘2 Record Screen
 
 Things
 
@@ -44,11 +45,11 @@ System Settings
      - 
  - Wallpaper
    - Dynamic Wallpapers => Solar Gradients
-- Keyboard 
-  - Key repeat rate => Fast
-  - Delay until repeat => Short
-  => Modifier Keys  
-    => ⭐️ Caps Lock to Control
+ - Keyboard 
+   - Key repeat rate => Fast
+   - Delay until repeat => Short
+   - Modifier Keys  
+     - ⭐️ Caps Lock to Control
 
 Fantastical
 MacGPT
