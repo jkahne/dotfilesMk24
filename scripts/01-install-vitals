@@ -69,6 +69,9 @@ stow . -t $HOME -v --dotfiles \
 
 popd 
 
+
+
+
 printf "\nSwitch to brew zsh\n"
 if [ $( cat /etc/shells | grep -E ^$(brew --prefix)/bin/zsh$ ) ]; then
   echo "zsh already set as default shell"
@@ -79,5 +82,11 @@ fi
 
 
 brew cleanup
+
+# used by Fork for commandline integrations
+pushd "/usr/local" 
+[ ! -d /usr/local/bin ] && sudo mkdir -p /usr/local/bin
+popd
+
 
 echo "done"
