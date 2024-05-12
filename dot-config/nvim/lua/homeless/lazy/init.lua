@@ -98,9 +98,17 @@ return {
         let HiSet   = 'f<CR>'
         let HiErase = 'f<BS>'
         let HiClear = 'f<C-L>'
-        " let HiFind  = 'f<Tab>'
-        let HiSetSL = 't<CR>'
+        let HiFind  = 'f<Tab>'
+        " let HiSetSL = 't<CR>'
         ]])
+
+    vim.keymap.set("n", "g<cr>", "<cmd>Hi><CR>" )
+    vim.keymap.set("n", "gb<cr>", "<cmd>Hi<<CR>" )
+-- nn <CR>   <Cmd>Hi><CR>
+-- nn g<CR>  <Cmd>Hi<<CR>
+-- nn ]<CR>  <Cmd>Hi}<CR>
+-- nn [<CR>  <Cmd>Hi{<CR>
+
     end
   },
   {
