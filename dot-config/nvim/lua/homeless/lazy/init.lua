@@ -44,12 +44,12 @@ return {
   -- },
 
   { 'tpope/vim-abolish' },
-  {
-    "preservim/vim-pencil",
-    init = function()
-      vim.g["pencil#wrapModeDefault"] = "soft"
-    end,
-  },
+  -- {
+  --   "preservim/vim-pencil",
+  --   init = function()
+  --     vim.g["pencil#wrapModeDefault"] = "soft"
+  --   end,
+  -- },
 
 
   { 'tpope/vim-endwise' },

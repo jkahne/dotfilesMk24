@@ -151,14 +151,14 @@ vim.keymap.set('n', '<leader>bo', ':up <bar> %bd <bar> e#<CR>', { noremap = true
 vim.keymap.set('n', '<Leader>c', '<C-^><CR>', { noremap = false, silent = true })
 
 
-function WrapPencil()
-  if vim.o.wrap then
-    vim.cmd('set nowrap')
-  else
-    vim.cmd('set wrap')
-    vim.cmd('PencilSoft')
-  end
-end
+-- function WrapPencil()
+--   if vim.o.wrap then
+--     vim.cmd('set nowrap')
+--   else
+--     vim.cmd('set wrap')
+--     vim.cmd('PencilSoft')
+--   end
+-- end
 
 -- Lua function to merge tabs in Neovim
 function MergeTabs()
