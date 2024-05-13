@@ -53,21 +53,26 @@ chmod -R go-w '/opt/homebrew/share'
 
 [ ! -L $HOME/.dotfiles ] && ln -s "$DOTFILES_DIR" "$HOME/.dotfiles"
 
-pushd "$(dirname "$SCRIPT_DIR")"
-# pushd "~/.dotfiles"
 
-echo "[+] Stowing dotfiles..."
-stow . -t $HOME -v --dotfiles \
-  --ignore=.DS_Store \
-  --ignore=README.md \
-  --ignore=aliases.zsh \
-  --ignore=key-bindings.zsh \
-  --ignore=prompt.zsh  \
-  --ignore=scripts \
-  --ignore=font \
-  --ignore=synced 
 
-popd 
+# # Not sure if calling this actually works, and I don't want to test out a fresh install right now
+
+./stow.sh
+
+# pushd "$(dirname "$SCRIPT_DIR")"
+#
+# echo "[+] Stowing dotfiles..."
+# stow . -t $HOME -v --dotfiles \
+#   --ignore=.DS_Store \
+#   --ignore=README.md \
+#   --ignore=aliases.zsh \
+#   --ignore=font \
+#   --ignore=key-bindings.zsh \
+#   --ignore=prompt.zsh  \
+#   --ignore=scripts \
+#   --ignore=synced 
+#
+# popd 
 
 
 
