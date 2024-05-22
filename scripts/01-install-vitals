@@ -29,7 +29,7 @@ brew install stow
 echo "tmux..."
 brew install tmux
 
-for pkg in gpg gawk autojump coreutils automake autoconf libyaml readline libxslt libtool openssl@3 fop wxwidgets tree vlc 1password-cli pngpaste lazygit btop broot; do
+for pkg in gpg gawk autojump coreutils automake autoconf libyaml readline libxslt libtool openssl@3 fop wxwidgets tree vlc 1password-cli pngpaste lazygit btop broot libpq; do
     brew install "$pkg"
 done
 

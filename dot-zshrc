@@ -13,6 +13,8 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # names, you can add a "gnubin" directory to your PATH with:
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
 # export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
 
 ## My own scripts
@@ -27,8 +29,8 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # export CC="/usr/bin/clang -I$(brew --prefix unixodbc)/include"
 # export LDFLAGS=-L$(brew --prefix unixodbc)/lib
 # export CPPFLAGS=-L$(brew --prefix unixodbc)/include
-export LDFLAGS="-L/opt/homebrew/opt/libxslt/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libxslt/include"
+export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
 #I added these but then i installed ruby 3.2.3 without them and it worked
 #export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 #export CFLAGS="-Wno-error=implicit-function-declaration"

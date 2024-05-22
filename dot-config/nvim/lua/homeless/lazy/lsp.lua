@@ -133,9 +133,16 @@ return  {
         documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        -- ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-y>'] = cmp.mapping(
+          cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+          },
+          { "i", "c" }
+        ),
         -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ["<C-Space>"] = cmp.mapping.complete(),
 
@@ -210,14 +217,18 @@ return  {
 
     })
 
-    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { silent = true, noremap = true })
-    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { silent = true, noremap = true })
+    vim.keymap.set('n', '<leader>ngd', vim.lsp.buf.definition, { silent = true, noremap = true })
+    vim.keymap.set('n', '<leader>ngD', vim.lsp.buf.declaration, { silent = true, noremap = true })
     -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { silent = true, noremap = true })
     -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, { silent = true, noremap = true })
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { silent = true, noremap = true })
 
     vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { silent = true, noremap = true })
     vim.keymap.set('n', 'gD', require('telescope.builtin').lsp_type_definitions, { silent = true, noremap = true })
+
+    -- vim.keymap.set('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { silent = true, noremap = true })
+    -- vim.keymap.set('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { silent = true, noremap = true })
+
     vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, { silent = true, noremap = true })
     vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { silent = true, noremap = true })
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true, noremap = true })
@@ -230,6 +241,8 @@ return  {
     -- vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, { silent = true, noremap = true })
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+
+    vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end , {  })
   end
 },
 
@@ -238,7 +251,7 @@ return  {
   "ray-x/lsp_signature.nvim",
   config = function()
     require("lsp_signature").setup()
-    vim.keymap.set("n", "<C-i>", function()
+    vim.keymap.set("n", "<leader>k", function()
       require("lsp_signature").toggle_float_win()
     end, { silent = true, noremap = true, desc = "toggle signature" })
   end,

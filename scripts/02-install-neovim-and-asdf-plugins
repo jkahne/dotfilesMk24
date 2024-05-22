@@ -34,5 +34,19 @@ done
 npm install -g neovim
 gem install neovim
 gem install solargraph
+gem install solargraph-rails
+
+# be sure to:
+# `solargraph config`
+# add solargraph-rails to .solargraph.yml:
+# ```
+# plugins:
+#  - solargraph-rails
+# ```
+# run `yard gems` at root level
+
+# you may need to run yard after new gems, so do
+# `bundle install && yard gems`
+
 
 

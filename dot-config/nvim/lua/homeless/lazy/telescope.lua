@@ -56,7 +56,7 @@ return {
         layout_strategy = "vertical",
         anchor = "N",
         file_ignore_patterns = { "node_modules", "package-lock.json", "lazy-lock.json" },
-        path_display = {"truncate"},
+        path_display = { "truncate" },
         layout_config = {
           center = {
             preview_height = 0.7,
@@ -128,7 +128,7 @@ return {
     vim.keymap.set('n', '<leader>ef', builtin.live_grep, {})
     vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
     vim.keymap.set('n', '<leader>m', builtin.marks, {})
-    vim.keymap.set('n', '<leader>h', builtin.quickfixhistory, {})
+    vim.keymap.set('n', '<leader>qh', builtin.quickfixhistory, {})
 
     vim.keymap.set('n', '<leader>eh', "<cmd>Telescope find_files hidden=true<cr>", {})
 
@@ -141,4 +141,3 @@ return {
     end, { noremap = true, silent = true, desc = "Open Telescope neoclip" })
   end,
 }
-
