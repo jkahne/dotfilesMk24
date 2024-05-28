@@ -41,6 +41,7 @@ vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true })
 vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true })
 vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true })
 
+-- I don't like this
 vim.api.nvim_set_keymap('i', '<leader>j', '<Plug>(snippy-next)', {silent = true})
 vim.api.nvim_set_keymap('i', '<leader>k', '<Plug>(snippy-previous)', {silent = true})
 
@@ -94,9 +95,9 @@ vim.keymap.set('i', '<F12>', '<ESC>:set list!<CR>i')
 
 -- Search and replace shortcuts
 vim.keymap.set('n', '<Leader>rr', ':%s//g<Left><Left>', { noremap = true })
-vim.keymap.set('n', '<Leader>rw', function()
-  vim.cmd('%s/' .. vim.fn.expand('<cword>') .. '//g<Left><Left>')
-end, { noremap = true })
+-- vim.keymap.set('n', '<Leader>rw', function()
+--   vim.cmd('%s/' .. vim.fn.expand('<cword>') .. '//g<Left><Left>')
+-- end, { noremap = true })
 
 -- Toggle text wrapping
 vim.api.nvim_set_keymap('n', '<leader>w', ':lua WrapPencil()<CR>', {noremap = true, silent = true})

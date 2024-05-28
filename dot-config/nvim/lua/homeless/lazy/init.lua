@@ -80,15 +80,35 @@ return {
     config = true
   },
 
+  -- {
+  --   "ggandor/leap.nvim",
+  --   config=function()
+  --     vim.keymap.set('n', ' ', function ()
+  --       require('leap').leap {
+  --         target_windows = require('leap.user').get_focusable_windows()
+  --       }
+  --     end)
+  --   end
+  -- },
+
   {
-    "ggandor/leap.nvim",
-    config=function()
-      vim.keymap.set('n', ' ', function ()
-        require('leap').leap {
-          target_windows = require('leap.user').get_focusable_windows()
-        }
-      end)
-    end
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    -- @type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      -- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      -- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
+    modes = {
+      char = {
+        jump_labels = true
+      }
+    }
   },
 
   {
@@ -173,52 +193,6 @@ return {
   --   end,
   -- },
 
-
-  {
-    "elixir-tools/elixir-tools.nvim",
-    version = "*",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local elixir = require("elixir")
-      local elixirls = require("elixir.elixirls")
-
-      elixir.setup {
-        nextls = {
-          enable = true
-        },
-        credo = {
-          -- enable = true
-        },
-        elixirls = {
-          enable = true,
-          settings = elixirls.settings {
-            -- dialyzerEnabled = false,
-            -- enableTestLenses = false,
-            dialyzerEnabled = true,
-            fetchDeps = false,
-            enableTestLenses = false,
-            suggestSpecs = false,
-          },
-          -- on_attach = function(client, bufnr)
-          --   vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-          --   vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-          --   vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-          -- end,
-        }
-      }
-
-      vim.keymap.set('n', '<leader>eo', function()
-        require("elixir.elixirls").open_output_panel()
-      end, { noremap = true, silent = true, desc = "Open ElixirLS Output Panel" })
-
-      vim.keymap.set('n', '<leader>er', ':ElixirRestart<CR>:edit<CR>', { noremap = true, silent = true, desc = "Restart ElixirLS and Refresh Buffer" })
-
-
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
   {
     'szw/vim-maximizer',
     config = function()
@@ -356,7 +330,7 @@ return {
         vim.api.nvim_win_set_buf(0, target_buffer)
       end
 
-      vim.keymap.set('n', ',ws', swap_windows, { desc = 'Window Swap' })
+      vim.keymap.set('n', '<leader>ws', swap_windows, { desc = 'Window Swap' })
     end,
   },
 
