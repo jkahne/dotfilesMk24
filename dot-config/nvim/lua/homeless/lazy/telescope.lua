@@ -123,6 +123,7 @@ return {
 
 
     vim.keymap.set('n', '<leader>b', builtin.buffers, {})
+    vim.keymap.set('n', '<leader>km', builtin.keymaps, {})
     vim.keymap.set('n', '<leader>gc', builtin.commands, {})
     vim.keymap.set('n', '<leader>ht', builtin.help_tags, {})
     vim.keymap.set('n', '<leader>ef', builtin.live_grep, {})

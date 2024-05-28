@@ -157,6 +157,9 @@ return {
   {
     "vim-test/vim-test",
     config = function()
+      -- vim.g['test#strategy'] = 'basic'
+      -- vim.g['test#strategy'] = 'neovim_sticky'
+
       vim.keymap.set('n', '<Leader>sa', ':TestSuite<CR>', { noremap = true, silent = true, desc = "Run Test Suite" })
       vim.keymap.set('n', '<Leader>sf', ':TestFile<CR>', { noremap = true, silent = true, desc = "Run Test File" })
       vim.keymap.set('n', '<Leader>ss', ':TestNearest<CR>', { noremap = true, silent = true, desc = "Run Nearest Test" })
