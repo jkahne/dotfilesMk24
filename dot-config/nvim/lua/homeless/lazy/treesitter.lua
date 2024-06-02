@@ -5,12 +5,11 @@ return {
     require("nvim-treesitter.configs").setup({
       -- A list of parser names, or "all"
       ensure_installed = {
-        "css", "dockerfile", "html",
-        "elixir", "heex", "eex",
+        "css",  "html",
         "javascript", "json", "json5", "lua",
         "markdown", "markdown_inline",
-        "sql", "tsx", "typescript", "ruby",
-        "embedded_template", "bash", "astro", "c",
+        "sql", "ruby",
+        "embedded_template", "bash",  "c",
         "vimdoc", "jsdoc"
       },
 
@@ -25,9 +24,9 @@ return {
         enable = true
       },
 
-      autotag = {
-        enable = true,
-      },
+      -- autotag = {
+      --   enable = true,
+      -- },
 
       highlight = {
         -- `false` will disable the whole extension
