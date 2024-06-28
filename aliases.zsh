@@ -20,7 +20,7 @@ alias t="tmux attach -t"
 # alias monte="tmux attach -t monte"
 # alias dot="tmux attach -t dot"
 
-alias rroutes="rails routes | fzf -e"
+alias rroutes="bin/rails routes | fzf -e"
 alias proutes="mix phx.routes | fzf -e"
 
 alias updateclam="freshclam -v"
@@ -42,6 +42,10 @@ alias sync='git add -u . && git commit -m "Minor changes. Commit message skipped
 alias fco="git branch --sort=-committerdate -r | fzf +m | awk '{print $1}' | xargs git switch"
 alias branch_cleanup='git branch | grep -v "main" | xargs git branch -D'
 # alias remove_merged_branches='git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
+
+alias gm="start_dev"
+alias mig="bin/rails db:migrate"
+
 
 alias lz="lazygit"
 alias lg="lazygit"
