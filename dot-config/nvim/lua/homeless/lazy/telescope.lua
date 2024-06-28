@@ -1,7 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
 
-  tag = "0.1.6",
+  tag = "0.1.8",
 
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -35,21 +35,21 @@ return {
             ["<C-h>"] = "which_key",
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
-            ['<C-g>'] = function(prompt_bufnr)
-              -- Use nvim-window-picker to choose the window by dynamically attaching a function
-              local action_set = require('telescope.actions.set')
-              local action_state = require('telescope.actions.state')
-
-              local picker = action_state.get_current_picker(prompt_bufnr)
-              picker.get_selection_window = function(picker, entry)
-                local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
-                -- Unbind after using so next instance of the picker acts normally
-                picker.get_selection_window = nil
-                return picked_window_id
-              end
-
-              return action_set.edit(prompt_bufnr, 'edit')
-            end,
+            -- ['<C-g>'] = function(prompt_bufnr)
+            --   -- Use nvim-window-picker to choose the window by dynamically attaching a function
+            --   local action_set = require('telescope.actions.set')
+            --   local action_state = require('telescope.actions.state')
+            --
+            --   local picker = action_state.get_current_picker(prompt_bufnr)
+            --   picker.get_selection_window = function(picker, entry)
+            --     local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
+            --     -- Unbind after using so next instance of the picker acts normally
+            --     picker.get_selection_window = nil
+            --     return picked_window_id
+            --   end
+            --
+            --   return action_set.edit(prompt_bufnr, 'edit')
+            -- end,
           },
 
         },
@@ -133,7 +133,22 @@ return {
 
     vim.keymap.set('n', '<leader>eh', "<cmd>Telescope find_files hidden=true<cr>", {})
 
+    local actions = require('telescope.actions')
+    local action_state = require('telescope.actions.state')
 
+    function live_grep_in_directory()
+      local opts = {}
+      local cwd = vim.fn.input("Path to directory: ", "", "dir")
+      if cwd ~= "" then
+        opts.cwd = cwd
+      end
+      require('telescope.builtin').live_grep(opts)
+    end
+
+    vim.api.nvim_set_keymap('n', '<leader>ee', 
+    [[<cmd>lua live_grep_in_directory()<CR>]], 
+    { noremap = true, silent = true }
+    )
 
     require("telescope").load_extension "neoclip"
     -- Lua mapping for launching Telescope's neoclip extension
