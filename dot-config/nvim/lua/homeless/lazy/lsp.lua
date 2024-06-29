@@ -48,13 +48,13 @@ return  {
       ensure_installed = {
         "lua_ls",
         "tailwindcss",
-        "tsserver",
+        -- "tsserver",
         "html",
-        "dockerls",
+        -- "dockerls",
         "solargraph",
-        "docker_compose_language_service",
+        -- "docker_compose_language_service",
         "cssls",
-        -- "ruby_ls",
+        -- "ruby_lsp",
         "astro"
       },
       handlers = {
