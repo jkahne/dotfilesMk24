@@ -46,3 +46,13 @@ vim.keymap.set('n', '<Leader>**', function()
     end
 end, { noremap = true, silent = true, desc = "Toggle auto highlight" })
 
+
+function OpenScratch()
+  vim.cmd("enew")
+  vim.bo.buftype = "nofile"
+  vim.bo.bufhidden = "hide"
+  vim.bo.swapfile = false
+end
+
+vim.api.nvim_create_user_command('Scratch', OpenScratch, {})
+
