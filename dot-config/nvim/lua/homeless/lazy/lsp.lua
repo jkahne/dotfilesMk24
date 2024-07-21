@@ -12,25 +12,25 @@ return  {
     "dcampos/nvim-snippy",
     "dcampos/cmp-snippy",
     "j-hui/fidget.nvim",
-   {
-      "folke/trouble.nvim",
-      dependencies = { "nvim-tree/nvim-web-devicons" },
-      opts = {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      },
-      config = function()
-        require("trouble").setup({})
-        -- Lua
-        vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
-        -- vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
-        -- vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
-        vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
-        -- vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
-        -- vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
-      end
-    },
+    -- {
+    --   "folke/trouble.nvim",
+    --   dependencies = { "nvim-tree/nvim-web-devicons" },
+    --   opts = {
+    --     -- your configuration comes here
+    --     -- or leave it empty to use the default settings
+    --     -- refer to the configuration section below
+    --   },
+    --   config = function()
+    --     require("trouble").setup({})
+    --     -- Lua
+    --     vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+    --     -- vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+    --     -- vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+    --     vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+    --     -- vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+    --     -- vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+    --   end
+    -- },
   },
 
   config = function()
@@ -48,13 +48,13 @@ return  {
       ensure_installed = {
         "lua_ls",
         "tailwindcss",
-        -- "tsserver",
+        "tsserver",
         "html",
         -- "dockerls",
-        "solargraph",
+        -- "solargraph",
         -- "docker_compose_language_service",
         "cssls",
-        -- "ruby_lsp",
+        "ruby_lsp",
         "astro"
       },
       handlers = {
@@ -104,7 +104,7 @@ return  {
         }
       },
       userLanguages = {
-        eelixir = "html-eex",
+        -- eelixir = "html-eex",
         eruby = "erb",
         ruby = "rb",
         html = 'html',
@@ -217,8 +217,8 @@ return  {
 
     })
 
-    vim.keymap.set('n', '<leader>ngd', vim.lsp.buf.definition, { silent = true, noremap = true })
-    vim.keymap.set('n', '<leader>ngD', vim.lsp.buf.declaration, { silent = true, noremap = true })
+    -- vim.keymap.set('n', '<leader>ngd', vim.lsp.buf.definition, { silent = true, noremap = true })
+    -- vim.keymap.set('n', '<leader>ngD', vim.lsp.buf.declaration, { silent = true, noremap = true })
     -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { silent = true, noremap = true })
     -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, { silent = true, noremap = true })
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { silent = true, noremap = true })
@@ -233,15 +233,16 @@ return  {
     vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { silent = true, noremap = true })
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true, noremap = true })
     vim.keymap.set('n', 'gq', vim.lsp.buf.code_action, { silent = true, noremap = true })
-    -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { silent = true, noremap = true })
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { silent = true, noremap = true })
 
     vim.keymap.set('n', 'ff', vim.lsp.buf.format, { silent = true, noremap = true })
 
     -- vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, { silent = true, noremap = true })
     -- vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, { silent = true, noremap = true })
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+    vim.keymap.set('n', 'd[', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-
+    vim.keymap.set('n', 'd]', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
     vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end , {  })
   end
 },

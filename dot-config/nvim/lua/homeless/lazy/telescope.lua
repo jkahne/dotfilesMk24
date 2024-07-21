@@ -1,4 +1,5 @@
 return {
+  {
   "nvim-telescope/telescope.nvim",
 
   tag = "0.1.8",
@@ -32,7 +33,7 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<C-h>"] = "which_key",
+            -- ["<C-h>"] = "which_key",
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
             -- ['<C-g>'] = function(prompt_bufnr)
@@ -156,4 +157,6 @@ return {
       require('telescope').extensions.neoclip.default()
     end, { noremap = true, silent = true, desc = "Open Telescope neoclip" })
   end,
+},
+
 }

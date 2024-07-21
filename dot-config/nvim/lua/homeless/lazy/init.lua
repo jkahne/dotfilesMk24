@@ -1,7 +1,21 @@
 return {
   {
-    "nvim-lua/plenary.nvim",
-    name = "plenary"
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+        -- Old text                    Command         New text
+        -- surr*ound_words             ysiw)           (surround_words)
+        -- *make strings               ys$"            "make strings"
+        -- [delete ar*ound me!]        ds]             delete around me!
+        -- remove <b>HTML t*ags</b>    dst             remove HTML tags
+        -- 'change quot*es'            cs'"            "change quotes"
+        -- <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+        -- delete(functi*on calls)     dsf             function calls
+      })
+    end
   },
   {
     "nvim-tree/nvim-web-devicons",
@@ -10,7 +24,11 @@ return {
       require('nvim-web-devicons').setup({})
     end
   },
-    -- filename
+  {
+    "nvim-lua/plenary.nvim",
+    name = "plenary"
+  },
+  -- filename
   -- {
   --   "b0o/incline.nvim",
   --   dependencies = {},
@@ -43,35 +61,30 @@ return {
   --   end,
   -- },
 
-  { 'tpope/vim-abolish' },
-  -- {
-  --   "preservim/vim-pencil",
-  --   init = function()
-  --     vim.g["pencil#wrapModeDefault"] = "soft"
-  --   end,
-  -- },
+  { 'tpope/vim-abolish'
+    -- fooBar => foo_bar  :  crs (coerce to snake_case)
+    -- MixedCase (crm),
+    -- camelCase (crc),
+    -- UPPER_CASE (cru),
+    -- dash-case (cr-),
+    -- dot.case (cr.)
+  },
 
-
-  { 'tpope/vim-endwise' },
+  -- { 'tpope/vim-endwise' },
   { 'kshenoy/vim-signature' },
   { 'rizzatti/dash.vim' },
-  { 'eandrju/cellular-automaton.nvim',
-    init = function()
-      vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<cr>', { noremap = false, silent = true })
-    end
-  },
   {
     'mhinz/vim-signify',
     init = function()
       vim.g.signify_update_on_bufenter = 1
       vim.g.signify_update_on_focusgained = 1
-    end},
+    end
+  },
   {
     'junegunn/vim-easy-align',
     config = function()
       vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = true })
       vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = true })
-
     end
   },
   { 'mg979/vim-visual-multi', },
@@ -82,34 +95,22 @@ return {
         {
           opts = {
             -- Defaults
-            enable_close = true, -- Auto close tags
-            enable_rename = true, -- Auto rename pairs of tags
-            enable_close_on_slash = false -- Auto close on trailing </
+            enable_close = true,         -- Auto close tags
+            enable_rename = true,        -- Auto rename pairs of tags
+            enable_close_on_slash = true -- Auto close on trailing </
           },
           -- Also override individual filetype configs, these take priority.
           -- Empty by default, useful if one of the "opts" global settings
           -- doesn't work well in a specific filetype
-          per_filetype = {
-            ["html"] = {
-              enable_close = false
-            }
-          }
+          -- per_filetype = {
+          --   ["html"] = {
+          --     enable_close = false
+          --   }
+          -- }
         }
       })
     end
   },
-
-  -- {
-  --   "ggandor/leap.nvim",
-  --   config=function()
-  --     vim.keymap.set('n', ' ', function ()
-  --       require('leap').leap {
-  --         target_windows = require('leap.user').get_focusable_windows()
-  --       }
-  --     end)
-  --   end
-  -- },
-
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -123,11 +124,15 @@ return {
       -- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
-    modes = {
-      char = {
-        jump_labels = true
-      }
-    }
+    config = function()
+      require("flash").setup({
+        modes = {
+          char = {
+            enabled = false
+          }
+        }
+      })
+    end
   },
 
   {
@@ -141,13 +146,12 @@ return {
         " let HiSetSL = 't<CR>'
         ]])
 
-    vim.keymap.set("n", "g<cr>", "<cmd>Hi><CR>" )
-    vim.keymap.set("n", "gb<cr>", "<cmd>Hi<<CR>" )
--- nn <CR>   <Cmd>Hi><CR>
--- nn g<CR>  <Cmd>Hi<<CR>
--- nn ]<CR>  <Cmd>Hi}<CR>
--- nn [<CR>  <Cmd>Hi{<CR>
-
+      -- vim.keymap.set("n", "g<cr>", "<cmd>Hi><CR>")
+      -- vim.keymap.set("n", "gb<cr>", "<cmd>Hi<<CR>")
+      -- nn <CR>   <Cmd>Hi><CR>
+      -- nn g<CR>  <Cmd>Hi<<CR>
+      -- nn ]<CR>  <Cmd>Hi}<CR>
+      -- nn [<CR>  <Cmd>Hi{<CR>
     end
   },
   {
@@ -184,10 +188,9 @@ return {
       vim.keymap.set('n', '<Leader>ss', ':TestNearest<CR>', { noremap = true, silent = true, desc = "Run Nearest Test" })
       vim.keymap.set('n', '<Leader>sl', ':TestLast<CR>', { noremap = true, silent = true, desc = "Run Last Test" })
       vim.keymap.set('n', '<Leader>sv', ':TestVisit<CR>', { noremap = true, silent = true, desc = "Visit Test File" })
-
     end
   },
-  -- comment 🤝 here 
+  -- comment 🤝 here
   -- This is code taken from https://gitlab.com/oinak/dot_config_nvim/-/blob/main/lua/plugins/languages.lua?ref_type=heads
   -- I have not tried this yet
   --  {
@@ -219,142 +222,199 @@ return {
     'szw/vim-maximizer',
     config = function()
       -- Set up key mapping for maximizing the current split window
-      vim.keymap.set('n', '<C-w>m', ':MaximizerToggle!<CR>', {noremap = true, silent = true, desc = "Toggle maximize current split"})
-
+      vim.keymap.set('n', '<C-w>m', ':MaximizerToggle!<CR>',
+        { noremap = true, silent = true, desc = "Toggle maximize current split" })
+    end
+  },
+  -- {
+  --   "utilyre/sentiment.nvim",
+  --   version = "*",
+  --   event = "VeryLazy", -- keep for lazy loading
+  --   opts = {
+  --     -- config
+  --   },
+  --   init = function()
+  --     -- `matchparen.vim` needs to be disabled manually in case of lazy loading
+  --     vim.g.loaded_matchparen = 1
+  --   end,
+  -- },
+  -- {
+  --   "tris203/hawtkeys.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  --   opts = {
+  --     -- an empty table will work for default config
+  --     --- if you use functions, or whichkey, or lazy to map keys
+  --     --- then please see the API below for options
+  --   },
+  -- },
+  -- {
+  --   's1n7ax/nvim-window-picker',
+  --   name = 'window-picker',
+  --   event = 'VeryLazy',
+  --   version = '2.*',
+  --   config = function()
+  --     require'window-picker'.setup({
+  --       highlights = {
+  --         statusline = {
+  --           focused = {
+  --             fg = '#000000',
+  --             bg = '#72C0FF',
+  --             bold = true,
+  --           },
+  --           unfocused = {
+  --             fg = '#000000',
+  --             bg = '#61AFEF',
+  --             bold = true,
+  --           },
+  --         },
+  --         winbar = {
+  --           focused = {
+  --             fg = '#000000',
+  --             bg = '#e35e4f',
+  --             bold = true,
+  --           },
+  --           unfocused = {
+  --             fg = '#000000',
+  --             bg = '#44cc41',
+  --             bold = true,
+  --           },
+  --         },
+  --       },
+  --     })
+  --
+  --     local picker = require('window-picker')
+  --
+  --     -- Swap two windows using the awesome window picker
+  --     local function swap_windows()
+  --       local window = picker.pick_window({
+  --         include_current_win = false
+  --       })
+  --       local target_buffer = vim.fn.winbufnr(window)
+  --       -- Set the target window to contain current buffer
+  --       vim.api.nvim_win_set_buf(window, 0)
+  --       -- Set current window to contain target buffer
+  --       vim.api.nvim_win_set_buf(0, target_buffer)
+  --     end
+  --
+  --     vim.keymap.set('n', '<leader>ws', swap_windows, { desc = 'Window Swap' })
+  --   end,
+  -- },
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      vim.keymap.set("n", "git", ":Git ")
+      -- vim.keymap.set("n", "gb",  ":Git blame<CR>")
+      -- vim.keymap.set("n", "gap", ":Git add -p<CR>")
     end
   },
 
   {
-    "utilyre/sentiment.nvim",
-    version = "*",
-    event = "VeryLazy", -- keep for lazy loading
-    opts = {
-      -- config
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
     },
-    init = function()
-      -- `matchparen.vim` needs to be disabled manually in case of lazy loading
-      vim.g.loaded_matchparen = 1
-    end,
-  },
-  {
-    "epwalsh/pomo.nvim",
-    version = "*",  -- Recommended, use latest release instead of latest commit
-    lazy = true,
-    cmd = { "TimerStart", "TimerRepeat" },
-    dependencies = {
-      -- Optional, but highly recommended if you want to use the "Default" timer
-      "rcarriga/nvim-notify",
-    },
-    opts = {
-      -- How often the notifiers are updated.
-      -- update_interval = 1000,
-
-      -- Configure the default notifiers to use for each timer.
-      -- You can also configure different notifiers for timers given specific names, see
-      -- the 'timers' field below.
-      notifiers = {
-        -- The "Default" notifier uses 'vim.notify' and works best when you have 'nvim-notify' installed.
-        {
-          name = "Default",
-          opts = {
-            -- With 'nvim-notify', when 'sticky = true' you'll have a live timer pop-up
-            -- continuously displayed. If you only want a pop-up notification when the timer starts
-            -- and finishes, set this to false.
-            sticky = false,
-
-            -- Configure the display icons:
-            -- title_icon = "󱎫",
-            -- text_icon = "󰄉",
-            -- Replace the above with these if you don't have a patched font:
-            -- title_icon = "⏳",
-            -- text_icon = "⏱️",
-          },
-        },
-
-        -- The "System" notifier sends a system notification when the timer is finished.
-        -- Available on MacOS natively and Linux via the `libnotify-bin` package.
-        -- Tracking: https://github.com/epwalsh/pomo.nvim/issues/3
-        -- { name = "System" },
-
-        -- You can also define custom notifiers by providing an "init" function instead of a name.
-        -- See "Defining custom notifiers" below for an example 👇
-        -- { init = function(timer) ... end }
-      },
-
-      -- -- Override the notifiers for specific timer names.
-      -- timers = {
-      --   -- For example, use only the "System" notifier when you create a timer called "Break",
-      --   -- e.g. ':TimerStart 2m Break'.
-      --   Break = {
-      --     { name = "System" },
-      --   },
-      -- },
-    },
-  },
-  {
-    "tris203/hawtkeys.nvim",
+    -- optional for floating window border decoration
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
     },
-    opts = {
-      -- an empty table will work for default config
-      --- if you use functions, or whichkey, or lazy to map keys
-      --- then please see the API below for options
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      -- { "<leader>lz", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
     },
-  },
-  {
-    's1n7ax/nvim-window-picker',
-    name = 'window-picker',
-    event = 'VeryLazy',
-    version = '2.*',
+
     config = function()
-      require'window-picker'.setup({
-        highlights = {
-          statusline = {
-            focused = {
-              fg = '#000000',
-              bg = '#72C0FF',
-              bold = true,
-            },
-            unfocused = {
-              fg = '#000000',
-              bg = '#61AFEF',
-              bold = true,
-            },
-          },
-          winbar = {
-            focused = {
-              fg = '#000000',
-              bg = '#e35e4f',
-              bold = true,
-            },
-            unfocused = {
-              fg = '#000000',
-              bg = '#44cc41',
-              bold = true,
-            },
-          },
-        },
+      require("lazy").setup()
+    end
+  },
+
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      -- add any options here
+    },
+    lazy = false,
+    config = function()
+      require('Comment').setup({})
+    end
+  },
+
+  {
+    "EdenEast/nightfox.nvim",
+    config = function()
+      require('nightfox').setup({
+        -- disable_background = true,
       })
+      vim.cmd.colorscheme("terafox")
+    end
+  },
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   main = "ibl",
+  --   opts = {},
+  --   config = function()
+  --     local highlight = {
+  --       "RainbowRed",
+  --       "RainbowYellow",
+  --       "RainbowBlue",
+  --       "RainbowOrange",
+  --       "RainbowGreen",
+  --       "RainbowViolet",
+  --       "RainbowCyan",
+  --     }
+  --
+  --     local hooks = require "ibl.hooks"
+  --     -- create the highlight groups in the highlight setup hook, so they are reset
+  --     -- every time the colorscheme changes
+  --     hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+  --       vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+  --       vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+  --       vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+  --       vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+  --       vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+  --       vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+  --       vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+  --     end)
+  --
+  --     -- require("ibl").setup { indent = { highlight = highlight } }
+  --     -- require("ibl").setup {  }
+  --   end
+  -- },
+  {
+    "zbirenbaum/copilot-cmp",
+    event = "InsertEnter",
+    dependencies = { "zbirenbaum/copilot.lua" },
+    config = function()
+      vim.defer_fn(function()
+        -- require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
 
-      local picker = require('window-picker')
-
-      -- Swap two windows using the awesome window picker
-      local function swap_windows()
-        local window = picker.pick_window({
-          include_current_win = false
+        require("copilot").setup({
+          suggestion = { enabled = false },
+          panel = { enabled = false },
         })
-        local target_buffer = vim.fn.winbufnr(window)
-        -- Set the target window to contain current buffer
-        vim.api.nvim_win_set_buf(window, 0)
-        -- Set current window to contain target buffer
-        vim.api.nvim_win_set_buf(0, target_buffer)
-      end
 
-      vim.keymap.set('n', '<leader>ws', swap_windows, { desc = 'Window Swap' })
+        require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+      end, 100)
     end,
   },
+  {
+    "mbbill/undotree",
 
+    config = function()
+      vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+    end
+  },
+  -- {
+  --   "luckasRanarison/tailwind-tools.nvim",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   opts = {} -- your configuration
+  -- },
 }
-
