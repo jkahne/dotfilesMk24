@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
-require 'irb/completion'
-require 'irb/ext/save-history'
+# require 'irb/completion'
+# require 'irb/ext/save-history'
 require 'rubygems'
 
 IRB.conf[:SAVE_HISTORY] = 1000
@@ -31,51 +31,12 @@ class Object
 end
 
 def me
-  User.find_by(email: 'jkahne@my-work.com')
+  User.find_by(email: 'jeremy@backerkit.com')
 end
 
 def time(&block)
   puts Benchmark.measure(&block)
 end
-
-def generate_items
-
-  address =   Address.create({ name: 'Ample',
-                               address: '30 East Central Pkwy',
-                               city: 'Cincinnati',
-                               state: 'OH',
-                               zip: '45202' })
-  region  = Region.create({ name: 'Cincinnati, OH',
-                            active: true,
-                            address: address,
-                            image: File.new("#{Rails.root}/test/fixtures/files/test_img.jpg")  })
-
-  100.times do |s|
-
-    start = rand(0..15).days.from_now
-    sale = Sale.create({ shipping_starts_at: rand(-5..15).days.from_now,
-                         sale_code: "15CIN#{'%03d' % s}",
-                         active: true,
-                         name: "Sale #{s}",
-                         sale_starts_at: start,
-                         sale_ends_at: start + 1.day,
-                         location: address,
-                         region_id: region.id,
-                         aasm_state: 'running' })
-    puts "Sale #{sale.name} created"
-
-    200.times do |i|
-      item = Item.create( { active: true,
-                            name: "Item #{i}",
-                            sale: sale,
-                            barcode: "#{sale.sale_code}-#{'%03d' % i}"  })
-      puts "Item #{item.name} created"
-
-    end
-  end
-
-end
-
 
 class Object
   def my_methods(include_inherited = false)

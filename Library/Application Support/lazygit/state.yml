@@ -1,14 +1,15 @@
 lastupdatecheck: 0
 recentrepos:
-- /Users/jkahne/projects/jkahne/topaz24
-- /Users/jkahne/projects/jkahne/topaz
-- /Users/jkahne/projects/worknotes
-- /Users/jkahne/.dotfiles
-- /Users/jkahne/Library/Mobile Documents/com~apple~CloudDocs/dotfilesMk24
+    - /Users/jkahne/.dotfiles
+    - /Users/jkahne/projects/worknotes
+    - /Users/jkahne/projects/jkahne/topaz24
+    - /Users/jkahne/projects/writebook
+    - /Users/jkahne/Library/Mobile Documents/com~apple~CloudDocs/dotfilesMk24
+    - /Users/jkahne/projects/jkahne/topaz
 startuppopupversion: 5
-lastversion: 0.41.0
+lastversion: 0.42.0
 customcommandshistory:
-- q
+    - q
 hidecommandlog: false
 ignorewhitespaceindiffview: false
 diffcontextsize: 3
