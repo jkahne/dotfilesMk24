@@ -17,6 +17,48 @@ return {
       })
     end
   },
+
+   {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    lazy = false,
+    enabled = true,
+    config = function ()
+      require("hardtime").setup({
+        disable_mouse = false,
+        disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil", "grug-far", "dbui", "Trouble", "trouble" },
+      })
+    end
+  },
+
+  -- {
+  --   'MagicDuck/grug-far.nvim',
+  --   event = 'VeryLazy',
+  --   keys = {
+  --     {
+  --       "<leader>sr",
+  --       "<cmd>lua require('grug-far').toggle_instance({ instanceName='far', staticTitle='Search and Replace' })<CR>",
+  --       mode = { "n", "o", "x" },
+  --     },
+  --     {
+  --       "<leader>srw",
+  --       "<cmd>lua require('grug-far').grug_far({ prefills = { search = vim.fn.expand('<cword>') } })<CR>",
+  --       mode = { "n", "o", "x" },
+  --     },
+  --     -- I use nvim-rip-substitute for file search and replace
+  --     -- {
+  --     --   "<leader>srf",
+  --     --   "<cmd>lua require('grug-far').grug_far({ prefills = { flags = vim.fn.expand('%') } })<CR>",
+  --     --   mode = { "n", "o", "x" },
+  --     -- },
+  --   },
+  --   config = function()
+  --     require('grug-far').setup({
+  --       -- startInInsertMode = false,
+  --     });
+  --   end
+  -- },
+
   {
     "nvim-tree/nvim-web-devicons",
     name = "nvim-web-devicons",
@@ -118,7 +160,7 @@ return {
     opts = {},
     -- stylua: ignore
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
       { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
       -- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
       -- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },

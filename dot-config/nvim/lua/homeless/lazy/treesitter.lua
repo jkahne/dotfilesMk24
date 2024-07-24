@@ -70,29 +70,47 @@ return {
 
       -- A list of parser names, or "all"
       ensure_installed = {
-        "css", 
-       -- "dockerfile", 
-        "html",
-       -- "elixir", 
-        --"heex", 
-       -- "eex",
-        "javascript", 
-        "json", 
-        "json5", 
-        "lua",
-        -- "markdown", 
-        -- "markdown_inline",
-        "sql", 
-        "tsx", 
-        "typescript", 
-        "ruby",
-        "embedded_template", 
-        "bash", 
-        "astro",
-        "c",
-        "vimdoc",
-        "jsdoc"
+       --  "css", 
+       -- -- "dockerfile", 
+       --  "html",
+       -- -- "elixir", 
+       --  --"heex", 
+       -- -- "eex",
+       --  "javascript", 
+       --  "json", 
+       --  "json5", 
+       --  "lua",
+       --  -- "markdown", 
+       --  -- "markdown_inline",
+       --  "sql", 
+       --  "tsx", 
+       --  "typescript", 
+       --  "ruby",
+       --  "embedded_template", 
+       --  "bash", 
+       --  "astro",
+       --  "c",
+       --  "vimdoc",
+       --  "jsdoc"
+          "ruby",
+					"html",
+					"css",
+					"scss",
+					"javascript",
+					"typescript",
+					"solidity",
+					"yaml",
+					"json",
+					"lua",
+					"vim",
+					"query",
+					"embedded_template",
+					"bash",
       },
+
+
+
+
 
       -- Install parsers synchronously (only applied to `ensure_installed`)
       sync_install = false,
@@ -136,4 +154,5 @@ return {
       filetype = "erb", -- Ensure it associates with `erb` files
     }
   end
+}
 }

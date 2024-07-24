@@ -13,6 +13,7 @@ vim.api.nvim_set_keymap('n', '<Leader>1', '<cmd>lua HighlightCurrentLine()<CR>',
 vim.api.nvim_set_keymap('n', '<Leader>2', '<cmd>lua vim.fn.clearmatches()<CR>', { noremap = true, silent = true })
 
 
+vim.lsp.set_log_level("debug")
 
 
 
