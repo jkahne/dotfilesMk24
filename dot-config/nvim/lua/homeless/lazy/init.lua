@@ -18,18 +18,18 @@ return {
     end
   },
 
-   {
-    "m4xshen/hardtime.nvim",
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    lazy = false,
-    enabled = true,
-    config = function ()
-      require("hardtime").setup({
-        disable_mouse = false,
-        disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil", "grug-far", "dbui", "Trouble", "trouble" },
-      })
-    end
-  },
+  --  {
+  --   "m4xshen/hardtime.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  --   lazy = false,
+  --   enabled = true,
+  --   config = function ()
+  --     require("hardtime").setup({
+  --       disable_mouse = false,
+  --       disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil", "grug-far", "dbui", "Trouble", "trouble" },
+  --     })
+  --   end
+  -- },
 
   -- {
   --   'MagicDuck/grug-far.nvim',
@@ -398,6 +398,8 @@ return {
       vim.cmd.colorscheme("terafox")
     end
   },
+
+
   -- {
   --   "lukas-reineke/indent-blankline.nvim",
   --   main = "ibl",

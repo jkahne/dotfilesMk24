@@ -62,7 +62,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          -- "tailwindcss",
+          "tailwindcss",
           "tsserver",
           "html",
           -- "dockerls",
@@ -120,7 +120,7 @@ return {
           ["tailwindcss"] = function()
             local lspconfig = require("lspconfig")
             lspconfig.tailwindcss.setup {
-              cmd = {"tailwindcss-language-server", "--stdio"},
+              -- cmd = {"tailwindcss-language-server", "--stdio"},
               capabilities = capabilities,
               on_attach = function(client, bufnr)
                 local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -142,8 +142,8 @@ return {
                   validate = true
                 }
               },
-              filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact", "erb" },
-              -- userLanguages = { eruby = "erb", ruby = "rb", html = 'html', css = 'css' }
+              -- filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact", "erb" },
+              userLanguages = { eruby = "erb", ruby = "rb", html = 'html', css = 'css' }
             }
           end,
         }
