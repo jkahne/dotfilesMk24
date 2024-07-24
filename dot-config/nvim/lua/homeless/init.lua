@@ -57,3 +57,11 @@ end
 
 vim.api.nvim_create_user_command('Scratch', OpenScratch, {})
 
+
+function NewNote()
+  vim.ui.input({ prompt = "Name: ", relative = "editor" }, function(name)
+    vim.api.nvim_command(":e ~/Notes/"..name..".md")
+  end)
+end
+
+vim.keymap.set('n', '<leader>nn', ":lua NewNote()<CR>", {noremap = true, silent = true})
