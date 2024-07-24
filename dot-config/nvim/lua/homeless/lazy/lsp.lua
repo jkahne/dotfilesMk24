@@ -116,9 +116,10 @@ return {
               }
             }
           end,
+
           ["tailwindcss"] = function()
             local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup {
+            lspconfig.tailwindcss.setup {
               cmd = {"tailwindcss-language-server", "--stdio"},
               capabilities = capabilities,
               on_attach = function(client, bufnr)
