@@ -62,7 +62,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          "tailwindcss",
+          -- "tailwindcss",
           "tsserver",
           "html",
           -- "dockerls",
@@ -117,111 +117,41 @@ return {
             }
           end,
 
-          ["tailwindcss"] = function()
-            local lspconfig = require("lspconfig")
-            lspconfig.tailwindcss.setup {
-              -- cmd = {"tailwindcss-language-server", "--stdio"},
-              capabilities = capabilities,
-              on_attach = function(client, bufnr)
-                local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-                buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-              end,
-              settings = {
-                tailwindCSS = {
-                  classAttributes = { "class", "className", "class:list", "classList", "ngClass", "class: " },
-                  emmetCompletions = true,
-                  lint = {
-                    cssConflict = "warning",
-                    invalidApply = "error",
-                    invalidConfigPath = "error",
-                    invalidScreen = "error",
-                    invalidTailwindDirective = "error",
-                    invalidVariant = "error",
-                    recommendedVariantOrder = "warning"
-                  },
-                  validate = true
-                }
-              },
-              -- filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact", "erb" },
-              userLanguages = { eruby = "erb", ruby = "rb", html = 'html', css = 'css' }
-            }
-          end,
+          -- ["tailwindcss"] = function()
+          --   local lspconfig = require("lspconfig")
+          --   lspconfig.tailwindcss.setup {
+          --     cmd = {"tailwindcss-language-server", "--stdio"},
+          --     capabilities = capabilities,
+          --     on_attach = function(client, bufnr)
+          --       local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+          --       buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+          --     end,
+          --     settings = {
+          --       tailwindCSS = {
+          --         classAttributes = { "class", "className", "class:list", "classList", "ngClass", "class: " },
+          --         emmetCompletions = true,
+          --         lint = {
+          --           cssConflict = "warning",
+          --           invalidApply = "error",
+          --           invalidConfigPath = "error",
+          --           invalidScreen = "error",
+          --           invalidTailwindDirective = "error",
+          --           invalidVariant = "error",
+          --           recommendedVariantOrder = "warning"
+          --         },
+          --         validate = true
+          --       }
+          --     },
+          --     -- filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact", "erb" },
+          --     userLanguages = { eruby = "erb", ruby = "rb", html = 'html', css = 'css' }
+          --   }
+          -- end,
         }
       })
 
-      -- local lspconfig = require("lspconfig")
-      -- lspconfig.tailwindcss.setup {
-      --   -- -- cmd = { "/Users/nick/.config/nvim/language-servers/node_modules/.bin/tailwindcss-language-server", "--stdio" }
-      --   -- capabilities = capabilities,
-      --   -- on_attach = function(client, bufnr)
-      --   --   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-      --   --   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-      --   -- end,
-      --   -- settings = {
-      --   --   tailwindCSS = {
-      --   --     classAttributes = { "class", "className", "class:list", "classList", "ngClass", "class: " },
-      --   --     emmetCompletions = true,
-      --   --     lint = {
-      --   --       cssConflict = "warning",
-      --   --       invalidApply = "error",
-      --   --       invalidConfigPath = "error",
-      --   --       invalidScreen = "error",
-      --   --       invalidTailwindDirective = "error",
-      --   --       invalidVariant = "error",
-      --   --       recommendedVariantOrder = "warning"
-      --   --     },
-      --   --     validate = true
-      --   --   }
-      --   -- },
-      --   -- filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact", "erb" },
-      --   -- userLanguages = { eruby = "erb", ruby = "rb", html = 'html', css = 'css' }
-      --   -- --   -- eelixir = "html-eex",
-      -- }
+      local lspconfig = require("lspconfig")
 
 
-
-      -- require('lspconfig').ruby_lsp.setup {
-      --   capabilities = capabilities,
-      --   diagnostics = false -- Enable diagnostics
-      -- }
-
-      -- require('lspconfig').solargraph.setup( -- setup solargraph (Don't install it with mason, it sucks)
-      --   {
-      --     on_attach = on_attach,
-      --     settings = {
-      --       solargraph = {
-      --         formatting = true,
-      --         useBundler = true,
-      --         diagnostics = true, -- lsp diagnostics are slow
-      --       },
-      --       formatting = true,
-      --       useBundler = true,
-      --       diagnostics = true, -- lsp diagnostics are slow
-      --
-      --     },
-      --   }
-      -- )
-
-
-            require('lspconfig').solargraph.setup({
-              on_attach = on_attach,
-              capabilities,
-              filetypes = { "ruby", "eruby" },
-              settings = {
-                solargraph = {
-                  useBundler = true,
-                  diagnostic = true,
-                  completion = true,
-                  hover = true,
-                  formatting = true,
-                  symbols = true,
-                  definitions = true,
-                  rename = true,
-                  references = true,
-                  folding = true
-                }
-              }
-            })
 
 
 

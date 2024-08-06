@@ -95,7 +95,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     -- :help highlight
     vim.api.nvim_set_hl(0, "Search", { bg = "#E5C07B", fg = "#455354", bold = true })
-    vim.api.nvim_set_hl(0, "CurSearch", { bg = "#D19A66", fg = "#455354", bold = true })
+    vim.api.nvim_set_hl(0, "CurSearch", { bg = "#D19A66", fg = "#344243", bold = true })
     vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#98C379", fg = "#FFFFFF" })
     vim.api.nvim_set_hl(0, "LineHighlight", { bg = "#56B6C2", fg = "#000000" })
     vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { fg = "#D19A66", bold = true })

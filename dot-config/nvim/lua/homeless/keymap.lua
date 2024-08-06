@@ -100,8 +100,7 @@ vim.keymap.set('n', '<Leader>rr', ':%s//g<Left><Left>', { noremap = true })
 -- end, { noremap = true })
 
 -- Toggle text wrapping
-vim.api.nvim_set_keymap('n', '<leader>w', ':lua WrapPencil()<CR>', {noremap = true, silent = true})
-
+vim.api.nvim_set_keymap('n', '<leader>w', ':set wrap!<CR>', {noremap = true, silent = true})
 
 -- Clear search highlighting with a leader key
 vim.keymap.set('n', '<Leader><space>', ':noh<CR>', { noremap = true })
@@ -151,15 +150,6 @@ vim.keymap.set('n', '<leader>bo', ':up <bar> %bd <bar> e#<CR>', { noremap = true
 -- Switch between current and last buffer
 vim.keymap.set('n', '<Leader>c', '<C-^><CR>', { noremap = false, silent = true })
 
-
-function WrapPencil()
-  if vim.o.wrap then
-    vim.cmd('set nowrap')
-  else
-    vim.cmd('set wrap')
-    -- vim.cmd('PencilSoft')
-  end
-end
 
 -- Lua function to merge tabs in Neovim
 function MergeTabs()

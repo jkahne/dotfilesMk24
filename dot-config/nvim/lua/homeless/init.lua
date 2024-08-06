@@ -12,10 +12,7 @@ end
 vim.api.nvim_set_keymap('n', '<Leader>1', '<cmd>lua HighlightCurrentLine()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>2', '<cmd>lua vim.fn.clearmatches()<CR>', { noremap = true, silent = true })
 
-
-vim.lsp.set_log_level("debug")
-
-
+-- vim.lsp.set_log_level("debug")
 
 local function auto_highlight_toggle()
   local auto_highlight_group = vim.api.nvim_create_augroup('auto_highlight', { clear = true })
