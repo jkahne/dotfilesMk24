@@ -8,6 +8,4 @@ return{
       vim.cmd.colorscheme("terafox")
     end
   },
-
-
 }
