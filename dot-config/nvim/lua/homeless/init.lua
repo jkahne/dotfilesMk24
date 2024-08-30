@@ -2,6 +2,14 @@ require("homeless.set")
 require("homeless.keymap")
 require("homeless.lazy_init")
 
+
+
+
+vim.api.nvim_command('command! CopyFilePath let @+ = expand("%:p")')
+
+
+
+
 function HighlightCurrentLine()
   -- Retrieve the current line number
   local line_number = vim.fn.line('.')
@@ -11,6 +19,7 @@ end
 
 vim.api.nvim_set_keymap('n', '<Leader>1', '<cmd>lua HighlightCurrentLine()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>2', '<cmd>lua vim.fn.clearmatches()<CR>', { noremap = true, silent = true })
+
 
 
 
@@ -45,4 +54,15 @@ vim.keymap.set('n', '<Leader>**', function()
         vim.o.hlsearch = true
     end
 end, { noremap = true, silent = true, desc = "Toggle auto highlight" })
+
+
+
+function OpenScratch()
+  vim.cmd("enew")
+  vim.bo.buftype = "nofile"
+  vim.bo.bufhidden = "hide"
+  vim.bo.swapfile = false
+end
+
+vim.api.nvim_create_user_command('Scratch', OpenScratch, {})
 

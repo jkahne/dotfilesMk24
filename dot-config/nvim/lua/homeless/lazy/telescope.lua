@@ -55,7 +55,7 @@ return {
         },
         layout_strategy = "vertical",
         anchor = "N",
-        file_ignore_patterns = { "node_modules", "package-lock.json", "lazy-lock.json" },
+        file_ignore_patterns = { "node_modules", "vcr_cassettes", "package-lock.json", "lazy-lock.json" },
         path_display = { "truncate" },
         layout_config = {
           center = {
@@ -149,6 +149,25 @@ return {
     [[<cmd>lua live_grep_in_directory()<CR>]], 
     { noremap = true, silent = true }
     )
+
+
+    -- local M = {}
+    --
+    -- M.grep_open_buffers = function()
+    --   local buffers = vim.api.nvim_list_bufs()
+    --   local buffer_list = {}
+    --
+    --   for _, buf in ipairs(buffers) do
+    --     if vim.api.nvim_buf_is_loaded(buf) then
+    --       table.insert(buffer_list, vim.api.nvim_buf_get_name(buf))
+    --     end
+    --   end
+    --
+    --   require('telescope.builtin').live_grep({ search_dirs = buffer_list })
+    -- end
+    --
+    -- vim.api.nvim_set_keymap('n', '<leader>gob', '<cmd>lua M.grep_open_buffers()<CR>', { noremap = true, silent = true })
+
 
     require("telescope").load_extension "neoclip"
     -- Lua mapping for launching Telescope's neoclip extension

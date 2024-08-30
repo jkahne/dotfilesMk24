@@ -142,9 +142,13 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "ruby",
     callback = function()
-        vim.keymap.set('n', '<leader>dr', ':!bundle exec standardrb --fix<CR><CR>', { noremap = true, silent = true, buffer = true })
+        -- vim.keymap.set('n', '<leader>dr', ':!bundle exec standardrb --fix<CR><CR>', { noremap = true, silent = true, buffer = true })
         -- vim.keymap.set('n', '<leader>dc', ':!bin/ci<CR><CR>', { noremap = true, silent = true, buffer = true })
-    end,
+        vim.keymap.set('n', '<leader>dr', function()
+          local current_file = vim.fn.expand('%:p')
+          vim.cmd('!rubocop -a ' .. current_file)
+        end, { noremap = true, silent = true, buffer = true })
+      end,
     group = vim.api.nvim_create_augroup("RubySettings", { clear = true })
 })
 

@@ -10,16 +10,16 @@ end
 
 return {
 
-  { "brenoprata10/nvim-highlight-colors",
-
-    config=function()
-      require('nvim-highlight-colors').setup {
-        enable_named_colors = true,
-        enable_tailwind = true
-      }
-
-    end
-  },
+  -- { "brenoprata10/nvim-highlight-colors",
+  --
+  --   config=function()
+  --     require('nvim-highlight-colors').setup {
+  --       enable_named_colors = true,
+  --       enable_tailwind = true
+  --     }
+  --
+  --   end
+  -- },
 
   -- {
   --   "folke/tokyonight.nvim",
@@ -102,7 +102,7 @@ return {
       end)
 
       -- require("ibl").setup { indent = { highlight = highlight } }
-      require("ibl").setup {  }
+      -- require("ibl").setup {  }
     end
   },
 }

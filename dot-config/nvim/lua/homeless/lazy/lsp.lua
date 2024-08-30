@@ -48,14 +48,14 @@ return  {
       ensure_installed = {
         "lua_ls",
         "tailwindcss",
-        "tsserver",
+        -- "tsserver",
         "html",
-        "dockerls",
-        "solargraph",
-        "docker_compose_language_service",
+        -- "dockerls",
+        -- "solargraph",
+        -- "docker_compose_language_service",
         "cssls",
-        -- "ruby_ls",
-        "astro"
+        -- "ruby_lsp",
+        -- "astro"
       },
       handlers = {
         function(server_name) -- default handler (optional)
@@ -78,6 +78,16 @@ return  {
             }
           }
         end,
+
+        ["solargraph"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.solargraph.setup {
+            capabilities = capabilities,
+            diagnostics = false -- Enable diagnostics
+          }
+        end,
+
+
       }
     })
 
@@ -112,10 +122,6 @@ return  {
       }
     }
 
-    lspconfig.solargraph.setup {
-      capabilities = capabilities,
-      diagnostics = false -- Enable diagnostics
-    }
 
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
 

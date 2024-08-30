@@ -8,7 +8,7 @@ return {
       ensure_installed = {
         "css",  "html",
         "javascript", "json", "json5", "lua",
-        "markdown", "markdown_inline",
+        -- "markdown", "markdown_inline",
         "sql", "ruby",
         "embedded_template", "bash",  "c",
         "vimdoc", "jsdoc"
@@ -21,9 +21,9 @@ return {
       -- Recommendation: set to false if you don"t have `tree-sitter` CLI installed locally
       auto_install = false,
 
-      -- indent = {
-      --   enable = false
-      -- },
+      indent = {
+        enable = false
+      },
 
       -- autotag = {
       --   enable = true,
