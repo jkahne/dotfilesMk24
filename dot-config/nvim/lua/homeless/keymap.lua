@@ -74,10 +74,10 @@ vim.keymap.set("i", "?", "?<C-g>u", { noremap = true })
 
 -- Toggle cursor crosshair
 vim.keymap.set("n", "+", function()
-	-- vim.opt.cursorline = not vim.opt.cursorline
-	-- vim.opt.cursorcolumn = not vim.opt.cursorcolumn
-	-- Halp! i can't even Lua properly
-	vim.cmd([[
+  -- vim.opt.cursorline = not vim.opt.cursorline
+  -- vim.opt.cursorcolumn = not vim.opt.cursorcolumn
+  -- Halp! i can't even Lua properly
+  vim.cmd([[
   set cursorline!
   set cursorcolumn!
   ]])
@@ -128,29 +128,29 @@ vim.keymap.set(
 vim.keymap.set({ "n", "v" }, "<space>", "<Nop>", { silent = true })
 
 vim.api.nvim_create_user_command("W", function()
-	vim.cmd("w !sudo tee % > /dev/null")
-	vim.cmd("edit!")
+  vim.cmd("w !sudo tee % > /dev/null")
+  vim.cmd("edit!")
 end, {})
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "elixir",
-	callback = function()
-		vim.keymap.set("n", "<leader>dr", ":!mix format<CR>", { noremap = true, silent = true, buffer = true })
-	end,
-	group = vim.api.nvim_create_augroup("ElixirSettings", { clear = true }),
+  pattern = "elixir",
+  callback = function()
+    vim.keymap.set("n", "<leader>dr", ":!mix format<CR>", { noremap = true, silent = true, buffer = true })
+  end,
+  group = vim.api.nvim_create_augroup("ElixirSettings", { clear = true }),
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "ruby",
-	callback = function()
-		-- vim.keymap.set('n', '<leader>dr', ':!bundle exec standardrb --fix<CR><CR>', { noremap = true, silent = true, buffer = true })
-		-- vim.keymap.set('n', '<leader>dc', ':!bin/ci<CR><CR>', { noremap = true, silent = true, buffer = true })
-		vim.keymap.set("n", "<leader>dr", function()
-			local current_file = vim.fn.expand("%:p")
-			vim.cmd("!rubocop -a " .. current_file)
-		end, { noremap = true, silent = true, buffer = true })
-	end,
-	group = vim.api.nvim_create_augroup("RubySettings", { clear = true }),
+  pattern = "ruby",
+  callback = function()
+    -- vim.keymap.set('n', '<leader>dr', ':!bundle exec standardrb --fix<CR><CR>', { noremap = true, silent = true, buffer = true })
+    -- vim.keymap.set('n', '<leader>dc', ':!bin/ci<CR><CR>', { noremap = true, silent = true, buffer = true })
+    vim.keymap.set("n", "<leader>dr", function()
+      local current_file = vim.fn.expand("%:p")
+      vim.cmd("!rubocop -a " .. current_file)
+    end, { noremap = true, silent = true, buffer = true })
+  end,
+  group = vim.api.nvim_create_augroup("RubySettings", { clear = true }),
 })
 
 -- -- Check if RuboCop is installed
@@ -181,25 +181,25 @@ end
 
 -- Lua function to merge tabs in Neovim
 function MergeTabs()
-	-- Check if only one tab is open
-	if vim.fn.tabpagenr() == 1 then
-		return
-	end
+  -- Check if only one tab is open
+  if vim.fn.tabpagenr() == 1 then
+    return
+  end
 
-	-- Get the current buffer name
-	local bufferName = vim.fn.bufname("%")
+  -- Get the current buffer name
+  local bufferName = vim.fn.bufname("%")
 
-	-- Check if it's the last tab page, then close it and switch to the previous one
-	if vim.fn.tabpagenr("$") == vim.fn.tabpagenr() then
-		vim.cmd("close!")
-	else
-		vim.cmd("close!")
-		vim.cmd("tabprev")
-	end
+  -- Check if it's the last tab page, then close it and switch to the previous one
+  if vim.fn.tabpagenr("$") == vim.fn.tabpagenr() then
+    vim.cmd("close!")
+  else
+    vim.cmd("close!")
+    vim.cmd("tabprev")
+  end
 
-	-- Split the window and load the buffer
-	vim.cmd("split")
-	vim.cmd("buffer " .. bufferName)
+  -- Split the window and load the buffer
+  vim.cmd("split")
+  vim.cmd("buffer " .. bufferName)
 end
 
 -- Mapping the function to a key or calling it in Lua
