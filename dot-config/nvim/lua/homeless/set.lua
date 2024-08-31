@@ -127,7 +127,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     -- :help highlight
     vim.api.nvim_set_hl(0, "Search", { bg = "#E5C07B", fg = "#455354", bold = true })
     vim.api.nvim_set_hl(0, "CurSearch", { bg = "#D19A66", fg = "#455354", bold = true })
-    vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#98C379", fg = "#FFFFFF" })
+    vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#0080FF", fg = "#FFFFFF" })
     vim.api.nvim_set_hl(0, "LineHighlight", { bg = "#56B6C2", fg = "#000000" })
     vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { fg = "#D19A66", bold = true })
     vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#abb2bf" })
@@ -139,15 +139,3 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "dot-zshrc",
   command = "set filetype=zsh",
 })
-
--- vim.opt.signcolumn = "yes" -- otherwise it bounces in and out, not strictly needed though
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "ruby",
--- 	group = vim.api.nvim_create_augroup("RubyLSP", { clear = true }), -- also this is not /needed/ but it's good practice
--- 	callback = function()
--- 		vim.lsp.start({
--- 			name = "standard",
--- 			cmd = { "~/.asdf/shims/standardrb", "--lsp" },
--- 		})
--- 	end,
--- })

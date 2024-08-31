@@ -333,4 +333,40 @@ return {
       -- vim.api.nvim_set_keymap("n", "<leader>ls", "<cmd>:Other scss<CR>", { noremap = true, silent = true })
     end,
   },
+
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    name = "tailwind-tools",
+    build = ":UpdateRemotePlugins",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+      "neovim/nvim-lspconfig",      -- optional
+    },
+    opts = {},                      -- your configuration
+    config = function()
+      require("tailwind-tools").setup({
+        document_color = {
+          enabled = true, -- can be toggled by commands
+          kind = "background", -- "inline" | "foreground" | "background"
+        },
+      })
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "luckasRanarison/tailwind-tools.nvim",
+      "onsails/lspkind-nvim",
+    },
+    opts = function()
+      return {
+        formatting = {
+          format = require("lspkind").cmp_format({
+            before = require("tailwind-tools.cmp").lspkind_format,
+          }),
+        },
+      }
+    end,
+  },
 }

@@ -718,6 +718,7 @@ return {
           "scss",
           "vim",
           "vimdoc",
+          "yaml",
           -- "elixir",
           -- "eex",
         },
