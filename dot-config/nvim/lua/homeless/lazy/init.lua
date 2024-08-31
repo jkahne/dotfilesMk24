@@ -629,7 +629,6 @@ return {
           -- "solargraph",
           "lua_ls",
           -- "ruby_lsp",
-          "rubocop",
         },
         automatic_installation = true,
       })
@@ -765,12 +764,47 @@ return {
         end,
         sources = {
           null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.prettier,
+          -- null_ls.builtins.formatting.prettier, -- yml, probably
           -- null_ls.builtins.diagnostics.erb_lint,
           -- null_ls.builtins.formatting.erb_format,
           -- null_ls.builtins.diagnostics.eslint_d,
-          null_ls.builtins.diagnostics.rubocop,
-          null_ls.builtins.formatting.rubocop,
+          -- null_ls.builtins.diagnostics.rubocop,
+          -- null_ls.builtins.formatting.rubocop,
+
+          null_ls.builtins.diagnostics.rubocop.with({
+            command = "rubocop",
+            args = function(params)
+              return {
+                "--config",
+                ".rubocop_local.yml", -- Explicitly specify the local config file
+                "--format",
+                "json",       -- Ensure JSON output
+                "--force-exclusion",
+                "--stdin",
+                params.bufname, -- Use params.bufname for the full path
+              }
+            end,
+            to_stdin = true,
+            format = "json",
+          }),
+          null_ls.builtins.formatting.rubocop.with({
+            command = "rubocop",
+            args = function(params)
+              return {
+                "--config",
+                ".rubocop_local.yml", -- Explicitly specify the local config file
+                "--auto-correct",
+                "--stdin",
+                params.bufname, -- Use params.bufname for the full path
+                "--stderr",
+                "--format",
+                "quiet",
+              }
+            end,
+            to_stdin = true,
+            from_stderr = false,
+          }),
+
           -- null_ls.builtins.diagnostics.standardrb, -- this doesn't seem to work at all
           -- null_ls.builtins.formatting.standardrb, -- this doesn't seem to work at all
         },
