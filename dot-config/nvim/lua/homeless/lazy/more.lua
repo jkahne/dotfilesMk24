@@ -111,7 +111,7 @@ return {
       vim.cmd([[
         let HiSet   = 'f<CR>'
         let HiErase = 'f<BS>'
-        let HiClear = 'f<C-L>'
+        let HiClear = 'f<C-l>'
         let HiFind  = 'f<Tab>'
         " let HiSetSL = 't<CR>'
         ]])
