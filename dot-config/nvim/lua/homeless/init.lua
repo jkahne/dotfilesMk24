@@ -2,48 +2,49 @@ require("homeless.set")
 require("homeless.keymap")
 require("homeless.lazy_init")
 
+vim.api.nvim_command('command! CopyFilePath let @+ = expand("%:p")')
+
 function HighlightCurrentLine()
   -- Retrieve the current line number
-  local line_number = vim.fn.line('.')
+  local line_number = vim.fn.line(".")
   -- Add highlight to the current line
-  vim.fn.matchadd('LineHighlight', '\\%'..line_number..'l')
+  vim.fn.matchadd("LineHighlight", "\\%" .. line_number .. "l")
 end
 
-vim.api.nvim_set_keymap('n', '<Leader>1', '<cmd>lua HighlightCurrentLine()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>2', '<cmd>lua vim.fn.clearmatches()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>1", "<cmd>lua HighlightCurrentLine()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>2", "<cmd>lua vim.fn.clearmatches()<CR>", { noremap = true, silent = true })
 
 -- vim.lsp.set_log_level("debug")
 
 local function auto_highlight_toggle()
-  local auto_highlight_group = vim.api.nvim_create_augroup('auto_highlight', { clear = true })
+  local auto_highlight_group = vim.api.nvim_create_augroup("auto_highlight", { clear = true })
 
   if vim.g.auto_highlight_active then
     vim.api.nvim_del_augroup_by_id(auto_highlight_group)
-    vim.api.nvim_set_option('updatetime', 4000)
+    vim.api.nvim_set_option("updatetime", 4000)
     vim.g.auto_highlight_active = false
-    vim.fn.setreg('/', '')  -- Clear the search register
+    vim.fn.setreg("/", "") -- Clear the search register
   else
-    vim.api.nvim_create_autocmd('CursorHold', {
+    vim.api.nvim_create_autocmd("CursorHold", {
       group = auto_highlight_group,
-      pattern = '*',
+      pattern = "*",
       callback = function()
-        local cword = vim.fn.expand('<cword>')
-        vim.fn.setreg('/', '\\V\\<' .. vim.fn.escape(cword, '\\') .. '\\>')
-      end
+        local cword = vim.fn.expand("<cword>")
+        vim.fn.setreg("/", "\\V\\<" .. vim.fn.escape(cword, "\\") .. "\\>")
+      end,
     })
-    vim.api.nvim_set_option('updatetime', 50)
+    vim.api.nvim_set_option("updatetime", 50)
     vim.g.auto_highlight_active = true
   end
 
   return vim.g.auto_highlight_active
 end
 
-vim.keymap.set('n', '<Leader>**', function()
-    if auto_highlight_toggle() then
-        vim.o.hlsearch = true
-    end
+vim.keymap.set("n", "<Leader>**", function()
+  if auto_highlight_toggle() then
+    vim.o.hlsearch = true
+  end
 end, { noremap = true, silent = true, desc = "Toggle auto highlight" })
-
 
 function OpenScratch()
   vim.cmd("enew")
@@ -52,13 +53,12 @@ function OpenScratch()
   vim.bo.swapfile = false
 end
 
-vim.api.nvim_create_user_command('Scratch', OpenScratch, {})
-
+vim.api.nvim_create_user_command("Scratch", OpenScratch, {})
 
 function NewNote()
   vim.ui.input({ prompt = "Name: ", relative = "editor" }, function(name)
-    vim.api.nvim_command(":e ~/Notes/"..name..".md")
+    vim.api.nvim_command(":e ~/Notes/" .. name .. ".md")
   end)
 end
 
-vim.keymap.set('n', '<leader>nn', ":lua NewNote()<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>nn", ":lua NewNote()<CR>", { noremap = true, silent = true })
