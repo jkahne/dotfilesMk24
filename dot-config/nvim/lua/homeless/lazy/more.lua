@@ -347,9 +347,16 @@ return {
     config = function()
       require("tailwind-tools").setup({
         document_color = {
-          enabled = true, -- can be toggled by commands
+          enabled = false, -- can be toggled by commands
           kind = "background", -- "inline" | "foreground" | "background"
         },
+
+        vim.api.nvim_set_keymap(
+          "n",
+          "<leader>fc",
+          "<cmd>:TailwindColorToggle<CR>",
+          { noremap = true, silent = true }
+        ),
       })
     end,
   },
