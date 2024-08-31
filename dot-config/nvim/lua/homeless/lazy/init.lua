@@ -322,6 +322,11 @@ return {
             "liquid",
           },
           userLanguages = { eruby = "erb", ruby = "rb", html = "html", css = "css" },
+          -- experimental = {
+          --   classRegex = {
+          --     'class[:]\\s*"([^"]*)"',
+          --   },
+          -- },
         },
       })
 
@@ -624,6 +629,7 @@ return {
           -- "solargraph",
           "lua_ls",
           -- "ruby_lsp",
+          "rubocop",
         },
         automatic_installation = true,
       })
