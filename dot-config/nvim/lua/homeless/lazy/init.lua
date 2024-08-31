@@ -180,12 +180,12 @@ return {
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			-- "WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		config = function()
 			local mason = require("mason")
 
-			local mason_tool_installer = require("mason-tool-installer")
+			-- local mason_tool_installer = require("mason-tool-installer")
 
 			-- enable mason and configure icons
 			mason.setup({
@@ -198,15 +198,15 @@ return {
 				},
 			})
 
-			mason_tool_installer.setup({
-				ensure_installed = {
-					"prettier", -- prettier formatter
-					"stylua", -- lua formatter
-					-- "standardrb", -- ruby formatter
-					"rubocop", -- ruby formatter
-					"htmlhint", -- html linter
-				},
-			})
+			-- mason_tool_installer.setup({
+			-- 	ensure_installed = {
+			-- 		"prettier", -- prettier formatter
+			-- 		"stylua", -- lua formatter
+			-- 		-- "standardrb", -- ruby formatter
+			-- 		-- "rubocop", -- ruby formatter
+			-- 		"htmlhint", -- html linter
+			-- 	},
+			-- })
 		end,
 	},
 	{
@@ -325,11 +325,11 @@ return {
 				},
 			})
 
-			local handlers = {
-				["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-					virtual_text = true,
-				}),
-			}
+			-- local handlers = {
+			-- 	["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+			-- 		virtual_text = true,
+			-- 	}),
+			-- }
 
 			lspconfig.solargraph.setup({
 				-- cmd = {
@@ -338,14 +338,14 @@ return {
 				-- 	"solargraph",
 				-- 	"stdio",
 				-- },
-				filetypes = {
-					"ruby",
-				},
-				flags = {
-					debounce_text_changes = 150,
-				},
-				root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
-				handlers = handlers,
+				-- filetypes = {
+				-- 	"ruby",
+				-- },
+				-- flags = {
+				-- 	debounce_text_changes = 150,
+				-- },
+				-- root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
+				-- handlers = handlers,
 				capabilities = capabilities,
 				-- settings = {
 				-- 	Solargraph = {
@@ -730,23 +730,39 @@ return {
 	{
 		"nvimtools/none-ls.nvim",
 		config = function()
+			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 			local null_ls = require("null-ls")
 			null_ls.setup({
+				on_attach = function(client, bufnr)
+					if client.supports_method("textDocument/formatting") then
+						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							group = augroup,
+							buffer = bufnr,
+							callback = function()
+								vim.lsp.buf.format({ async = false })
+							end,
+						})
+					end
+				end,
 				sources = {
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.prettier,
-					-- null_ls.builtins.diagnostics.erb_lint,
+					null_ls.builtins.diagnostics.erb_lint,
+					-- null_ls.builtins.diagnostics.eslint_d,
 					null_ls.builtins.diagnostics.rubocop,
 					null_ls.builtins.formatting.rubocop,
+					-- null_ls.builtins.diagnostics.standardrb, -- this doesn't seem to work at all
+					-- null_ls.builtins.formatting.standardrb, -- this doesn't seem to work at all
 				},
 			})
 
 			vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, {})
 		end,
 	},
-	{
-		"nvim-telescope/telescope-ui-select.nvim",
-	},
+	-- {
+	-- 	"nvim-telescope/telescope-ui-select.nvim",
+	-- },
 
 	-- {
 	-- 	"stevearc/conform.nvim",
@@ -820,49 +836,49 @@ return {
 	-- 	end,
 	-- },
 
-	-- {
-	-- 	"mhartington/formatter.nvim",
-	-- 	event = "BufWrite",
-	-- 	config = function()
-	-- 		local util = require("formatter.util")
-	--
-	-- 		vim.api.nvim_create_autocmd("BufWritePost", {
-	-- 			group = vim.api.nvim_create_augroup("_formatter", { clear = true }),
-	-- 			pattern = "*",
-	-- 			command = "FormatWrite",
-	-- 		})
-	--
-	-- 		-- Provides the following commands:
-	-- 		-- Format, FormatWrite, FormatLock, FormatWriteLock
-	-- 		require("formatter").setup({
-	-- 			logging = true,
-	-- 			log_level = vim.log.levels.WARN,
-	-- 			filetype = {
-	-- 				ruby = {
-	-- 					function()
-	-- 						return {
-	-- 							exe = "rubocop",
-	-- 							args = {
-	-- 								"--fix-layout",
-	-- 								"--autocorrect-all",
-	-- 								"--stdin",
-	-- 								util.escape_path(util.get_current_buffer_file_name()),
-	-- 								"--format",
-	-- 								"files",
-	-- 								"--stderr",
-	-- 							},
-	-- 							stdin = true,
-	-- 						}
-	-- 					end,
-	-- 				},
-	-- 				lua = {
-	-- 					require("formatter.filetypes.lua").stylua,
-	-- 				},
-	-- 				["*"] = {
-	-- 					require("formatter.filetypes.any").remove_trailing_whitespace,
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
+	{
+		"mhartington/formatter.nvim",
+		event = "BufWrite",
+		config = function()
+			local util = require("formatter.util")
+
+			vim.api.nvim_create_autocmd("BufWritePost", {
+				group = vim.api.nvim_create_augroup("_formatter", { clear = true }),
+				pattern = "*",
+				command = "FormatWrite",
+			})
+
+			-- Provides the following commands:
+			-- Format, FormatWrite, FormatLock, FormatWriteLock
+			require("formatter").setup({
+				logging = true,
+				log_level = vim.log.levels.WARN,
+				filetype = {
+					ruby = {
+						function()
+							return {
+								exe = "rubocop",
+								args = {
+									"--fix-layout",
+									"--autocorrect-all",
+									"--stdin",
+									util.escape_path(util.get_current_buffer_file_name()),
+									"--format",
+									"files",
+									"--stderr",
+								},
+								stdin = true,
+							}
+						end,
+					},
+					lua = {
+						require("formatter.filetypes.lua").stylua,
+					},
+					["*"] = {
+						require("formatter.filetypes.any").remove_trailing_whitespace,
+					},
+				},
+			})
+		end,
+	},
 }
