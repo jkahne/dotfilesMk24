@@ -135,9 +135,7 @@ return {
     },
     config = function()
       require("aerial").setup({
-        layout = {
-          default_direction = "float",
-        },
+        layout = {},
         -- optionally use on_attach to set keymaps when aerial has attached to a buffer
         on_attach = function(bufnr)
           -- Jump forwards/backwards with '{' and '}'
