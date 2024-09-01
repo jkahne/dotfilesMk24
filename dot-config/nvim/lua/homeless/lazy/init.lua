@@ -1,21 +1,21 @@
 return {
-	-- {
-	--   "zbirenbaum/copilot-cmp",
-	--   event = "InsertEnter",
-	--   dependencies = { "zbirenbaum/copilot.lua" },
-	--   config = function()
-	--     vim.defer_fn(function()
-	--       -- require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
-	--
-	--       require("copilot").setup({
-	--         suggestion = { enabled = false },
-	--         panel = { enabled = false },
-	--       })
-	--
-	--       require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
-	--     end, 100)
-	--   end,
-	-- },
+	{
+		"zbirenbaum/copilot-cmp",
+		event = "InsertEnter",
+		dependencies = { "zbirenbaum/copilot.lua" },
+		config = function()
+			vim.defer_fn(function()
+				-- require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+
+				require("copilot").setup({
+					suggestion = { enabled = false },
+					panel = { enabled = false },
+				})
+
+				require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+			end, 100)
+		end,
+	},
 
 	{
 		"stevearc/oil.nvim",
@@ -439,7 +439,7 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 				}),
 				sources = cmp.config.sources({
-					-- { name = "copilot", group_index = 2 },
+					{ name = "copilot", group_index = 2 },
 					{ name = "nvim_lsp" },
 					{ name = "snippy" }, -- For snippy users.
 					{ name = "path" },
