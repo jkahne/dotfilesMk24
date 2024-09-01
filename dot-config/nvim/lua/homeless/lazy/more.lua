@@ -184,6 +184,8 @@ return {
 				"<Leader>sv",
 				":TestVisit<CR>",
 				{ noremap = true, silent = true, desc = "Visit Test File" }
+
+				-- vim.cmd("let test#strategy = 'vimux'")
 			)
 		end,
 	},

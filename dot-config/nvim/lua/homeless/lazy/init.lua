@@ -175,6 +175,7 @@ return {
 		init = function()
 			vim.keymap.set("n", "gt", ":Neotree toggle<CR>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<leader>gt", ":Neotree reveal<CR>", {})
+			vim.keymap.set("n", "<leader>bt", ":Neotree buffers reveal float<CR>", {})
 		end,
 	},
 	{
@@ -396,7 +397,6 @@ return {
 			-- vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, { silent = true, noremap = true })
 			vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { silent = true, noremap = true })
-			vim.keymap.set("n", "gq", vim.lsp.buf.code_action, { silent = true, noremap = true })
 			vim.keymap.set("n", "ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 
