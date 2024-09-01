@@ -358,6 +358,7 @@ return {
 						-- completion = true,
 						autoformat = false,
 						formatting = false,
+						diagnostics = false, -- turned off cause I want to use standardrb
 						-- symbols = true,
 						-- definitions = true,
 						-- references = true,
@@ -365,7 +366,6 @@ return {
 						-- highlights = true,
 						-- useBundler = true,
 						-- rename = true,
-						-- diagnostics = false, -- lsp diagnostics are slow
 						-- hover = true,
 						--    -- Enable this when running with docker compose
 						--transport = 'external',
@@ -755,6 +755,44 @@ return {
 		config = function()
 			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 			local null_ls = require("null-ls")
+
+			local standardrb_diagnostics = {
+				method = null_ls.methods.DIAGNOSTICS,
+				filetypes = { "ruby" },
+				generator = null_ls.generator({
+					command = "standardrb",
+					args = { "--fix", "--format", "json", "--force-exclusion", "--stdin", "$FILENAME" },
+					to_stdin = true,
+					from_stderr = true,
+					format = "json",
+					on_output = function(params)
+						local diags = {}
+						for _, offense in ipairs(params.output[1].offenses) do
+							table.insert(diags, {
+								row = offense.location.start_line,
+								col = offense.location.start_column,
+								end_row = offense.location.end_line,
+								end_col = offense.location.end_column,
+								source = "standardrb",
+								message = offense.message,
+								severity = offense.severity == "error" and 1 or 2, -- 1 for error, 2 for warning
+							})
+						end
+						return diags
+					end,
+				}),
+			}
+
+			local standardrb_formatting = {
+				method = null_ls.methods.FORMATTING,
+				filetypes = { "ruby" },
+				generator = null_ls.generator({
+					command = "standardrb",
+					args = { "--fix", "--stdin", "$FILENAME" },
+					to_stdin = true,
+				}),
+			}
+
 			null_ls.setup({
 				on_attach = function(client, bufnr)
 					if client.supports_method("textDocument/formatting") then
@@ -813,6 +851,15 @@ return {
 
 					-- null_ls.builtins.diagnostics.standardrb, -- this doesn't seem to work at all
 					-- null_ls.builtins.formatting.standardrb, -- this doesn't seem to work at all
+
+					standardrb_diagnostics,
+					standardrb_formatting,
+					-- null_ls.builtins.formatting.standardrb.with({
+					-- 	command = "standardrb", -- Ensure this matches the output of `which standardrb`
+					-- }),
+					-- null_ls.builtins.diagnostics.standardrb.with({
+					-- 	command = "standardrb",
+					-- }),
 				},
 			})
 
