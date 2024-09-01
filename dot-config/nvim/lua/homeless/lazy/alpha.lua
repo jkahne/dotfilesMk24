@@ -7,24 +7,7 @@ return {
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.startify")
-
-		-- dashboard.section.header.val = {
-		-- 	[[                                                                       ]],
-		-- 	[[                                                                       ]],
-		-- 	[[                                                                       ]],
-		-- 	[[                                                                       ]],
-		-- 	[[                                                                     ]],
-		-- 	[[       ████ ██████           █████      ██                     ]],
-		-- 	[[      ███████████             █████                             ]],
-		-- 	[[      █████████ ███████████████████ ███   ███████████   ]],
-		-- 	[[     █████████  ███    █████████████ █████ ██████████████   ]],
-		-- 	[[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
-		-- 	[[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
-		-- 	[[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
-		-- 	[[                                                                       ]],
-		-- 	[[                                                                       ]],
-		-- 	[[                                                                       ]],
-		-- }
+		dashboard.file_icons.provider = "devicons"
 
 		dashboard.section.header.val = {
 			"                                                     ",
@@ -47,6 +30,13 @@ return {
 		-- 	"  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝   ╚═╝   ",
 		-- 	"                                                                      ",
 		-- }
+		--
+
 		alpha.setup(dashboard.opts)
+
+		-- Lua configuration for init.lua
+
+		-- Set a keymap to show the Alpha dashboard
+		vim.api.nvim_set_keymap("n", "<leader>da", ":Alpha<CR>", { noremap = true, silent = true })
 	end,
 }
