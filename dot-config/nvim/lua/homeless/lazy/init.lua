@@ -1,21 +1,21 @@
 return {
-	{
-		"zbirenbaum/copilot-cmp",
-		event = "InsertEnter",
-		dependencies = { "zbirenbaum/copilot.lua" },
-		config = function()
-			vim.defer_fn(function()
-				-- require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
-
-				require("copilot").setup({
-					suggestion = { enabled = false },
-					panel = { enabled = false },
-				})
-
-				require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
-			end, 100)
-		end,
-	},
+	-- {
+	--   "zbirenbaum/copilot-cmp",
+	--   event = "InsertEnter",
+	--   dependencies = { "zbirenbaum/copilot.lua" },
+	--   config = function()
+	--     vim.defer_fn(function()
+	--       -- require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+	--
+	--       require("copilot").setup({
+	--         suggestion = { enabled = false },
+	--         panel = { enabled = false },
+	--       })
+	--
+	--       require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+	--     end, 100)
+	--   end,
+	-- },
 
 	{
 		"stevearc/oil.nvim",
@@ -180,12 +180,12 @@ return {
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			-- "WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		config = function()
 			local mason = require("mason")
 
-			local mason_tool_installer = require("mason-tool-installer")
+			-- local mason_tool_installer = require("mason-tool-installer")
 
 			-- enable mason and configure icons
 			mason.setup({
@@ -198,15 +198,15 @@ return {
 				},
 			})
 
-			mason_tool_installer.setup({
-				ensure_installed = {
-					"prettier", -- prettier formatter
-					"stylua", -- lua formatter
-					-- "standardrb", -- ruby formatter
-					"rubocop", -- ruby formatter
-					"htmlhint", -- html linter
-				},
-			})
+			-- mason_tool_installer.setup({
+			-- 	ensure_installed = {
+			-- 		"prettier", -- prettier formatter
+			-- 		"stylua", -- lua formatter
+			-- 		-- "standardrb", -- ruby formatter
+			-- 		-- "rubocop", -- ruby formatter
+			-- 		"htmlhint", -- html linter
+			-- 	},
+			-- })
 		end,
 	},
 	{
@@ -246,6 +246,21 @@ return {
 
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
+				settings = {
+					Lua = {
+						diagnostics = {
+							-- Get the language server to recognize the `vim` global
+							globals = { "vim" },
+						},
+						workspace = {
+							-- Make the server aware of Neovim runtime files
+							library = {
+								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+								[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+							},
+						},
+					},
+				},
 			})
 
 			lspconfig.tailwindcss.setup({
@@ -307,29 +322,63 @@ return {
 						"liquid",
 					},
 					userLanguages = { eruby = "erb", ruby = "rb", html = "html", css = "css" },
+					-- experimental = {
+					--   classRegex = {
+					--     'class[:]\\s*"([^"]*)"',
+					--   },
+					-- },
 				},
 			})
 
+			-- local handlers = {
+			-- 	["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+			-- 		virtual_text = true,
+			-- 	}),
+			-- }
+
 			lspconfig.solargraph.setup({
-				capabilities = capabilities,
-				-- settings = {
-				--   solargraph = {
-				--     formatting = true,
-				--     useBundler = true,
-				--     diagnostics = false,     -- lsp diagnostics are slow
-				--     completion = true,
-				--     hover = true,
-				--     definitions = true,
-				--     rename = true,
-				--     references = true,
-				--     folding = true
-				--   },
+				-- cmd = {
+				-- 	"asdf",
+				-- 	"exec",
+				-- 	"solargraph",
+				-- 	"stdio",
 				-- },
+				-- filetypes = {
+				-- 	"ruby",
+				-- },
+				-- flags = {
+				-- 	debounce_text_changes = 150,
+				-- },
+				-- root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
+				-- handlers = handlers,
+				capabilities = capabilities,
+				settings = {
+					Solargraph = {
+						-- completion = true,
+						autoformat = false,
+						formatting = false,
+						-- symbols = true,
+						-- definitions = true,
+						-- references = true,
+						-- folding = true,
+						-- highlights = true,
+						-- useBundler = true,
+						-- rename = true,
+						-- diagnostics = false, -- lsp diagnostics are slow
+						-- hover = true,
+						--    -- Enable this when running with docker compose
+						--transport = 'external',
+						--externalServer = {
+						--    host = 'localhost',
+						--    port = '7658',
+						--}
+					},
+				},
 			})
 
 			-- lspconfig.ruby_lsp.setup({
-			--   capabilities = capabilities,
-			--   -- cmd = { "/jkahne/.asdf/shims/ruby-lsp" }
+			-- 	capabilities = capabilities,
+			-- 	-- cmd = { "/jkahne/.asdf/shims/ruby-lsp" }
 			-- })
 
 			lspconfig.html.setup({
@@ -351,7 +400,7 @@ return {
 			vim.keymap.set("n", "ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 
-			vim.keymap.set("n", "ff", vim.lsp.buf.format, { silent = true, noremap = true })
+			-- vim.keymap.set("n", "ff", vim.lsp.buf.format, { silent = true, noremap = true })
 
 			-- vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, { silent = true, noremap = true })
 			-- vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, { silent = true, noremap = true })
@@ -390,7 +439,7 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 				}),
 				sources = cmp.config.sources({
-					{ name = "copilot", group_index = 2 },
+					-- { name = "copilot", group_index = 2 },
 					{ name = "nvim_lsp" },
 					{ name = "snippy" }, -- For snippy users.
 					{ name = "path" },
@@ -461,7 +510,13 @@ return {
 					},
 					layout_strategy = "vertical",
 					anchor = "N",
-					file_ignore_patterns = { "node_modules", "vcr_cassettes", "package-lock.json", "lazy-lock.json" },
+					file_ignore_patterns = {
+						"node_modules",
+						"vcr_cassettes",
+						"vendor",
+						"package-lock.json",
+						"lazy-lock.json",
+					},
 					path_display = { "truncate" },
 					layout_config = {
 						center = {
@@ -472,14 +527,14 @@ return {
 							preview_height = 0.7,
 							mirror = true,
 							preview_cutoff = 4,
-							width = 0.99,
-							height = 0.99,
+							width = 0.90,
+							height = 0.90,
 						},
 						horizontal = {
 							prompt_position = "top",
 							preview_width = 0.7,
-							width = 0.99,
-							height = 0.99,
+							width = 0.90,
+							height = 0.90,
 						},
 					},
 					sorting_strategy = "ascending",
@@ -577,9 +632,9 @@ return {
 					"tailwindcss",
 					"html",
 					"cssls",
-					"solargraph",
+					-- "solargraph",
 					"lua_ls",
-					-- "ruby_lsp"
+					-- "ruby_lsp",
 				},
 				automatic_installation = true,
 			})
@@ -655,8 +710,7 @@ return {
 			local configs = require("nvim-treesitter.configs")
 
 			configs.setup({
-
-				automatic_installation = true,
+				auto_install = true,
 				textobjects = {
 					swap = {
 						enable = true,
@@ -675,104 +729,151 @@ return {
 					"scss",
 					"vim",
 					"vimdoc",
+					"yaml",
 					-- "elixir",
 					-- "eex",
 				},
-				sync_install = false,
 				highlight = { enable = true },
 				indent = { enable = true },
 			})
+
+			-- You might need to manually add the ERB parser if it's not officially supported:
+			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+			parser_config.erb = {
+				install_info = {
+					url = "https://github.com/tree-sitter/tree-sitter-embedded-template",
+					files = { "src/parser.c" },
+					branch = "main",
+				},
+				filetype = "erb", -- Ensure it associates with `erb` files
+			}
 		end,
 	},
 
 	{
 		"nvimtools/none-ls.nvim",
 		config = function()
+			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 			local null_ls = require("null-ls")
 			null_ls.setup({
+				on_attach = function(client, bufnr)
+					if client.supports_method("textDocument/formatting") then
+						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							group = augroup,
+							buffer = bufnr,
+							callback = function()
+								vim.lsp.buf.format({ async = false })
+							end,
+						})
+					end
+				end,
 				sources = {
 					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.prettier,
+					-- null_ls.builtins.formatting.prettier, -- yml, probably
 					-- null_ls.builtins.diagnostics.erb_lint,
+					-- null_ls.builtins.formatting.erb_format,
+					-- null_ls.builtins.diagnostics.eslint_d,
 					-- null_ls.builtins.diagnostics.rubocop,
-					null_ls.builtins.formatting.rubocop,
+					-- null_ls.builtins.formatting.rubocop,
+
+					null_ls.builtins.diagnostics.rubocop.with({
+						command = "rubocop",
+						args = function(params)
+							return {
+								"--config",
+								".rubocop_local.yml", -- Explicitly specify the local config file
+								"--format",
+								"json", -- Ensure JSON output
+								"--force-exclusion",
+								"--stdin",
+								params.bufname, -- Use params.bufname for the full path
+							}
+						end,
+						to_stdin = true,
+						format = "json",
+					}),
+					null_ls.builtins.formatting.rubocop.with({
+						command = "rubocop",
+						args = function(params)
+							return {
+								"--config",
+								".rubocop_local.yml", -- Explicitly specify the local config file
+								"--auto-correct",
+								"--stdin",
+								params.bufname, -- Use params.bufname for the full path
+								"--stderr",
+								"--format",
+								"quiet",
+							}
+						end,
+						to_stdin = true,
+						from_stderr = false,
+					}),
+
+					-- null_ls.builtins.diagnostics.standardrb, -- this doesn't seem to work at all
+					-- null_ls.builtins.formatting.standardrb, -- this doesn't seem to work at all
 				},
 			})
+
+			vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, {})
 		end,
 	},
-	{
-		"nvim-telescope/telescope-ui-select.nvim",
-	},
-
-	{
-		"stevearc/conform.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local conform = require("conform")
-
-			conform.setup({
-				formatters_by_ft = {
-					javascript = { "prettier" },
-					-- typescript = { "prettier" },
-					-- javascriptreact = { "prettier" },
-					-- typescriptreact = { "prettier" },
-					-- svelte = { "prettier" },
-					css = { "prettier" },
-					html = { "prettier" },
-					json = { "prettier" },
-					yaml = { "prettier" },
-					markdown = { "prettier" },
-					-- graphql = { "prettier" },
-					-- lua = { "stylua" },
-					ruby = { "rubocop" }, --, "standardrb",  "rubocop", "htmlbeautifier" } }
-					-- python = { "isort", "black" },
-				},
-				format_on_save = {
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 1000,
-				},
-			})
-			vim.keymap.set({ "n", "v" }, "<leader>mp", function()
-				conform.format({
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 500,
-				})
-			end, { desc = "Format file or range (in visual mode)" })
-		end,
-	},
-
 	-- {
-	-- 	"mfussenegger/nvim-lint",
-	-- 	event = {
-	-- 		"BufReadPre",
-	-- 		"BufNewFile",
-	-- 	},
-	-- 	config = function()
-	-- 		local lint = require("lint")
-	--
-	-- 		lint.linters_by_ft = {
-	-- 			-- javascript = { "eslint_d" },
-	-- 			-- typescript = { "eslint_d" },
-	-- 			-- javascriptreact = { "eslint_d" },
-	-- 			-- typescriptreact = { "eslint_d" },
-	-- 			ruby = { "rubocop" },
-	-- 			html = { "htmlhint" },
-	-- 		}
-	--
-	-- 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-	--
-	-- 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-	-- 			group = lint_augroup,
-	-- 			callback = function()
-	-- 				lint.try_lint()
-	-- 			end,
-	-- 		})
-	--
-	-- 		vim.keymap.set("n", "<leader>l", function()
-	-- 			lint.try_lint()
-	-- 		end, { desc = "Trigger linting for current file" })
-	-- 	end,
+	-- 	"nvim-telescope/telescope-ui-select.nvim",
 	-- },
+
+	{
+		"mhartington/formatter.nvim",
+		event = "BufWrite",
+		config = function()
+			-- local util = require("formatter.util")
+
+			vim.api.nvim_create_autocmd("BufWritePost", {
+				group = vim.api.nvim_create_augroup("_formatter", { clear = true }),
+				pattern = "*",
+				command = "FormatWrite",
+			})
+
+			-- Provides the following commands:
+			-- Format, FormatWrite, FormatLock, FormatWriteLock
+			require("formatter").setup({
+				logging = true,
+				log_level = vim.log.levels.WARN,
+				filetype = {
+					-- ruby = {
+					-- function()
+					-- 	return {
+					-- 		exe = "rubocop",
+					-- 		args = {
+					-- 			"--fix-layout",
+					-- 			"--autocorrect-all",
+					-- 			"--stdin",
+					-- 			util.escape_path(util.get_current_buffer_file_name()),
+					-- 			"--format",
+					-- 			"files",
+					-- 			"--stderr",
+					-- 		},
+					-- 		stdin = true,
+					-- 	}
+					-- end,
+					-- },
+					lua = {
+						require("formatter.filetypes.lua").stylua,
+					},
+					["*"] = {
+						require("formatter.filetypes.any").remove_trailing_whitespace,
+					},
+				},
+			})
+		end,
+	},
+
+	{
+		"j-hui/fidget.nvim",
+		tag = "v1.4.5",
+		opts = {
+			-- options
+		},
+	},
 }
