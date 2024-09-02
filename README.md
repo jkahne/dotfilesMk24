@@ -15,7 +15,7 @@ Keyboard Maestro
 
 Brew
  - git install gh
-   - gh auth login 
+   - gh auth login
      => sets ups ssh and puts it on github.com
      => next time you push, you will need to auth with the forever token
 
@@ -32,7 +32,7 @@ Things
 
 System Settings
  - Desktop & Dock
-   - size => small 
+   - size => small
    - Magnification => 1/4 or so
    - position on screen => Left
    - Double Click a window's title bar => Do Nothing
@@ -42,13 +42,13 @@ System Settings
  - Accessibility
    - Zoom
      - Use scroll gesture with modifier keys to zoom => true
-     - 
+     -
  - Wallpaper
    - Dynamic Wallpapers => Solar Gradients
- - Keyboard 
+ - Keyboard
    - Key repeat rate => Fast
    - Delay until repeat => Short
-   - Modifier Keys  
+   - Modifier Keys
      - ⭐️ Caps Lock to Control
 
 Fantastical
@@ -57,3 +57,5 @@ Fork
 Datagrip
 Ice - bartender alternative since bartender got bought by a shady company.   https://github.com/jordanbaird/Ice
 
+
+I need to steal some ideas from this whole repo: https://github.com/prdanelli/dotfiles/blob/main/neovim/lua/plugins/whichkey.lua
