@@ -25,6 +25,7 @@ only-icloud-synced/
 .nvimrc
 dockerrubocop.rb
 /app/models/jog.rb
+.rubocop_local.yml
 
 
 config/nvim/db_ui/connections.json
@@ -33,4 +34,3 @@ config/nvim/db_ui/
 /dot-config/broot/**/*
 /dot-config/github-copilot/**/*
 /dot-config/iterm2/**/*
-
