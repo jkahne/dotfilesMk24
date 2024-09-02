@@ -386,6 +386,16 @@ return {
 				capabilities = capabilities,
 			})
 
+			lspconfig.jsonls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.bashls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.yamlls.setup({
+				capabilities = capabilities,
+			})
+
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 
 			-- vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { silent = true, noremap = true })
