@@ -334,4 +334,15 @@ return {
 			-- vim.api.nvim_set_keymap("n", "<leader>ls", "<cmd>:Other scss<CR>", { noremap = true, silent = true })
 		end,
 	},
+	{
+		"kevinhwang91/nvim-bqf", -- better quickfix
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+		build = ":TSUpdate",
+		config = function()
+			vim.api.nvim_set_keymap("n", "<leader>cn", ":cnext<cr>", {})
+			vim.api.nvim_set_keymap("n", "<leader>cp", ":cprevious<cr>", {})
+		end,
+	},
 }
