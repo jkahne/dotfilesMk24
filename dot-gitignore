@@ -34,3 +34,10 @@ config/nvim/db_ui/
 /dot-config/broot/**/*
 /dot-config/github-copilot/**/*
 /dot-config/iterm2/**/*
+
+# .tool-versions
+# /dot-config/broot/**/*
+# /dot-config/github-copilot/**/*
+# /dot-config/iterm2/**/*
+
+.tool-versions

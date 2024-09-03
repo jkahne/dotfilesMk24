@@ -35,7 +35,7 @@ return {
                 "--config",
                 ".rubocop_local.yml", -- Explicitly specify the local config file
                 "--format",
-                "json", -- Ensure JSON output
+                "json",               -- Ensure JSON output
                 "--force-exclusion",
                 "--stdin",
                 params.bufname, -- Use params.bufname for the full path
@@ -61,6 +61,9 @@ return {
             to_stdin = true,
             from_stderr = false,
           }),
+
+          -- null_ls.builtins.diagnostics.standardrb, -- this doesn't seem to work at all
+          -- null_ls.builtins.formatting.standardrb, -- this doesn't seem to work at all
         },
       })
 
