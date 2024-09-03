@@ -105,7 +105,7 @@ return {
           },
           follow_current_file = {
             enabled = false, -- This will find and focus the file in the active buffer every time
-            --               -- the current file is changed while the tree is open.
+            --                       -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
         },
@@ -314,23 +314,23 @@ return {
       })
 
       -- local handlers = {
-      -- 	["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      -- 		virtual_text = true,
-      -- 	}),
+      --   ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+      --     virtual_text = true,
+      --   }),
       -- }
 
       lspconfig.solargraph.setup({
         -- cmd = {
-        -- 	"asdf",
-        -- 	"exec",
-        -- 	"solargraph",
-        -- 	"stdio",
+        --   "asdf",
+        --   "exec",
+        --   "solargraph",
+        --   "stdio",
         -- },
         -- filetypes = {
-        -- 	"ruby",
+        --   "ruby",
         -- },
         -- flags = {
-        -- 	debounce_text_changes = 150,
+        --   debounce_text_changes = 150,
         -- },
         -- root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
         -- handlers = handlers,
@@ -764,21 +764,21 @@ return {
         log_level = vim.log.levels.WARN,
         filetype = {
           -- ruby = {
-          -- function()
-          -- 	return {
-          -- 		exe = "rubocop",
-          -- 		args = {
-          -- 			"--fix-layout",
-          -- 			"--autocorrect-all",
-          -- 			"--stdin",
-          -- 			util.escape_path(util.get_current_buffer_file_name()),
-          -- 			"--format",
-          -- 			"files",
-          -- 			"--stderr",
-          -- 		},
-          -- 		stdin = true,
-          -- 	}
-          -- end,
+          --   function()
+          --     return {
+          --       exe = "rubocop",
+          --       args = {
+          --         "--fix-layout",
+          --         "--autocorrect-all",
+          --         "--stdin",
+          --         util.escape_path(util.get_current_buffer_file_name()),
+          --         "--format",
+          --         "files",
+          --         "--stderr",
+          --       },
+          --       stdin = true,
+          --     }
+          --   end,
           -- },
           lua = {
             require("formatter.filetypes.lua").stylua,
