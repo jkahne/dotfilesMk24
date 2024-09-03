@@ -10,4 +10,3 @@ gui:
       # Reassign scroll keys
       scrollUpMain: '<C-k>'
       scrollDownMain: '<C-j>'
-
