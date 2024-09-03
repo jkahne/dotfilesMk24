@@ -65,8 +65,8 @@ return {
         {
           opts = {
             -- Defaults
-            enable_close = true,    -- Auto close tags
-            enable_rename = true,   -- Auto rename pairs of tags
+            enable_close = true,          -- Auto close tags
+            enable_rename = true,         -- Auto rename pairs of tags
             enable_close_on_slash = true, -- Auto close on trailing </
           },
           -- Also override individual filetype configs, these take priority.
@@ -155,30 +155,15 @@ return {
       -- vim.g['test#strategy'] = 'basic'
       -- vim.g['test#strategy'] = 'neovim_sticky'
 
-      vim.keymap.set(
-        "n",
-        "<Leader>sa",
-        ":TestSuite<CR>",
-        { noremap = true, silent = true, desc = "Run Test Suite" }
-      )
-      vim.keymap.set(
-        "n",
-        "<Leader>sf",
-        ":TestFile<CR>",
-        { noremap = true, silent = true, desc = "Run Test File" }
-      )
+      vim.keymap.set("n", "<Leader>sa", ":TestSuite<CR>", { noremap = true, silent = true, desc = "Run Test Suite" })
+      vim.keymap.set("n", "<Leader>sf", ":TestFile<CR>", { noremap = true, silent = true, desc = "Run Test File" })
       vim.keymap.set(
         "n",
         "<Leader>ss",
         ":TestNearest<CR>",
         { noremap = true, silent = true, desc = "Run Nearest Test" }
       )
-      vim.keymap.set(
-        "n",
-        "<Leader>sl",
-        ":TestLast<CR>",
-        { noremap = true, silent = true, desc = "Run Last Test" }
-      )
+      vim.keymap.set("n", "<Leader>sl", ":TestLast<CR>", { noremap = true, silent = true, desc = "Run Last Test" })
       vim.keymap.set(
         "n",
         "<Leader>sv",
@@ -341,22 +326,17 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope.nvim", -- optional
-      "neovim/nvim-lspconfig",      -- optional
+      "neovim/nvim-lspconfig",         -- optional
     },
-    opts = {},                      -- your configuration
+    opts = {},                         -- your configuration
     config = function()
       require("tailwind-tools").setup({
         document_color = {
-          enabled = false, -- can be toggled by commands
+          enabled = false,     -- can be toggled by commands
           kind = "background", -- "inline" | "foreground" | "background"
         },
 
-        vim.api.nvim_set_keymap(
-          "n",
-          "<leader>fc",
-          "<cmd>:TailwindColorToggle<CR>",
-          { noremap = true, silent = true }
-        ),
+        vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>:TailwindColorToggle<CR>", { noremap = true, silent = true }),
       })
     end,
   },

@@ -18,7 +18,9 @@ return {
           end
         end,
         sources = {
-          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.stylua.with({
+            extra_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+          }),
           -- null_ls.builtins.formatting.prettier, -- yml, probably
           -- null_ls.builtins.diagnostics.erb_lint,
           -- null_ls.builtins.formatting.erb_format,
@@ -33,7 +35,7 @@ return {
                 "--config",
                 ".rubocop_local.yml", -- Explicitly specify the local config file
                 "--format",
-                "json",       -- Ensure JSON output
+                "json",               -- Ensure JSON output
                 "--force-exclusion",
                 "--stdin",
                 params.bufname, -- Use params.bufname for the full path
