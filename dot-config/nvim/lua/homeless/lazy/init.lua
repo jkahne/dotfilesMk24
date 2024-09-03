@@ -182,13 +182,13 @@ return {
       })
 
       -- mason_tool_installer.setup({
-      -- 	ensure_installed = {
-      -- 		"prettier", -- prettier formatter
-      -- 		"stylua", -- lua formatter
-      -- 		-- "standardrb", -- ruby formatter
-      -- 		-- "rubocop", -- ruby formatter
-      -- 		"htmlhint", -- html linter
-      -- 	},
+      --   ensure_installed = {
+      --     "prettier", -- prettier formatter
+      --     "stylua", -- lua formatter
+      --     -- "standardrb", -- ruby formatter
+      --     -- "rubocop", -- ruby formatter
+      --     "htmlhint", -- html linter
+      --   },
       -- })
     end,
   },
