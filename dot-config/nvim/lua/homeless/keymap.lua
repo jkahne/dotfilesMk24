@@ -164,18 +164,28 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("RubySettings", { clear = true }),
 })
 
+-- Set indentation settings specifically for Lua files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua",
+	callback = function()
+		vim.bo.expandtab = true
+		vim.bo.shiftwidth = 2
+		vim.bo.tabstop = 2
+	end,
+})
+
 -- -- Check if RuboCop is installed
 -- local rubocop_installed = vim.fn.executable("rubocop") == 1
 -- -- Auto command to run RuboCop on save
 -- if rubocop_installed then
--- 	vim.api.nvim_create_autocmd("BufWritePost", {
--- 		pattern = "*.rb", -- Match Ruby files
--- 		callback = function()
--- 			vim.cmd("silent !rubocop --auto-correct-all %")
--- 			vim.cmd("edit") -- Reload the file after RuboCop modifies it
--- 		end,
--- 		group = vim.api.nvim_create_augroup("RubocopOnSave", { clear = true }),
--- 	})
+--  vim.api.nvim_create_autocmd("BufWritePost", {
+--    pattern = "*.rb", -- Match Ruby files
+--    callback = function()
+--      vim.cmd("silent !rubocop --auto-correct-all %")
+--      vim.cmd("edit") -- Reload the file after RuboCop modifies it
+--    end,
+--    group = vim.api.nvim_create_augroup("RubocopOnSave", { clear = true }),
+--  })
 -- end
 
 -- vim.api.nvim_set_keymap('i', '<C-y>', '<C-y>', { noremap = true, silent = true })

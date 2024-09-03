@@ -183,13 +183,13 @@ return {
 			})
 
 			-- mason_tool_installer.setup({
-			-- 	ensure_installed = {
-			-- 		"prettier", -- prettier formatter
-			-- 		"stylua", -- lua formatter
-			-- 		-- "standardrb", -- ruby formatter
-			-- 		-- "rubocop", -- ruby formatter
-			-- 		"htmlhint", -- html linter
-			-- 	},
+			--  ensure_installed = {
+			--    "prettier", -- prettier formatter
+			--    "stylua", -- lua formatter
+			--    -- "standardrb", -- ruby formatter
+			--    -- "rubocop", -- ruby formatter
+			--    "htmlhint", -- html linter
+			--  },
 			-- })
 		end,
 	},
@@ -315,23 +315,23 @@ return {
 			})
 
 			-- local handlers = {
-			-- 	["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-			-- 		virtual_text = true,
-			-- 	}),
+			--  ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+			--    virtual_text = true,
+			--  }),
 			-- }
 
 			lspconfig.solargraph.setup({
 				-- cmd = {
-				-- 	"asdf",
-				-- 	"exec",
-				-- 	"solargraph",
-				-- 	"stdio",
+				--  "asdf",
+				--  "exec",
+				--  "solargraph",
+				--  "stdio",
 				-- },
 				-- filetypes = {
-				-- 	"ruby",
+				--  "ruby",
 				-- },
 				-- flags = {
-				-- 	debounce_text_changes = 150,
+				--  debounce_text_changes = 150,
 				-- },
 				-- root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
 				-- handlers = handlers,
@@ -361,8 +361,8 @@ return {
 			})
 
 			-- lspconfig.ruby_lsp.setup({
-			-- 	capabilities = capabilities,
-			-- 	-- cmd = { "/jkahne/.asdf/shims/ruby-lsp" }
+			--  capabilities = capabilities,
+			--  -- cmd = { "/jkahne/.asdf/shims/ruby-lsp" }
 			-- })
 
 			lspconfig.html.setup({
@@ -809,37 +809,37 @@ return {
 					-- null_ls.builtins.formatting.rubocop,
 
 					-- null_ls.builtins.diagnostics.rubocop.with({
-					-- 	command = "rubocop",
-					-- 	args = function(params)
-					-- 		return {
-					-- 			"--config",
-					-- 			".rubocop_local.yml", -- Explicitly specify the local config file
-					-- 			"--format",
-					-- 			"json", -- Ensure JSON output
-					-- 			"--force-exclusion",
-					-- 			"--stdin",
-					-- 			params.bufname, -- Use params.bufname for the full path
-					-- 		}
-					-- 	end,
-					-- 	to_stdin = true,
-					-- 	format = "json",
+					--  command = "rubocop",
+					--  args = function(params)
+					--    return {
+					--      "--config",
+					--      ".rubocop_local.yml", -- Explicitly specify the local config file
+					--      "--format",
+					--      "json", -- Ensure JSON output
+					--      "--force-exclusion",
+					--      "--stdin",
+					--      params.bufname, -- Use params.bufname for the full path
+					--    }
+					--  end,
+					--  to_stdin = true,
+					--  format = "json",
 					-- }),
 					-- null_ls.builtins.formatting.rubocop.with({
-					-- 	command = "rubocop",
-					-- 	args = function(params)
-					-- 		return {
-					-- 			"--config",
-					-- 			".rubocop_local.yml", -- Explicitly specify the local config file
-					-- 			"--auto-correct",
-					-- 			"--stdin",
-					-- 			params.bufname, -- Use params.bufname for the full path
-					-- 			"--stderr",
-					-- 			"--format",
-					-- 			"quiet",
-					-- 		}
-					-- 	end,
-					-- 	to_stdin = true,
-					-- 	from_stderr = false,
+					--  command = "rubocop",
+					--  args = function(params)
+					--    return {
+					--      "--config",
+					--      ".rubocop_local.yml", -- Explicitly specify the local config file
+					--      "--auto-correct",
+					--      "--stdin",
+					--      params.bufname, -- Use params.bufname for the full path
+					--      "--stderr",
+					--      "--format",
+					--      "quiet",
+					--    }
+					--  end,
+					--  to_stdin = true,
+					--  from_stderr = false,
 					-- }),
 
 					-- null_ls.builtins.diagnostics.standardrb, -- this doesn't seem to work at all
@@ -848,10 +848,10 @@ return {
 					standardrb_diagnostics,
 					standardrb_formatting,
 					-- null_ls.builtins.formatting.standardrb.with({
-					-- 	command = "standardrb", -- Ensure this matches the output of `which standardrb`
+					--  command = "standardrb", -- Ensure this matches the output of `which standardrb`
 					-- }),
 					-- null_ls.builtins.diagnostics.standardrb.with({
-					-- 	command = "standardrb",
+					--  command = "standardrb",
 					-- }),
 				},
 			})
@@ -860,7 +860,7 @@ return {
 		end,
 	},
 	-- {
-	-- 	"nvim-telescope/telescope-ui-select.nvim",
+	--  "nvim-telescope/telescope-ui-select.nvim",
 	-- },
 
 	{
@@ -883,19 +883,19 @@ return {
 				filetype = {
 					-- ruby = {
 					-- function()
-					-- 	return {
-					-- 		exe = "rubocop",
-					-- 		args = {
-					-- 			"--fix-layout",
-					-- 			"--autocorrect-all",
-					-- 			"--stdin",
-					-- 			util.escape_path(util.get_current_buffer_file_name()),
-					-- 			"--format",
-					-- 			"files",
-					-- 			"--stderr",
-					-- 		},
-					-- 		stdin = true,
-					-- 	}
+					--  return {
+					--    exe = "rubocop",
+					--    args = {
+					--      "--fix-layout",
+					--      "--autocorrect-all",
+					--      "--stdin",
+					--      util.escape_path(util.get_current_buffer_file_name()),
+					--      "--format",
+					--      "files",
+					--      "--stderr",
+					--    },
+					--    stdin = true,
+					--  }
 					-- end,
 					-- },
 					lua = {
