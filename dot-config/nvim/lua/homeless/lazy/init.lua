@@ -360,8 +360,8 @@ return {
       })
 
       -- lspconfig.ruby_lsp.setup({
-      -- 	capabilities = capabilities,
-      -- 	-- cmd = { "/jkahne/.asdf/shims/ruby-lsp" }
+      --   capabilities = capabilities,
+      --   -- cmd = { "/jkahne/.asdf/shims/ruby-lsp" }
       -- })
 
       lspconfig.html.setup({
