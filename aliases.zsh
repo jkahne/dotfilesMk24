@@ -44,7 +44,6 @@ alias branch_cleanup='git branch | grep -v "main" | xargs git branch -D'
 # alias remove_merged_branches='git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
 
 alias gm="start_dev"
-alias mig="bin/rails db:migrate"
 
 
 alias lz="lazygit"
@@ -136,5 +135,4 @@ alias blog="cd ~/projects/active/jkahnecom; vim ./src/pages/posts/\[page\].astro
 
 
 # alias dbreset="mix ecto.reset"
-
 

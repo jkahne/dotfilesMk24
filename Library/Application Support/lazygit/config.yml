@@ -2,4 +2,12 @@ gui:
   authorColors:
     'jkahne': '#ffff00'
     '*': 'red'
+  keybinding:
+    universal:
+      # Reassign move commit up and down to different keys (optional)
+      # moveCommitUp: '<some-other-key>'
+      # moveCommitDown: '<another-key>'
+      # Reassign scroll keys
+      scrollUpMain: '<C-k>'
+      scrollDownMain: '<C-j>'
 

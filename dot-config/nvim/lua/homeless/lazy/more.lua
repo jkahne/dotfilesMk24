@@ -135,7 +135,6 @@ return {
     },
     config = function()
       require("aerial").setup({
-        layout = {},
         -- optionally use on_attach to set keymaps when aerial has attached to a buffer
         on_attach = function(bufnr)
           -- Jump forwards/backwards with '{' and '}'
@@ -185,6 +184,8 @@ return {
         "<Leader>sv",
         ":TestVisit<CR>",
         { noremap = true, silent = true, desc = "Visit Test File" }
+
+      -- vim.cmd("let test#strategy = 'vimux'")
       )
     end,
   },
@@ -333,7 +334,6 @@ return {
       -- vim.api.nvim_set_keymap("n", "<leader>ls", "<cmd>:Other scss<CR>", { noremap = true, silent = true })
     end,
   },
-
   {
     "luckasRanarison/tailwind-tools.nvim",
     name = "tailwind-tools",
@@ -374,6 +374,17 @@ return {
           }),
         },
       }
+    end,
+  },
+  {
+    "kevinhwang91/nvim-bqf", -- better quickfix
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    build = ":TSUpdate",
+    config = function()
+      vim.api.nvim_set_keymap("n", "<leader>cn", ":cnext<cr>", {})
+      vim.api.nvim_set_keymap("n", "<leader>cp", ":cprevious<cr>", {})
     end,
   },
 }

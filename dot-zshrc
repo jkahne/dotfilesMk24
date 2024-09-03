@@ -28,18 +28,14 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export KERL_BUILD_DOCS="yes"
 export ERL_AFLAGS="-kernel shell_history enabled"
-# commented these out and added the ones below to 
+# commented these out and added the ones below to
 # install ruby 3.3.0 on the work laptop
 # export CC="/usr/bin/clang -I$(brew --prefix unixodbc)/include"
 # export LDFLAGS=-L$(brew --prefix unixodbc)/lib
 # export CPPFLAGS=-L$(brew --prefix unixodbc)/include
 export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
-# export LDFLAGS="-L/opt/homebrew/opt/libxslt/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/libxslt/include"
-# export LDFLAGS="-L/opt/homebrew/opt/libxslt/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/libxslt/include"
-#
+
 # for BackerKit, to install pg gem during bundle
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"

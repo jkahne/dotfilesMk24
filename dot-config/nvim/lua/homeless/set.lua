@@ -53,7 +53,8 @@ vim.opt.showmatch = true
 vim.opt.wildignorecase = true
 vim.opt.wildignore:append("**/node_modules/*")
 vim.opt.wildignore:append("**/.git/*")
-vim.g.ruby_host_prog = "/Users/jeremykahne/.asdf/shims/neovim-ruby-host" -- avoid needing to install this in every project
+vim.g.ruby_host_prog = vim.fn.expand("~/.asdf/shims/neovim-ruby-host")
+
 vim.opt.fixendofline = false -- Prevent Nvim from removing end of file new line
 
 -- Ensure I dont freak out by hitting the cap w when exiting
