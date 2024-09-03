@@ -65,8 +65,8 @@ return {
         {
           opts = {
             -- Defaults
-            enable_close = true, -- Auto close tags
-            enable_rename = true, -- Auto rename pairs of tags
+            enable_close = true,          -- Auto close tags
+            enable_rename = true,         -- Auto rename pairs of tags
             enable_close_on_slash = true, -- Auto close on trailing </
           },
           -- Also override individual filetype configs, these take priority.
@@ -111,7 +111,7 @@ return {
       vim.cmd([[
         let HiSet   = 'f<CR>'
         let HiErase = 'f<BS>'
-        let HiClear = 'f<C-L>'
+        let HiClear = 'f<C-l>'
         let HiFind  = 'f<Tab>'
         " let HiSetSL = 't<CR>'
         ]])
@@ -170,7 +170,7 @@ return {
         ":TestVisit<CR>",
         { noremap = true, silent = true, desc = "Visit Test File" }
 
-        -- vim.cmd("let test#strategy = 'vimux'")
+      -- vim.cmd("let test#strategy = 'vimux'")
       )
     end,
   },
@@ -326,13 +326,13 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope.nvim", -- optional
-      "neovim/nvim-lspconfig", -- optional
+      "neovim/nvim-lspconfig",         -- optional
     },
-    opts = {}, -- your configuration
+    opts = {},                         -- your configuration
     config = function()
       require("tailwind-tools").setup({
         document_color = {
-          enabled = false, -- can be toggled by commands
+          enabled = false,     -- can be toggled by commands
           kind = "background", -- "inline" | "foreground" | "background"
         },
 

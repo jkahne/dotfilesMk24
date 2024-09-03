@@ -56,7 +56,7 @@ return {
             local path = node:get_id()
             if node.type == "file" then
               local lastSlashIndex = path:match("^.+()/[^/]*$") -- Match the last slash and everything before it
-              path = path:sub(1, lastSlashIndex - 1) -- Extract substring before the last slash
+              path = path:sub(1, lastSlashIndex - 1)            -- Extract substring before the last slash
             end
 
             vim.fn.jobstart({ "open", path }, { detach = true })
@@ -105,8 +105,8 @@ return {
             },
           },
           follow_current_file = {
-            enabled = false, -- This will find and focus the file in the active buffer every time
-            --               -- the current file is changed while the tree is open.
+            enabled = false,         -- This will find and focus the file in the active buffer every time
+            --                       -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
         },
@@ -183,13 +183,13 @@ return {
       })
 
       -- mason_tool_installer.setup({
-      --  ensure_installed = {
-      --    "prettier", -- prettier formatter
-      --    "stylua", -- lua formatter
-      --    -- "standardrb", -- ruby formatter
-      --    -- "rubocop", -- ruby formatter
-      --    "htmlhint", -- html linter
-      --  },
+      --   ensure_installed = {
+      --     "prettier", -- prettier formatter
+      --     "stylua",   -- lua formatter
+      --     -- "standardrb", -- ruby formatter
+      --     -- "rubocop", -- ruby formatter
+      --     "htmlhint", -- html linter
+      --   },
       -- })
     end,
   },
@@ -315,23 +315,23 @@ return {
       })
 
       -- local handlers = {
-      --  ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      --    virtual_text = true,
-      --  }),
+      --   ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+      --     virtual_text = true,
+      --   }),
       -- }
 
       lspconfig.solargraph.setup({
         -- cmd = {
-        --  "asdf",
-        --  "exec",
-        --  "solargraph",
-        --  "stdio",
+        --   "asdf",
+        --   "exec",
+        --   "solargraph",
+        --   "stdio",
         -- },
         -- filetypes = {
-        --  "ruby",
+        --   "ruby",
         -- },
         -- flags = {
-        --  debounce_text_changes = 150,
+        --   debounce_text_changes = 150,
         -- },
         -- root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
         -- handlers = handlers,
@@ -432,7 +432,7 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
         }),
         sources = cmp.config.sources({
-          { name = "copilot", group_index = 2 },
+          { name = "copilot",   group_index = 2 },
           { name = "nvim_lsp" },
           { name = "snippy" }, -- For snippy users.
           { name = "path" },
@@ -743,124 +743,6 @@ return {
     end,
   },
 
-  {
-    "nvimtools/none-ls.nvim",
-    config = function()
-      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-      local null_ls = require("null-ls")
-
-      local standardrb_diagnostics = {
-        method = null_ls.methods.DIAGNOSTICS,
-        filetypes = { "ruby" },
-        generator = null_ls.generator({
-          command = "standardrb",
-          args = { "--fix", "--format", "json", "--force-exclusion", "--stdin", "$FILENAME" },
-          to_stdin = true,
-          from_stderr = true,
-          format = "json",
-          on_output = function(params)
-            local diags = {}
-            for _, offense in ipairs(params.output[1].offenses) do
-              table.insert(diags, {
-                row = offense.location.start_line,
-                col = offense.location.start_column,
-                end_row = offense.location.end_line,
-                end_col = offense.location.end_column,
-                source = "standardrb",
-                message = offense.message,
-                severity = offense.severity == "error" and 1 or 2, -- 1 for error, 2 for warning
-              })
-            end
-            return diags
-          end,
-        }),
-      }
-
-      local standardrb_formatting = {
-        method = null_ls.methods.FORMATTING,
-        filetypes = { "ruby" },
-        generator = null_ls.generator({
-          command = "standardrb",
-          args = { "--fix", "--stdin", "$FILENAME" },
-          to_stdin = true,
-        }),
-      }
-
-      null_ls.setup({
-        on_attach = function(client, bufnr)
-          if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              group = augroup,
-              buffer = bufnr,
-              callback = function()
-                vim.lsp.buf.format({ async = false })
-              end,
-            })
-          end
-        end,
-        sources = {
-          null_ls.builtins.formatting.stylua.with({
-            extra_args = { "--indent-type", "Spaces", "--indent-width", "2" },
-          }),
-          -- null_ls.builtins.formatting.prettier, -- yml, probably
-          -- null_ls.builtins.diagnostics.erb_lint,
-          -- null_ls.builtins.formatting.erb_format,
-          -- null_ls.builtins.diagnostics.eslint_d,
-          -- null_ls.builtins.diagnostics.rubocop,
-          -- null_ls.builtins.formatting.rubocop,
-
-          -- null_ls.builtins.diagnostics.rubocop.with({
-          --  command = "rubocop",
-          --  args = function(params)
-          --    return {
-          --      "--config",
-          --      ".rubocop_local.yml", -- Explicitly specify the local config file
-          --      "--format",
-          --      "json", -- Ensure JSON output
-          --      "--force-exclusion",
-          --      "--stdin",
-          --      params.bufname, -- Use params.bufname for the full path
-          --    }
-          --  end,
-          --  to_stdin = true,
-          --  format = "json",
-          -- }),
-          -- null_ls.builtins.formatting.rubocop.with({
-          --  command = "rubocop",
-          --  args = function(params)
-          --    return {
-          --      "--config",
-          --      ".rubocop_local.yml", -- Explicitly specify the local config file
-          --      "--auto-correct",
-          --      "--stdin",
-          --      params.bufname, -- Use params.bufname for the full path
-          --      "--stderr",
-          --      "--format",
-          --      "quiet",
-          --    }
-          --  end,
-          --  to_stdin = true,
-          --  from_stderr = false,
-          -- }),
-
-          -- null_ls.builtins.diagnostics.standardrb, -- this doesn't seem to work at all
-          -- null_ls.builtins.formatting.standardrb, -- this doesn't seem to work at all
-
-          standardrb_diagnostics,
-          standardrb_formatting,
-          -- null_ls.builtins.formatting.standardrb.with({
-          --  command = "standardrb", -- Ensure this matches the output of `which standardrb`
-          -- }),
-          -- null_ls.builtins.diagnostics.standardrb.with({
-          --  command = "standardrb",
-          -- }),
-        },
-      })
-
-      vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, {})
-    end,
-  },
   -- {
   --  "nvim-telescope/telescope-ui-select.nvim",
   -- },
@@ -884,21 +766,21 @@ return {
         log_level = vim.log.levels.WARN,
         filetype = {
           -- ruby = {
-          -- function()
-          --  return {
-          --    exe = "rubocop",
-          --    args = {
-          --      "--fix-layout",
-          --      "--autocorrect-all",
-          --      "--stdin",
-          --      util.escape_path(util.get_current_buffer_file_name()),
-          --      "--format",
-          --      "files",
-          --      "--stderr",
-          --    },
-          --    stdin = true,
-          --  }
-          -- end,
+          --   function()
+          --     return {
+          --       exe = "rubocop",
+          --       args = {
+          --         "--fix-layout",
+          --         "--autocorrect-all",
+          --         "--stdin",
+          --         util.escape_path(util.get_current_buffer_file_name()),
+          --         "--format",
+          --         "files",
+          --         "--stderr",
+          --       },
+          --       stdin = true,
+          --     }
+          --   end,
           -- },
           lua = {
             require("formatter.filetypes.lua").stylua,
