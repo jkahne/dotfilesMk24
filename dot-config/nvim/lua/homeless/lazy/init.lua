@@ -824,9 +824,8 @@ return {
       -- vim.g.mkdp_highlight_css = "C:/users/micha/appdata/local/nvim/mdhl.css"
     end,
   },
-  {
-    "tpope/vim-rails",
-  },
+  -- { "tpope/vim-rails", },
+  { "tpope/vim-bundler" },
 
   -- consider
   -- https://github.com/RRethy/vim-illuminate
