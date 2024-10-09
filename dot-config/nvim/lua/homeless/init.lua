@@ -14,6 +14,19 @@ end
 vim.api.nvim_set_keymap("n", "<Leader>1", "<cmd>lua HighlightCurrentLine()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>2", "<cmd>lua vim.fn.clearmatches()<CR>", { noremap = true, silent = true })
 
+-- function OpenMarkdownPreview(url)
+--   vim.cmd("silent ! chrome --new-window " .. url)
+-- end
+
+-- function OpenMarkdownPreview(url)
+--   vim.cmd("silent ! open -a Google\\ Chrome -n --args --new-window a:" .. url)
+-- end
+
+vim.fn.OpenMarkdownPreview = function(url)
+  -- vim.cmd("silent ! /Applications/Firefox.app/Contents/MacOS/firefox --new-window " .. url)
+  vim.cmd("silent ! /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --new-window " .. url)
+end
+vim.g.mkdp_browserfunc = "OpenMarkdownPreview"
 local function auto_highlight_toggle()
 	local auto_highlight_group = vim.api.nvim_create_augroup("auto_highlight", { clear = true })
 

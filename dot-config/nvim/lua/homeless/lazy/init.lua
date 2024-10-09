@@ -800,4 +800,35 @@ return {
       -- options
     },
   },
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+    config = function()
+      vim.keymap.set("n", "<leader>mdn", ":MarkdownPreview<CR>")
+      vim.keymap.set("n", "<leader>mds", ":MarkdownPreviewStop<CR>")
+
+      -- vim.g.mkdp_markdown_css = "C:/users/micha/appdata/local/nvim/md.css"
+      -- vim.g.mkdp_highlight_css = "C:/users/micha/appdata/local/nvim/mdhl.css"
+    end,
+  },
+  {
+    "tpope/vim-rails",
+  },
+
+  -- consider
+  -- https://github.com/RRethy/vim-illuminate
+  --
 }
