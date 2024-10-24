@@ -1,0 +1,54 @@
+return {
+	-- {
+	-- 	"stevearc/conform.nvim",
+	-- 	-- event = { "BufReadPre", "BufNewFile" },
+	-- 	opts = {},
+	-- 	config = function()
+	-- 		local conform = require("conform")
+	-- 		conform.setup({
+	-- 			-- formatters = {
+	-- 			--   my_rubocop={
+	-- 			--     command = "bundle exec rubocop",
+	-- 			--     args = function(params)
+	-- 			--       return {
+	-- 			--         "--config",
+	-- 			--         ".rubocop_local.yml", -- Explicitly specify the local config file
+	-- 			--         "--format",
+	-- 			--         "json",               -- Ensure JSON output
+	-- 			--         "--force-exclusion",
+	-- 			--         "--stdin",
+	-- 			--         params.bufname, -- Use params.bufname for the full path
+	-- 			--       }
+	-- 			--     end,
+	-- 			--     stdin = true,
+	-- 			--   }
+	-- 			-- },
+	-- 			formatters_by_ft = {
+	-- 				lua = { "stylua" },
+	-- 				-- Conform will run multiple formatters sequentially
+	-- 				-- python = { "isort", "black" },
+	-- 				-- You can customize some of the format options for the filetype (:help conform.format)
+	-- 				-- rust = { "rustfmt", lsp_format = "fallback" },
+	-- 				-- Conform will run the first available formatter
+	-- 				javascript = { "prettierd", "prettier", stop_after_first = true },
+	-- 				ruby = { "rubocop", stop_after_first = true },
+	-- 				-- ruby = { "bundle exec rubocop", "rubocop" },
+	-- 				["_"] = { "trim_whitespace" },
+	-- 			},
+	-- 			format_on_save = {
+	-- 				timeout_ms = 500,
+	-- 				async = false,
+	-- 				lsp_format = "fallback",
+	-- 			},
+	-- 		})
+	--
+	-- 		vim.keymap.set({ "n", "v" }, "<leader>ff", function()
+	-- 			conform.format({
+	-- 				lsp_fallback = true,
+	-- 				async = false,
+	-- 				timeout_ms = 500,
+	-- 			})
+	-- 		end, { desc = "Format file or range (in visual mode)" })
+	-- 	end,
+	-- },
+}

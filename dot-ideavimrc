@@ -1,14 +1,44 @@
 let mapleader = ','
 
-set commentary
-
-set incsearch
-
 inoremap <leader>, <Esc>
 vnoremap <leader>, <Esc>
-inoremap ,, <Esc>
-vnoremap ,, <Esc>
+
+set commentary
+set incsearch
+set hlsearch
+
+map <leader><Space> :nohlsearch<CR>
 
 nmap <Leader>rf <Action>(ReformatCode)
+
 set clipboard+=unnamed
+
+map gt :action HideAllWindows<CR>
+map <leader>gt :action SelectInProjectView<CR>
+map <leader>x :action HideTestResults<CR>
+
+
+map gr :action GotoDeclaration<CR>
+map <leader>t :action GotoFile<CR>
+map <leader>ef :action FindInPath<CR>
+map <leader>b :action RecentFiles<CR>
+
+
+# map <Leader>pf <action>(com.mituuz.fuzzier.Fuzzier)
+# map <Leader>mf <action>(com.mituuz.fuzzier.FuzzyMover)
+# map <Leader>gf <action>(com.mituuz.fuzzier.FuzzierVCS)
+
+map <S-Tab> :action EditorToggleFold<CR>
+map <leader>s :action AceAction<CR>
+# set easymotion
+# g:EasyMotion_re_anywhere = 1
+# map <leader>s :action AceAction<CR>
+
+map <leader>sf :action RerunTests<CR>
+map <leader>ss :action RunRSpec<CR>
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 

@@ -26,7 +26,9 @@ only-icloud-synced/
 dockerrubocop.rb
 /app/models/jog.rb
 .rubocop_local.yml
-
+.jeremy_rubocop_local.yml
+tags
+vendor/ruby
 
 config/nvim/db_ui/connections.json
 config/nvim/db_ui/

@@ -34,6 +34,8 @@ vim.keymap.set("n", "<C-J>", "<C-W>j", { noremap = false })
 vim.keymap.set("n", "<C-K>", "<C-W>k", { noremap = false })
 vim.keymap.set("n", "<C-L>", "<C-W>l", { noremap = false })
 
+vim.keymap.set("n", "*", "*N", { noremap = true, silent = true })
+
 -- vim.api.nvim_set_keymap( "n", "<C-k>", 'pumvisible() ? "<C-p>" : "<C-k>"', { noremap = true, expr = true, silent = true })
 -- vim.api.nvim_set_keymap( "n", "<C-j>", 'pumvisible() ? "<C-n>" : "<C-j>"', { noremap = true, expr = true, silent = true })
 -- vim.api.nvim_set_keymap( "n", "<C-m>", 'pumvisible() ? "<C-p>" : "<C-m>"', { noremap = true, expr = true, silent = true })

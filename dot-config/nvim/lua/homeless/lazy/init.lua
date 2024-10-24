@@ -56,7 +56,7 @@ return {
             local path = node:get_id()
             if node.type == "file" then
               local lastSlashIndex = path:match("^.+()/[^/]*$") -- Match the last slash and everything before it
-              path = path:sub(1, lastSlashIndex - 1)            -- Extract substring before the last slash
+              path = path:sub(1, lastSlashIndex - 1) -- Extract substring before the last slash
             end
 
             vim.fn.jobstart({ "open", path }, { detach = true })
@@ -105,7 +105,7 @@ return {
             },
           },
           follow_current_file = {
-            enabled = false,         -- This will find and focus the file in the active buffer every time
+            enabled = false, -- This will find and focus the file in the active buffer every time
             --                       -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
@@ -314,55 +314,149 @@ return {
         },
       })
 
-      -- local handlers = {
-      --   ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      --     virtual_text = true,
-      --   }),
-      -- }
+      local handlers = {
+        ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+          virtual_text = true,
+        }),
+      }
 
-      lspconfig.solargraph.setup({
-        -- cmd = {
-        --   "asdf",
-        --   "exec",
-        --   "solargraph",
-        --   "stdio",
-        -- },
-        -- filetypes = {
-        --   "ruby",
-        -- },
-        -- flags = {
-        --   debounce_text_changes = 150,
-        -- },
-        -- root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
-        -- handlers = handlers,
+      -- lspconfig.solargraph.setup({
+      --   -- cmd = {
+      --   --   "asdf",
+      --   --   "exec",
+      --   --   "solargraph",
+      --   --   "stdio",
+      --   -- },
+      --   -- filetypes = {
+      --   --   "ruby",
+      --   -- },
+      --   -- flags = {
+      --   --   debounce_text_changes = 150,
+      --   -- },
+      --   -- root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
+      --   -- handlers = handlers,
+      --   capabilities = capabilities,
+      --   settings = {
+      --     Solargraph = {
+      --       -- completion = true,
+      --       autoformat = false,
+      --       formatting = false,
+      --       diagnostics = true,
+      --       -- symbols = true,
+      --       -- definitions = true,
+      --       -- references = true,
+      --       -- folding = true,
+      --       -- highlights = true,
+      --       -- useBundler = true,
+      --       -- rename = true,
+      --       -- hover = true,
+      --       --    -- Enable this when running with docker compose
+      --       --transport = 'external',
+      --       --externalServer = {
+      --       --    host = 'localhost',
+      --       --    port = '7658',
+      --       --}
+      --     },
+      --   },
+      -- })
+
+      local function add_ruby_deps_command(client, bufnr)
+        vim.api.nvim_buf_create_user_command(bufnr, "ShowRubyDeps", function(opts)
+          local params = vim.lsp.util.make_text_document_params()
+          local showAll = opts.args == "all"
+          client.request("rubyLsp/workspace/dependencies", params, function(error, result)
+            if error then
+              print("Error showing deps: " .. error)
+              return
+            end
+            local qf_list = {}
+            for _, item in ipairs(result) do
+              if showAll or item.dependency then
+                table.insert(qf_list, {
+                  text = string.format("%s (%s) - %s", item.name, item.version, item.dependency),
+                  filename = item.path,
+                })
+              end
+            end
+            vim.fn.setqflist(qf_list)
+            vim.cmd("copen")
+          end, bufnr)
+        end, {
+          nargs = "?",
+          complete = function()
+            return { "all" }
+          end,
+        })
+      end
+
+      lspconfig.ruby_lsp.setup({
         capabilities = capabilities,
+        handlers = handlers,
+        -- cmd = { "~/.asdf/shims/ruby-lsp" },
+        init_options = {
+          formatter = "standard",
+          linters = { "standard" },
+          enabled_features = {
+            definition = true,
+            diagnostics = true,
+            formatting = true,
+          },
+          indexing = {
+            excluded_patterns = { "/vendor/" },
+            -- included_patterns = { "path/to/included/file.rb" },
+            -- excludedGems = { "gem1", "gem2", "etc." },
+            -- excludedMagicComments = { "compiled:true" },
+          },
+        },
+        on_attach = function(client, bufnr)
+          add_ruby_deps_command(client, bufnr)
+        end,
         settings = {
-          Solargraph = {
-            -- completion = true,
-            autoformat = false,
-            formatting = false,
-            diagnostics = false, -- turned off cause I want to use standardrb
-            -- symbols = true,
-            -- definitions = true,
-            -- references = true,
-            -- folding = true,
-            -- highlights = true,
-            -- useBundler = true,
-            -- rename = true,
-            -- hover = true,
-            --    -- Enable this when running with docker compose
-            --transport = 'external',
-            --externalServer = {
-            --    host = 'localhost',
-            --    port = '7658',
-            --}
+          completion = true,
+          formatting = true,
+          diagnostics = true,
+          ruby_lsp = {
+            -- Enable or disable specific features
+            completion = true,
+            formatting = true,
+            diagnostics = true,
+            -- Add other options as needed
           },
         },
       })
 
       -- lspconfig.ruby_lsp.setup({
-      --  capabilities = capabilities,
-      --  -- cmd = { "/jkahne/.asdf/shims/ruby-lsp" }
+      -- 	capabilities = capabilities,
+      -- 	-- cmd = { "bundle", "exec", "ruby-lsp" },
+      -- 	-- cmd = { "ruby", "-e", "require 'bundler/setup'; exec 'ruby-lsp'" },
+      -- 	init_options = {
+      -- 		-- https://shopify.github.io/ruby-lsp/editors.html#Neovim
+      -- 		formatter = "standard",
+      -- 		linters = { "standard" },
+      -- 		enabled_features = {
+      -- 			definition = true,
+      -- 			diagnostics = true,
+      -- 		},
+      -- 		indexing = {
+      -- 			excluded_patterns = { "/vendor/" },
+      -- 			-- included_patterns = { "path/to/included/file.rb" },
+      -- 			-- excludedGems = { "gem1", "gem2", "etc." },
+      -- 			-- excludedMagicComments = { "compiled:true" },
+      -- 		},
+      -- 	},
+      -- 	filetypes = { "ruby" },
+      -- 	root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+      -- 	settings = {
+      -- 		ruby = {
+      -- 			lsp = {
+      -- 				enabled = true,
+      -- 				features = { "rails" },
+      -- 			},
+      -- 			diagnostics = {
+      -- 				ignoredPatterns = { "/vendor/" }, -- Add this line
+      -- 			},
+      -- 		},
+      -- 	},
       -- })
 
       lspconfig.html.setup({
@@ -793,11 +887,34 @@ return {
     end,
   },
 
-  {
-    "j-hui/fidget.nvim",
-    tag = "v1.4.5",
-    opts = {
-      -- options
-    },
-  },
+  -- {
+  -- 	"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  -- 	config = function()
+  -- 		require("lsp_lines").setup()
+  -- 	end,
+  -- },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  --   build = function()
+  --     vim.fn["mkdp#util#install"]()
+  --   end,
+  --   init = function()
+  --     vim.g.mkdp_filetypes = { "markdown" }
+  --   end,
+  --   ft = { "markdown" },
+  --   config = function()
+  --     vim.keymap.set("n", "<leader>mdn", ":MarkdownPreview<CR>")
+  --     vim.keymap.set("n", "<leader>mds", ":MarkdownPreviewStop<CR>")
+  --
+  --     -- vim.g.mkdp_markdown_css = "C:/users/micha/appdata/local/nvim/md.css"
+  --     -- vim.g.mkdp_highlight_css = "C:/users/micha/appdata/local/nvim/mdhl.css"
+  --   end,
+  -- },
+  -- { "tpope/vim-rails", },
+  { "tpope/vim-bundler" },
+
+  -- consider
+  -- https://github.com/RRethy/vim-illuminate
+  --
 }

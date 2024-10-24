@@ -72,6 +72,14 @@ export KERL_CONFIGURE_OPTIONS="
 # autoload -Uz compinit && compinit
 
 
+# # Check if Gemfile.local exists and set BUNDLE_GEMFILE accordingly
+# if [ -f Gemfile.local ]; then
+#   export BUNDLE_GEMFILE=Gemfile.local
+# else
+#   unset BUNDLE_GEMFILE
+# fi
+
+
 # Completions
 unsetopt menu_complete   # do not autoselect the first completion entry
 unsetopt flowcontrol

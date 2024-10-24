@@ -25,17 +25,37 @@ return {
           -- null_ls.builtins.diagnostics.erb_lint,
           -- null_ls.builtins.formatting.erb_format,
           -- null_ls.builtins.diagnostics.eslint_d,
+
           -- null_ls.builtins.diagnostics.rubocop,
           -- null_ls.builtins.formatting.rubocop,
 
+          -- null_ls.builtins.diagnostics.erb_lint.with({
+          --   command = "bundle", -- Ensure it's run through Bundler
+          --   args = function(params)
+          --     return {
+          --       "exec",
+          --       "erb_lint", -- Run through bundle exec
+          --       "--config",
+          --       ".erb-lint.yml", -- Specify the config file (if you have one)
+          --       "--format",
+          --       "json", -- Use JSON output
+          --       params.bufname, -- Analyze the current buffer
+          --     }
+          --   end,
+          --   to_stdin = false, -- ERB Lint reads from file, not stdin
+          --   format = "json",
+          -- }),
+
           null_ls.builtins.diagnostics.rubocop.with({
-            command = "rubocop",
+            command = "bundle",
             args = function(params)
               return {
+                "exec",
+                "rubocop",
                 "--config",
                 ".rubocop_local.yml", -- Explicitly specify the local config file
                 "--format",
-                "json",               -- Ensure JSON output
+                "json", -- Ensure JSON output
                 "--force-exclusion",
                 "--stdin",
                 params.bufname, -- Use params.bufname for the full path
@@ -44,23 +64,23 @@ return {
             to_stdin = true,
             format = "json",
           }),
-          null_ls.builtins.formatting.rubocop.with({
-            command = "rubocop",
-            args = function(params)
-              return {
-                "--config",
-                ".rubocop_local.yml", -- Explicitly specify the local config file
-                "--auto-correct",
-                "--stdin",
-                params.bufname, -- Use params.bufname for the full path
-                "--stderr",
-                "--format",
-                "quiet",
-              }
-            end,
-            to_stdin = true,
-            from_stderr = false,
-          }),
+          -- null_ls.builtins.formatting.rubocop.with({
+          --   command = "rubocop",
+          --   args = function(params)
+          --     return {
+          --       "--config",
+          --       ".rubocop_local.yml", -- Explicitly specify the local config file
+          --       "--auto-correct",
+          --       "--stdin",
+          --       params.bufname, -- Use params.bufname for the full path
+          --       "--stderr",
+          --       "--format",
+          --       "quiet",
+          --     }
+          --   end,
+          --   to_stdin = true,
+          --   from_stderr = false,
+          -- }),
 
           -- null_ls.builtins.diagnostics.standardrb, -- this doesn't seem to work at all
           -- null_ls.builtins.formatting.standardrb, -- this doesn't seem to work at all
