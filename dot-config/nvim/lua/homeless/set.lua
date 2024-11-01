@@ -8,8 +8,11 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.shiftround = true
 
-vim.opt.smartindent = true
+vim.opt.smartindent = false
 vim.opt.completeopt = { "menuone", "noselect" }
+
+vim.opt.breakindent = false
+vim.opt.linebreak = false
 
 vim.opt.wrap = false
 
@@ -86,56 +89,56 @@ vim.o.autoread = true
 
 -- Create an autocommand in Lua to check for file changes
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
-  pattern = "*",
-  callback = function()
-    vim.cmd("checktime")
-  end,
+	pattern = "*",
+	callback = function()
+		vim.cmd("checktime")
+	end,
 })
 
 -- Key mapping using vim.keymap.set for better readability and functionality
 vim.keymap.set("i", "<Tab>", function()
-  return vim.fn.pumvisible() == 1 and "\\<C-n>" or "\\<Tab>"
+	return vim.fn.pumvisible() == 1 and "\\<C-n>" or "\\<Tab>"
 end, { expr = true, noremap = true, silent = true })
 
 -- Use Lua API to create autocommands for cursorline highlighting
 vim.api.nvim_create_augroup("CursorLineHighlight", { clear = true })
 
 vim.api.nvim_create_autocmd("WinEnter", {
-  group = "CursorLineHighlight",
-  pattern = "*",
-  command = "set cursorline",
+	group = "CursorLineHighlight",
+	pattern = "*",
+	command = "set cursorline",
 })
 
 vim.api.nvim_create_autocmd("WinLeave", {
-  group = "CursorLineHighlight",
-  pattern = "*",
-  command = "set nocursorline",
+	group = "CursorLineHighlight",
+	pattern = "*",
+	command = "set nocursorline",
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highligh when yanking test",
-  group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
-    vim.highlight.on_yank()
-  end,
+	desc = "Highligh when yanking test",
+	group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+		vim.highlight.on_yank()
+	end,
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "*",
-  callback = function()
-    -- :help highlight
-    vim.api.nvim_set_hl(0, "Search", { bg = "#E5C07B", fg = "#455354", bold = true })
-    vim.api.nvim_set_hl(0, "CurSearch", { bg = "#D19A66", fg = "#455354", bold = true })
-    vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#0080FF", fg = "#FFFFFF" })
-    vim.api.nvim_set_hl(0, "LineHighlight", { bg = "#56B6C2", fg = "#000000" })
-    vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { fg = "#D19A66", bold = true })
-    vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#abb2bf" })
-    vim.api.nvim_set_hl(0, "MatchParen", { fg = "#000000", bg = "#989797" })
-  end,
+	pattern = "*",
+	callback = function()
+		-- :help highlight
+		vim.api.nvim_set_hl(0, "Search", { bg = "#E5C07B", fg = "#455354", bold = true })
+		vim.api.nvim_set_hl(0, "CurSearch", { bg = "#D19A66", fg = "#455354", bold = true })
+		vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#0080FF", fg = "#FFFFFF" })
+		vim.api.nvim_set_hl(0, "LineHighlight", { bg = "#56B6C2", fg = "#000000" })
+		vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { fg = "#D19A66", bold = true })
+		vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#abb2bf" })
+		vim.api.nvim_set_hl(0, "MatchParen", { fg = "#000000", bg = "#989797" })
+	end,
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "dot-zshrc",
-  command = "set filetype=zsh",
+	pattern = "dot-zshrc",
+	command = "set filetype=zsh",
 })

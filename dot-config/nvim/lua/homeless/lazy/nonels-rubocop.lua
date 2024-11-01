@@ -5,18 +5,18 @@ return {
       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
       local null_ls = require("null-ls")
       null_ls.setup({
-        on_attach = function(client, bufnr)
-          if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              group = augroup,
-              buffer = bufnr,
-              callback = function()
-                vim.lsp.buf.format({ async = false })
-              end,
-            })
-          end
-        end,
+        -- on_attach = function(client, bufnr)
+        -- if client.supports_method("textDocument/formatting") then
+        -- vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        -- vim.api.nvim_create_autocmd("BufWritePre", {
+        --   group = augroup,
+        --   buffer = bufnr,
+        --   callback = function()
+        --     vim.lsp.buf.format({ async = false })
+        --   end,
+        -- })
+        -- end
+        -- end,
         sources = {
           null_ls.builtins.formatting.stylua.with({
             extra_args = { "--indent-type", "Spaces", "--indent-width", "2" },
@@ -29,11 +29,13 @@ return {
           -- null_ls.builtins.formatting.rubocop,
 
           null_ls.builtins.diagnostics.rubocop.with({
-            command = "rubocop",
+            command = "bundle",
             args = function(params)
               return {
-                "--config",
-                ".rubocop_local.yml", -- Explicitly specify the local config file
+                "exec",
+                "rubocop",
+                -- "--config",
+                -- ".rubocop_local.yml", -- Explicitly specify the local config file
                 "--format",
                 "json", -- Ensure JSON output
                 "--force-exclusion",
@@ -45,11 +47,13 @@ return {
             format = "json",
           }),
           null_ls.builtins.formatting.rubocop.with({
-            command = "rubocop",
+            command = "bundle",
             args = function(params)
               return {
-                "--config",
-                ".rubocop_local.yml", -- Explicitly specify the local config file
+                "exec",
+                "rubocop",
+                -- "--config",
+                -- ".rubocop_local.yml", -- Explicitly specify the local config file
                 "--auto-correct",
                 "--stdin",
                 params.bufname, -- Use params.bufname for the full path
