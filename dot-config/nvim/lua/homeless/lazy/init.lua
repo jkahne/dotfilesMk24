@@ -158,11 +158,11 @@ return {
 						"liquid",
 					},
 					userLanguages = { eruby = "erb", ruby = "rb", html = "html", css = "css" },
-					-- experimental = {
-					--   classRegex = {
-					--     'class[:]\\s*"([^"]*)"',
-					--   },
-					-- },
+					experimental = {
+						classRegex = {
+							'class[:]\\s*"([^"]*)"',
+						},
+					},
 				},
 			})
 
@@ -212,48 +212,48 @@ return {
 			--   },
 			-- })
 
-			local function add_ruby_deps_command(client, bufnr)
-				vim.api.nvim_buf_create_user_command(bufnr, "ShowRubyDeps", function(opts)
-					local params = vim.lsp.util.make_text_document_params()
-					local showAll = opts.args == "all"
-
-					client.request("rubyLsp/workspace/dependencies", params, function(error, result)
-						if error then
-							print("Error showing deps: " .. error)
-							return
-						end
-
-						local qf_list = {}
-						for _, item in ipairs(result) do
-							if showAll or item.dependency then
-								table.insert(qf_list, {
-									text = string.format("%s (%s) - %s", item.name, item.version, item.dependency),
-									filename = item.path,
-								})
-							end
-						end
-
-						vim.fn.setqflist(qf_list)
-						vim.cmd("copen")
-					end, bufnr)
-				end, {
-					nargs = "?",
-					complete = function()
-						return { "all" }
-					end,
-				})
-			end
-
-			local handlers = {
-				["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-					virtual_text = true,
-				}),
-			}
+			-- local function add_ruby_deps_command(client, bufnr)
+			-- 	vim.api.nvim_buf_create_user_command(bufnr, "ShowRubyDeps", function(opts)
+			-- 		local params = vim.lsp.util.make_text_document_params()
+			-- 		local showAll = opts.args == "all"
+			--
+			-- 		client.request("rubyLsp/workspace/dependencies", params, function(error, result)
+			-- 			if error then
+			-- 				print("Error showing deps: " .. error)
+			-- 				return
+			-- 			end
+			--
+			-- 			local qf_list = {}
+			-- 			for _, item in ipairs(result) do
+			-- 				if showAll or item.dependency then
+			-- 					table.insert(qf_list, {
+			-- 						text = string.format("%s (%s) - %s", item.name, item.version, item.dependency),
+			-- 						filename = item.path,
+			-- 					})
+			-- 				end
+			-- 			end
+			--
+			-- 			vim.fn.setqflist(qf_list)
+			-- 			vim.cmd("copen")
+			-- 		end, bufnr)
+			-- 	end, {
+			-- 		nargs = "?",
+			-- 		complete = function()
+			-- 			return { "all" }
+			-- 		end,
+			-- 	})
+			-- end
+			--
+			-- local handlers = {
+			-- 	["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+			-- 		virtual_text = true,
+			-- 	}),
+			-- }
 
 			lspconfig.ruby_lsp.setup({
 				capabilities = capabilities,
 				-- cmd = { "~/.asdf/shims/ruby-lsp" },
-				handlers = handlers,
+				-- handlers = handlers,
 				-- cmd = { "~/.asdf/shims/ruby-lsp" },
 				init_options = {
 					formatter = "standard",
@@ -270,9 +270,9 @@ return {
 						-- excludedMagicComments = { "compiled:true" },
 					},
 				},
-				on_attach = function(client, bufnr)
-					add_ruby_deps_command(client, bufnr)
-				end,
+				-- on_attach = function(client, bufnr)
+				-- 	add_ruby_deps_command(client, bufnr)
+				-- end,
 				settings = {
 					completion = true,
 					formatting = true,
@@ -312,8 +312,8 @@ return {
 			-- vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, { silent = true, noremap = true })
 			vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { silent = true, noremap = true })
-			vim.keymap.set("n", "ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+			vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, {})
 
 			-- vim.keymap.set("n", "ff", vim.lsp.buf.format, { silent = true, noremap = true })
 
@@ -536,85 +536,10 @@ return {
 
 	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = {
-			"williamboman/mason.nvim",
-			"neovim/nvim-lspconfig",
+		lazy = false,
+		opts = {
+			auto_install = true,
 		},
-		config = function()
-			require("mason").setup({})
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"tailwindcss",
-					"html",
-					"cssls",
-					-- "solargraph",
-					"lua_ls",
-					-- "ruby_lsp",
-				},
-				automatic_installation = true,
-			})
-
-			-- I don't think I use these at all
-			-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
-			-- require("mason-lspconfig").setup_handlers {
-			--   -- The first entry (without a key) will be the default handler
-			--   -- and will be called for each installed server that doesn't have
-			--   -- a dedicated handler.
-			--   function(server_name)    -- default handler (optional)
-			--     require("lspconfig")[server_name].setup {
-			--       capabilities = capabilities
-			--     }
-			--   end,
-			--   -- Next, you can provide a dedicated handler for specific servers.
-			--   ["tailwindcss"] = function()
-			--     require 'lspconfig'.tailwindcss.setup {
-			--       capabilities = capabilities,
-			--       settings = {
-			--         tailwindCSS = {
-			--           classAttributes = { "class", "className", "class:list", "classList", "ngClass", "class:" },
-			--           -- emmetCompletions = true,
-			--           includeLanguages = {
-			--             eelixir = "html-eex",
-			--             eruby = "erb",
-			--             -- htmlangular = "html",
-			--             -- templ = "html"
-			--           },
-			--           lint = {
-			--             cssConflict = "warning",
-			--             invalidApply = "error",
-			--             invalidConfigPath = "error",
-			--             invalidScreen = "error",
-			--             invalidTailwindDirective = "error",
-			--             invalidVariant = "error",
-			--             recommendedVariantOrder = "warning"
-			--           },
-			--           validate = true
-			--         },
-			--         filetypes = { "astro", "astro-markdown", "eelixir", "elixir", "ejs", "erb", "eruby", "handlebars", "hbs", "html", "html-eex", "heex", "markdown", "mdx", "mustache", "css", "less", "postcss", "sass", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "liquid" },
-			--         -- userLanguages = { eruby = "erb", ruby = "rb", html = 'html', css = 'css' }
-			--       }
-			--     }
-			--   end,
-			--   ["solargraph"] = function()
-			--     require("lspconfig")["solargraph"].setup {
-			--       capabilities = capabilities,
-			--       settings = {
-			--         solargraph = {
-			--           formatting = true,
-			--           useBundler = true,
-			--           diagnostics = false,     -- lsp diagnostics are slow
-			--           completion = true,
-			--           hover = true,
-			--           definitions = true,
-			--           rename = true,
-			--           references = true,
-			--           folding = true
-			--         },
-			--       },
-			--     }
-			--   end
-			-- }
-		end,
 	},
 
 	{
