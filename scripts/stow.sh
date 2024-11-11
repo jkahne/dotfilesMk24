@@ -17,9 +17,9 @@ stow . -t $HOME -v --dotfiles \
   --ignore=key-bindings.zsh \
   --ignore=prompt.zsh  \
   --ignore=scripts \
-  --ignore=synced 
+  --ignore=synced
 
-popd 
+popd
 
 
 

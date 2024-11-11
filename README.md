@@ -20,7 +20,7 @@ Brew
      => next time you push, you will need to auth with the forever token
 
 Font
- - Install JetBrains font from TODO
+ - Install JetBrains font from TODO -- NO, install HACK font
 
 Cleanshot
  - keyboard shortcuts:

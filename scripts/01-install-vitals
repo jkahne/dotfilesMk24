@@ -11,7 +11,7 @@ then
     echo "Homebrew is not installed. Installing now..."
     # Install Homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"    
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 else
     echo "Homebrew is already installed."
 fi
@@ -29,7 +29,7 @@ brew install stow
 echo "tmux..."
 brew install tmux
 
-for pkg in gpg gawk autojump coreutils automake autoconf libyaml readline libxslt libtool openssl@3 fop wxwidgets tree vlc 1password-cli pngpaste lazygit btop broot libpq; do
+for pkg in gpg gawk autojump coreutils automake autoconf libyaml readline libxslt libtool openssl@3 fop wxwidgets tree vlc 1password-cli pngpaste lazygit btop broot libpq docker; do
     brew install "$pkg"
 done
 
@@ -44,6 +44,9 @@ echo "iterm2..."
 brew reinstall --cask iterm2
 brew reinstall --cask keycastr
 brew reinstall --cask stats
+
+echo "wezterm..."
+brew install --cask wezterm
 
 chmod -R go-w '/opt/homebrew/share'
 
@@ -70,9 +73,9 @@ chmod -R go-w '/opt/homebrew/share'
 #   --ignore=key-bindings.zsh \
 #   --ignore=prompt.zsh  \
 #   --ignore=scripts \
-#   --ignore=synced 
+#   --ignore=synced
 #
-# popd 
+# popd
 
 
 
@@ -89,7 +92,7 @@ fi
 brew cleanup
 
 # used by Fork for commandline integrations
-pushd "/usr/local" 
+pushd "/usr/local"
 [ ! -d /usr/local/bin ] && sudo mkdir -p /usr/local/bin
 popd
 
