@@ -14,5 +14,5 @@ keybinding:
     scrollUpMain: <c-k>
     scrollDownMain: <c-j>
     commits:
-      moveDownCommit: ''
-      moveUpCommit: ''
+      moveDownCommit: <c-1>
+      moveUpCommit: <c-2>
