@@ -4,6 +4,15 @@ return {
 	font = wezterm.font("Hack Nerd Font"),
 	-- font = wezterm.font("JetBrains Mono"),
 	font_size = 16.0,
+	max_fps = 120,
+	enable_kitty_graphics = true,
+	window_padding = {
+		left = 5,
+		right = 0,
+		top = 30,
+		bottom = 0,
+	},
+
 	hide_tab_bar_if_only_one_tab = true,
 	leader = { key = "a", mods = "CTRL" },
 	hide_mouse_cursor_when_typing = false,
