@@ -43,12 +43,9 @@ alias fco="git branch --sort=-committerdate -r | fzf +m | awk '{print $1}' | xar
 alias branch_cleanup='git branch | grep -v "main" | xargs git branch -D'
 # alias remove_merged_branches='git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
 
-alias gm="start_dev"
+# alias gm="start_dev"
 
-alias lz="lazygit"
 alias lg="lazygit"
-alias lzconfig="vim ~/Library/Application\ Support/lazygit/config.yml"
-alias lgconfig="vim ~/Library/Application\ Support/lazygit/config.yml"
 
 alias gw="git ci -m'wip'"
 alias gwip="git ci -m'wip'"
@@ -123,16 +120,14 @@ alias cpwd="pwd | ruby -pe'\$_.chomp!' | pbcopy"
 alias rshare="ruby -rubygems -e \"['thin', 'rack', 'socket'].each {|file| require file };"\
   " Thin::Server.start(IPSocket.getaddress(Socket.gethostname), 7777) {"\
   " use Rack::CommonLogger; run Rack::Directory.new(Dir.pwd) }\""
-  alias duo='du -sh $(du -s * | sort -k1n | ruby -nae '\''puts '\$'F[1..-1].join("?")'\'')'
+alias duo='du -sh $(du -s * | sort -k1n | ruby -nae '\''puts '\$'F[1..-1].join("?")'\'')'
 
 
 # Pipe my public key to my clipboard. Fuck you, pay me.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
-alias web="cd ~/projects/active/jkahnecom; vim ./src/pages/posts/\[page\].astro"
-alias blog="cd ~/projects/active/jkahnecom; vim ./src/pages/posts/\[page\].astro"
+alias web="cd ~/projects/jkahne/jkahnecom; n ./src/pages/posts/\[page\].astro"
+alias blog="cd ~/projects/jkahne/jkahnecom; n ./src/pages/posts/\[page\].astro"
 
 
 # alias dbreset="mix ecto.reset"
-
-
