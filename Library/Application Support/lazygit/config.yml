@@ -5,12 +5,15 @@ gui:
   theme:
     selectedLineBgColor:
       - cyan
+  showRandomTip: false
+  nerdFontsVersion: "2"
 git:
   merging:
     args: '--no-ff'
+  autoFetch: false
 keybinding:
   universal:
-    quit: <esc>
+    # quit: <esc>
     scrollUpMain: <c-k>
     scrollDownMain: <c-j>
     commits:
