@@ -126,6 +126,12 @@ vim.keymap.set("n", "<Leader><space>", ":noh<CR>", { noremap = true })
 
 vim.keymap.set({ "n", "v", "o" }, "<S-h>", "^", { noremap = false })
 vim.keymap.set({ "n", "v", "o" }, "<S-l>", "g_", { noremap = false })
+vim.keymap.set({ "n", "v", "o" }, "gh", "^", { noremap = false })
+vim.keymap.set({ "n", "v", "o" }, "gl", "g_", { noremap = false })
+
+-- Move lines up and down in visual mode
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "[P]Move line down in visual mode" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "[P]Move line up in visual mode" })
 
 -- Scratch and Vim notes with leader key for quick access
 vim.keymap.set(

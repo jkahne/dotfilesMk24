@@ -552,7 +552,7 @@ return {
 			local configs = require("nvim-treesitter.configs")
 
 			configs.setup({
-				auto_install = true,
+				auto_install = false,
 				textobjects = {
 					swap = {
 						enable = true,

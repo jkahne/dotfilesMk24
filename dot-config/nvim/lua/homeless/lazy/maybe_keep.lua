@@ -1,5 +1,12 @@
 return {
-
+	{
+		-- eh, this aint' great.  comma-p in neo-tree to preview an image in a new split kinda sucks.
+		"adelarsq/image_preview.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("image_preview").setup({})
+		end,
+	},
 	{
 		"echasnovski/mini.nvim",
 		version = "*",
@@ -63,35 +70,89 @@ return {
 			-- log debug messages to 'auto-save.log' file in neovim cache directory, set to `true` to enable
 			debug = false,
 		},
+	},
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		},
 		config = function()
-			require("auto-save").setup()
-			local group = vim.api.nvim_create_augroup("autosave", {})
+			require("noice").setup({
+				-- lsp = {
+				-- 	-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+				-- 	override = {
+				-- 		["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+				-- 		["vim.lsp.util.stylize_markdown"] = true,
+				-- 		["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+				-- 	},
+				-- },
+				lsp = {
+					message = {
+						-- Messages shown by lsp servers
+						enabled = true,
+						view = "mini",
+					},
+				},
+				-- you can enable a preset for easier configuration
+				presets = {
+					bottom_search = true, -- use a classic bottom cmdline for search
+					-- command_palette = true, -- position the cmdline and popupmenu together
+					-- long_message_to_split = true, -- long messages will be sent to a split
+					-- inc_rename = false, -- enables an input dialog for inc-rename.nvim
+					-- lsp_doc_border = false, -- add a border to hover docs and signature help
+				},
 
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "AutoSaveWritePost",
-				group = group,
-				callback = function(opts)
-					if opts.data.saved_buffer ~= nil then
-						local filename = vim.api.nvim_buf_get_name(opts.data.saved_buffer)
-						print("AutoSave: saved " .. filename .. " at " .. vim.fn.strftime("%H:%M:%S"))
-					end
-				end,
+				messages = {
+					-- NOTE: If you enable messages, then the cmdline is enabled automatically.
+					-- This is a current Neovim limitation.
+					enabled = true, -- enables the Noice messages UI
+					view = "mini", -- default view for messages
+					view_error = "mini", -- view for errors
+					view_warn = "mini", -- view for warnings
+					view_history = "mini", -- view for :messages
+					view_search = "mini", -- view for search count messages. Set to `false` to disable
+				},
+				notify = {
+					-- Noice can be used as `vim.notify` so you can route any notification like other messages
+					-- Notification messages have their level and other properties set.
+					-- event is always "notify" and kind can be any log level as a string
+					-- The default routes will forward notifications to nvim-notify
+					-- Benefit of using Noice for this is the routing and consistent history view
+					enabled = true,
+					view = "mini",
+				},
+
+				views = {
+					-- This sets the position for the search popup that shows up with / or with :
+					cmdline_popup = {
+						position = {
+							row = "40%",
+							col = "50%",
+						},
+					},
+					mini = {
+						timeout = 5000, -- timeout in milliseconds
+						align = "center",
+						position = {
+							-- Centers messages top to bottom
+							row = "95%",
+							-- Aligns messages to the far right
+							col = "100%",
+						},
+					},
+				},
 			})
 		end,
 	},
-
-	-- {
-	-- 	"akinsho/bufferline.nvim",
-	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	-- 	version = "*",
-	-- 	opts = {
-	-- 		options = {
-	-- 			mode = "tabs",
-	-- 			separator_style = "slant",
-	-- 		},
-	-- 	},
-	-- },
-	--
 
 	-- {
 	-- 	"echasnovski/mini.hipatterns",
