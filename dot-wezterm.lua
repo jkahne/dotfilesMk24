@@ -14,10 +14,11 @@ return {
 	},
 
 	hide_tab_bar_if_only_one_tab = true,
-	leader = { key = "a", mods = "CTRL" },
+	leader = { key = "b", mods = "CTRL" },
 	hide_mouse_cursor_when_typing = false,
 
 	keys = {
+
 		-- Split pane vertically
 		{ key = '"', mods = "LEADER|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 

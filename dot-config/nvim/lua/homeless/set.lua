@@ -33,9 +33,14 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Set options for better performance and folding behavior
-vim.opt.lazyredraw = true -- Minimize redraw operations while executing macros and other scripts
+-- can't remember why or when this was added.
+-- commenting out while adding noice
+-- vim.opt.lazyredraw = true -- Minimize redraw operations while executing macros and other scripts
 vim.opt.foldmethod = "indent" -- Use indentation levels to define folds
 vim.opt.foldlevel = 10 -- Set the depth of opened folds (high number to keep most folds open)
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.opt.foldcolumn = "1"
 
 vim.opt.termguicolors = true
 
