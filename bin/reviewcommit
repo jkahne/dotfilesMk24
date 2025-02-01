@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# resources:
+# https://llm.datasette.io/en/stable/
+# https://github.com/simonw/llm
+# https://www.amirsharif.com/every-tip-i-know-for-shipping-products-that-match-the-spec
+#
+# dependencies:
+# brew install llm
+# paste in openAI API key.  This doesn't seem to work immediately - struggled with changing keys several times.
+# llm --system 'whatever' --save reviewcommit
+# llm templates edit reviewcommit
+#    and then paste this in
+#
+# system: |
+#   <Diff>
+#     $input
+#   </Diff>
+#
+#   You are an expert FANG engineer reviewing a pull request.
+#
+#   Suggest any improvements, optimizations, and keep an eye out for any bugs or things that look misplaced.
+#   Iterate file by file, and then end your message by reviewing the entire commit together and providing commentary.
+#   For any changes you suggest, please output the modified code or some example code.
+#   When making suggestions, please reference the specific lines you want to change before your code block.
+#
+#   Pay particular attention to strings or frontend code that may contain typos, grammar mistakes, or other language problems.
+#
+#   When prefacing any potential mistake use this emoji to start that line:
+#   When reviewing a file that has no issues, preface with:
+#
+#   Do not include any introductory message. No yapping.
+#
+#
+#   I should really just figure out how to change the template directory and add to dotfiles
+
+
+start_commit="${1:-HEAD~1}"
+temp_file=mktemp
+git diff --no-color "$start_commit" -- ':!yarn.lock' ':!README.md' > "$temp_file"
+if [[ -s "$temp_file" ]]
+then
+  cat "$temp_file" | llm -t reviewcommit
+else
+  echo "No changes to review."
+fi
+rm -f "$temp_file"
