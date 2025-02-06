@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# rc - review commit
+#
 # resources:
 # https://llm.datasette.io/en/stable/
 # https://github.com/simonw/llm
@@ -8,8 +10,8 @@
 # dependencies:
 # brew install llm
 # paste in openAI API key.  This doesn't seem to work immediately - struggled with changing keys several times.
-# llm --system 'whatever' --save reviewcommit
-# llm templates edit reviewcommit
+# llm --system 'whatever' --save rc
+# llm templates edit rc
 #    and then paste this in
 #
 # system: |
@@ -26,8 +28,8 @@
 #
 #   Pay particular attention to strings or frontend code that may contain typos, grammar mistakes, or other language problems.
 #
-#   When prefacing any potential mistake use this emoji to start that line:
-#   When reviewing a file that has no issues, preface with:
+#   When prefacing any potential mistake use this emoji to start that line: ‼️
+#   When reviewing a file that has no issues, preface with: ✅
 #
 #   Do not include any introductory message. No yapping.
 #
@@ -40,7 +42,7 @@ temp_file=mktemp
 git diff --no-color "$start_commit" -- ':!yarn.lock' ':!README.md' > "$temp_file"
 if [[ -s "$temp_file" ]]
 then
-  cat "$temp_file" | llm -t reviewcommit
+  cat "$temp_file" | llm -t rc
 else
   echo "No changes to review."
 fi
