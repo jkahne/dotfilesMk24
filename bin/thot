@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Set base directory
+BASE_DIR=~/projects/jkahne/jkahnecom
+POSTS_DIR="$BASE_DIR/src/pages/posts"
+
+# Get current date in UTC (converted from Eastern timezone)
+CURRENT_YEAR=$(TZ="America/New_York" date -u +%Y)
+TIMESTAMP=$(TZ="America/New_York" date -u +%Y%m%d%H%M%S)
+
+# Create year directory if it doesn't exist
+mkdir -p "$POSTS_DIR/$CURRENT_YEAR"
+
+# Create full filepath
+FILE_PATH="$POSTS_DIR/$CURRENT_YEAR/$TIMESTAMP.md"
+
+# Create file with template content
+cat > "$FILE_PATH" << EOL
+---
+tags: []
+---
+EOL
+
+# Open Neovim in base directory with the new file
+cd "$BASE_DIR" && nvim "$FILE_PATH"
+```
