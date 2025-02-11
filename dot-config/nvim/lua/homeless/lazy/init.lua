@@ -355,6 +355,9 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "copilot", group_index = 2 },
+					per_filetype = {
+						codecompanion = { "codecompanion" },
+					},
 					{ name = "nvim_lsp" },
 					{ name = "snippy" }, -- For snippy users.
 					{ name = "path" },
