@@ -1,0 +1,13 @@
+font-size = 18
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
+keybind = ctrl+cmd+h=goto_split:left
+keybind = ctrl+cmd+l=goto_split:right
+keybind = ctrl+cmd+k=goto_split:top
+keybind = ctrl+cmd+j=goto_split:bottom
+keybind = global:alt+j=toggle_quick_terminal
+
+mouse-hide-while-typing = true
+quick-terminal-autohide = false
