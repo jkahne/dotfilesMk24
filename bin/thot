@@ -23,4 +23,3 @@ EOL
 
 # Open Neovim in base directory with the new file
 cd "$BASE_DIR" && nvim "$FILE_PATH"
-```
