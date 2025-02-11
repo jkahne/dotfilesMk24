@@ -9,9 +9,9 @@ alias bu="b update"
 alias be="bundle exec"
 alias binit="bi && b package && echo 'vendor/ruby' >> .gitignore"
 
-alias rubocop-nike="bin/rake lint:ruby:current:fix"
-alias nike="bin/rake lint:ruby:current:fix"
-alias pair="bundle exec git pair"
+# alias rubocop-nike="bin/rake lint:ruby:current:fix"
+# alias nike="bin/rake lint:ruby:current:fix"
+# alias pair="bundle exec git pair"
 
 alias tls="tmux ls"
 alias t="tmux attach -t"
@@ -79,6 +79,8 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
+alias topaz="cd ~/projects/jkahne/2025/topaz && nvim"
+
 # alias st="tag --add starred ."
 # alias un="tag --add up next ."
 # alias starred="tag -f starred"
@@ -126,8 +128,10 @@ alias duo='du -sh $(du -s * | sort -k1n | ruby -nae '\''puts '\$'F[1..-1].join("
 # Pipe my public key to my clipboard. Fuck you, pay me.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
-alias web="cd ~/projects/jkahne/jkahnecom; n ./src/pages/posts/\[page\].astro"
-alias blog="cd ~/projects/jkahne/jkahnecom; n ./src/pages/posts/\[page\].astro"
+alias web="cd ~/projects/jkahne/jkahnecom"
+alias blog="cd ~/projects/jkahne/jkahnecom"
+
+alias llm_templates="cd ~/Library/Application Support/io.datasette.llm/templates"
 
 
 # alias dbreset="mix ecto.reset"
