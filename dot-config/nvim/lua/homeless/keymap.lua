@@ -90,10 +90,10 @@ vim.keymap.set("i", "?", "?<C-g>u", { noremap = true })
 
 -- Toggle cursor crosshair
 vim.keymap.set("n", "+", function()
-	-- vim.opt.cursorline = not vim.opt.cursorline
-	-- vim.opt.cursorcolumn = not vim.opt.cursorcolumn
-	-- Halp! i can't even Lua properly
-	vim.cmd([[
+  -- vim.opt.cursorline = not vim.opt.cursorline
+  -- vim.opt.cursorcolumn = not vim.opt.cursorcolumn
+  -- Halp! i can't even Lua properly
+  vim.cmd([[
   set cursorline!
   set cursorcolumn!
   ]])
@@ -135,54 +135,54 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "[P]Move line up in visual
 
 -- Scratch and Vim notes with leader key for quick access
 vim.keymap.set(
-	"n",
-	"<Leader>sn",
-	":tab drop " .. vim.fn.expand("$HOME") .. "/projects/worknotes/00\\ Inbox/scratch.md<CR>",
-	{ noremap = true }
+  "n",
+  "<Leader>sn",
+  ":tab drop " .. vim.fn.expand("$HOME") .. "/projects/worknotes/00\\ Inbox/scratch.md<CR>",
+  { noremap = true }
 )
 vim.keymap.set(
-	"n",
-	"<Leader>vn",
-	":tab drop " .. vim.fn.expand("$HOME") .. "/projects/worknotes/00\\ Inbox/vimnotes.md<CR>",
-	{ noremap = true }
+  "n",
+  "<Leader>vn",
+  ":tab drop " .. vim.fn.expand("$HOME") .. "/projects/worknotes/00\\ Inbox/vimnotes.md<CR>",
+  { noremap = true }
 )
 
 vim.keymap.set({ "n", "v" }, "<space>", "<Nop>", { silent = true })
 
 vim.api.nvim_create_user_command("W", function()
-	vim.cmd("w !sudo tee % > /dev/null")
-	vim.cmd("edit!")
+  vim.cmd("w !sudo tee % > /dev/null")
+  vim.cmd("edit!")
 end, {})
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "elixir",
-	callback = function()
-		vim.keymap.set("n", "<leader>dr", ":!mix format<CR>", { noremap = true, silent = true, buffer = true })
-	end,
-	group = vim.api.nvim_create_augroup("ElixirSettings", { clear = true }),
+  pattern = "elixir",
+  callback = function()
+    vim.keymap.set("n", "<leader>dr", ":!mix format<CR>", { noremap = true, silent = true, buffer = true })
+  end,
+  group = vim.api.nvim_create_augroup("ElixirSettings", { clear = true }),
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "ruby",
-	callback = function()
-		-- vim.keymap.set('n', '<leader>dr', ':!bundle exec standardrb --fix<CR><CR>', { noremap = true, silent = true, buffer = true })
-		-- vim.keymap.set('n', '<leader>dc', ':!bin/ci<CR><CR>', { noremap = true, silent = true, buffer = true })
-		vim.keymap.set("n", "<leader>dr", function()
-			local current_file = vim.fn.expand("%:p")
-			vim.cmd("!rubocop -a " .. current_file)
-		end, { noremap = true, silent = true, buffer = true })
-	end,
-	group = vim.api.nvim_create_augroup("RubySettings", { clear = true }),
+  pattern = "ruby",
+  callback = function()
+    -- vim.keymap.set('n', '<leader>dr', ':!bundle exec standardrb --fix<CR><CR>', { noremap = true, silent = true, buffer = true })
+    -- vim.keymap.set('n', '<leader>dc', ':!bin/ci<CR><CR>', { noremap = true, silent = true, buffer = true })
+    vim.keymap.set("n", "<leader>dr", function()
+      local current_file = vim.fn.expand("%:p")
+      vim.cmd("!rubocop -a " .. current_file)
+    end, { noremap = true, silent = true, buffer = true })
+  end,
+  group = vim.api.nvim_create_augroup("RubySettings", { clear = true }),
 })
 
 -- Set indentation settings specifically for Lua files
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lua",
-	callback = function()
-		vim.bo.expandtab = true
-		vim.bo.shiftwidth = 2
-		vim.bo.tabstop = 2
-	end,
+  pattern = "lua",
+  callback = function()
+    vim.bo.expandtab = true
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+  end,
 })
 
 -- -- Check if RuboCop is installed
@@ -203,35 +203,35 @@ vim.api.nvim_create_autocmd("FileType", {
 -- vim.api.nvim_set_keymap('c', '<C-y>', '<C-y>', { noremap = true, silent = true })
 
 function WrapPencil()
-	if vim.o.wrap then
-		vim.cmd("set nowrap")
-	else
-		vim.cmd("set wrap")
-		-- vim.cmd('PencilSoft')
-	end
+  if vim.o.wrap then
+    vim.cmd("set nowrap")
+  else
+    vim.cmd("set wrap")
+    -- vim.cmd('PencilSoft')
+  end
 end
 
 -- Lua function to merge tabs in Neovim
 function MergeTabs()
-	-- Check if only one tab is open
-	if vim.fn.tabpagenr() == 1 then
-		return
-	end
+  -- Check if only one tab is open
+  if vim.fn.tabpagenr() == 1 then
+    return
+  end
 
-	-- Get the current buffer name
-	local bufferName = vim.fn.bufname("%")
+  -- Get the current buffer name
+  local bufferName = vim.fn.bufname("%")
 
-	-- Check if it's the last tab page, then close it and switch to the previous one
-	if vim.fn.tabpagenr("$") == vim.fn.tabpagenr() then
-		vim.cmd("close!")
-	else
-		vim.cmd("close!")
-		vim.cmd("tabprev")
-	end
+  -- Check if it's the last tab page, then close it and switch to the previous one
+  if vim.fn.tabpagenr("$") == vim.fn.tabpagenr() then
+    vim.cmd("close!")
+  else
+    vim.cmd("close!")
+    vim.cmd("tabprev")
+  end
 
-	-- Split the window and load the buffer
-	vim.cmd("split")
-	vim.cmd("buffer " .. bufferName)
+  -- Split the window and load the buffer
+  vim.cmd("split")
+  vim.cmd("buffer " .. bufferName)
 end
 
 -- Mapping the function to a key or calling it in Lua
@@ -247,3 +247,9 @@ vim.keymap.set("n", "<Leader>T", ":tabnew<CR>", { noremap = false })
 -- vim.keymap.set('i', "(", "()<left>", { noremap = true })
 -- vim.keymap.set('i', "[", "[]<left>", { noremap = true })
 -- vim.keymap.set('i', "{", "{}<left>", { noremap = true })
+
+-- vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "gb", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])

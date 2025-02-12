@@ -258,33 +258,40 @@ return {
 				init_options = {
 					formatter = "standard",
 					linters = { "standard" },
-					enabled_features = {
-						definition = true,
-						diagnostics = true,
-						formatting = true,
+					enabledFeatures = {
+						"definition",
+						"diagnostics",
+						"formatting",
 					},
+					excludePath = { "vendor/**/*" }, -- Try this setting
+					excludePatterns = { "/vendor/", "**/vendor/**" },
 					indexing = {
-						excluded_patterns = { "/vendor/" },
-						-- included_patterns = { "path/to/included/file.rb" },
-						-- excludedGems = { "gem1", "gem2", "etc." },
-						-- excludedMagicComments = { "compiled:true" },
+						excludedPatterns = { "/vendor/", "**/vendor/**" },
+						excluded_patterns = { "/vendor/", "**/vendor/**" },
 					},
+					-- indexing = {
+					-- 	excluded_patterns = { "/vendor/" },
+					-- 	-- included_patterns = { "path/to/included/file.rb" },
+					-- 	-- excludedGems = { "gem1", "gem2", "etc." },
+					-- 	-- excludedMagicComments = { "compiled:true" },
+					-- },
 				},
 				-- on_attach = function(client, bufnr)
 				-- 	add_ruby_deps_command(client, bufnr)
 				-- end,
-				settings = {
-					completion = true,
-					formatting = true,
-					diagnostics = true,
-					ruby_lsp = {
-						-- Enable or disable specific features
-						completion = true,
-						formatting = true,
-						diagnostics = true,
-						-- Add other options as needed
-					},
-				},
+				--
+				-- settings = {
+				-- 	completion = true,
+				-- 	formatting = true,
+				-- 	diagnostics = true,
+				-- 	ruby_lsp = {
+				-- 		-- Enable or disable specific features
+				-- 		completion = true,
+				-- 		formatting = true,
+				-- 		diagnostics = true,
+				-- 		-- Add other options as needed
+				-- 	},
+				-- },
 			})
 
 			lspconfig.html.setup({
