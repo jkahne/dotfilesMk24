@@ -18,6 +18,7 @@ FILE_PATH="$POSTS_DIR/$CURRENT_YEAR/$TIMESTAMP.md"
 cat > "$FILE_PATH" << EOL
 ---
 tags: []
+draft: true
 ---
 EOL
 

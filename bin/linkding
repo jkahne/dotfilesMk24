@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Change this to the directory containing your docker-compose.yml
+COMPOSE_DIR="/Users/jkahne/projects/sissbruecker/linkding"
+
+case "$1" in
+    start)
+        echo "Starting service..."
+        cd "$COMPOSE_DIR" || exit 1
+        docker compose up -d
+        ;;
+    stop)
+        echo "Stopping service..."
+        cd "$COMPOSE_DIR" || exit 1
+        docker compose down
+        ;;
+    restart)
+        echo "Restarting service..."
+        cd "$COMPOSE_DIR" || exit 1
+        docker compose down
+        docker compose up -d
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+

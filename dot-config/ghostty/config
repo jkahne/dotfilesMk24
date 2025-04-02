@@ -10,4 +10,3 @@ keybind = ctrl+cmd+j=goto_split:bottom
 keybind = global:alt+j=toggle_quick_terminal
 
 mouse-hide-while-typing = true
-quick-terminal-autohide = false
