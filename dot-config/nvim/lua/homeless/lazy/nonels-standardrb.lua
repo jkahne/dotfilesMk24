@@ -80,8 +80,29 @@ return {
           }),
           -- null_ls.builtins.diagnostics.erb_lint,
           -- null_ls.builtins.formatting.erb_format,
-          -- null_ls.builtins.formatting.htmlbeautifier,
+          -- null_ls.builtins.formatting.erb_format.with({
+          --   extra_args = {
+          --     "--stdin",
+          --     "--print-width",
+          --     "120",
+          --     "--single-quote",
+          --     "--preserve-blank-lines",
+          --   },
+          -- }),
 
+          -- null_ls.builtins.formatting.prettier.with({
+          --   extra_args = {
+          --     "--plugin=@prettier/plugin-ruby",
+          --     "--print-width",
+          --     "120",
+          --     "--html-whitespace-sensitivity",
+          --     "strict",
+          --     "--preserve-blank-lines",
+          --   },
+          -- }),
+
+          -- null_ls.builtins.formatting.htmlbeautifier,
+          -- null_ls.builtins.formatting.prettier,
           standardrb_diagnostics,
           standardrb_formatting,
         },
