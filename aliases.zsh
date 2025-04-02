@@ -41,6 +41,7 @@ alias sync='git add -u . && git commit -m "Minor changes. Commit message skipped
 # alias fbr='git branch --sort=-committerdate | grep -v HEAD | string trim | fzf +s | xargs git checkout'
 alias fco="git branch --sort=-committerdate -r | fzf +m | awk '{print $1}' | xargs git switch"
 alias branch_cleanup='git branch | grep -v "main" | xargs git branch -D'
+alias gbo='gh browse -b $(git branch --show-current)'
 # alias remove_merged_branches='git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
 
 # alias gm="start_dev"
@@ -73,13 +74,13 @@ alias jsontidy="pbpaste | jq '.' | pbcopy"
 # alias home="cp ~/.npmrc.home ~/.npmrc;"
 
 # Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+# alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+# alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
-alias topaz="cd ~/projects/jkahne/2025/topaz && nvim"
+alias topaz="cd ~/projects/jkahne/2025/topaz"
 
 # alias st="tag --add starred ."
 # alias un="tag --add up next ."

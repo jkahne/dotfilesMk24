@@ -107,6 +107,8 @@ vim.keymap.set("n", "<C-Down>", "ddp")
 vim.keymap.set("v", "<C-Up>", "xkP`[V`]=gv")
 vim.keymap.set("v", "<C-Down>", "xp`[V`]=gv")
 
+vim.keymap.set("n", "gV", "`[v`]")
+
 -- " <F12> " Invisible characters and colors
 vim.keymap.set("n", "<F12>", ":set list!<CR>")
 vim.keymap.set("v", "<F12>", "<ESC>:set list!<CR>gv")

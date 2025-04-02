@@ -47,7 +47,7 @@ vim.opt.termguicolors = true
 vim.opt.pumheight = 10
 vim.opt.pumblend = 10
 
-vim.opt.showmode = false
+vim.opt.showmode = true -- make noice show macro recording
 vim.opt.showtabline = 1
 
 vim.opt.scrolloff = 4
