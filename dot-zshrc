@@ -199,3 +199,10 @@ function gitcc() {
 
 
 source /Users/jkahne/.config/broot/launcher/bash/br
+
+# bun completions
+[ -s "/Users/jkahne/.bun/_bun" ] && source "/Users/jkahne/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
